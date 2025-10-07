@@ -36,19 +36,15 @@ export default function ChatPage() {
         body: JSON.stringify({ message: text }),
       });
 
-      const data = (await res.json()) as {
-        answer?: string;
-        sources?: Source[];
-        error?: string;
-      };
+      const data: { answer?: string; sources?: Source[]; error?: string } = await res.json();
 
-      if (data?.answer) {
+      if (data.answer) {
         setMessages([...next, { role: "assistant", content: data.answer }]);
         setLastSources(data.sources ?? []);
       } else {
         setMessages([
           ...next,
-          { role: "assistant", content: data?.error || "Erro ao responder." },
+          { role: "assistant", content: data.error || "Erro ao responder." },
         ]);
       }
     } catch {
@@ -63,7 +59,7 @@ export default function ChatPage() {
 
   return (
     <div className="chat-container">
-      {/* Barra de topo */}
+      {/* Top bar */}
       <div className="chat-header">
         <Link href="/" className="back-link">
           ← Voltar para Início
@@ -71,7 +67,7 @@ export default function ChatPage() {
         <h1>Assistente do Gonçalo</h1>
       </div>
 
-      {/* Área do chat */}
+      {/* Chat */}
       <div className="chat-box">
         {messages.map((m, i) => (
           <div key={i} className={m.role === "user" ? "msg user" : "msg assistant"}>
@@ -88,7 +84,7 @@ export default function ChatPage() {
       </div>
 
       {/* Fontes */}
-      {lastSources?.length > 0 && (
+      {lastSources.length > 0 && (
         <div className="sources">
           <b>Fontes:</b>{" "}
           {lastSources.map((s, i) => (

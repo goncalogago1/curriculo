@@ -12,11 +12,12 @@ export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as ChatRequestBody;
     const userMessage = body?.message?.trim() ?? "";
+
     if (!userMessage) {
       return NextResponse.json({ error: "Mensagem vazia." }, { status: 400 });
     }
 
-    // 1) RAG
+    // 1) Recupera contexto (RAG)
     const results: RetrievedDoc[] = await retrieveContext(userMessage, 6);
     const contextText = results
       .map(
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest) {
       )
       .join("\n\n---\n\n");
 
-    // 2) Persona + guardrails
+    // 2) System prompt
     const systemPrompt = `
 Você é o assistente do Gonçalo Gago. Responda APENAS com base nas fontes fornecidas no contexto.
 Se a pergunta fugir ao escopo (CV/LinkedIn/projetos) ou não houver evidência suficiente, informe isso claramente.
@@ -43,7 +44,7 @@ Contexto (trechos recuperados):
 ${contextText}
 `.trim();
 
-    // 3) Modelo
+    // 3) Gera resposta
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       temperature: 0.2,
@@ -70,7 +71,7 @@ ${contextText}
     const err = e as Error;
     console.error(err);
     return NextResponse.json(
-      { error: err.message ?? "Erro" },
+      { error: err.message ?? "Erro interno." },
       { status: 500 }
     );
   }
