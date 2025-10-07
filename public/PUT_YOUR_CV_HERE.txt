@@ -1,0 +1,1 @@
+Coloque aqui o seu cv.pdf (ficheiro final) e rode o script de ingestão.
