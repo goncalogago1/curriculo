@@ -4,10 +4,9 @@ import path from "path";
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
 
-// 👇 Importar CommonJS dentro de ESM
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-const pdf = require("pdf-parse"); // <- aqui está o truque
+const pdf = require("pdf-parse"); // CommonJS dentro de ESM
 
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
