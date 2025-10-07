@@ -5,11 +5,20 @@ import Link from "next/link";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
+export interface Source {
+  id: number;
+  i: number;
+  title?: string;
+  url?: string;
+  source?: string;
+  similarity?: number;
+}
+
 export default function ChatPage() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [lastSources, setLastSources] = useState<any[]>([]);
+  const [lastSources, setLastSources] = useState<Source[]>([]);
 
   async function send() {
     const text = input.trim();
@@ -27,15 +36,26 @@ export default function ChatPage() {
         body: JSON.stringify({ message: text }),
       });
 
-      const data = await res.json();
+      const data = (await res.json()) as {
+        answer?: string;
+        sources?: Source[];
+        error?: string;
+      };
+
       if (data?.answer) {
         setMessages([...next, { role: "assistant", content: data.answer }]);
         setLastSources(data.sources ?? []);
       } else {
-        setMessages([...next, { role: "assistant", content: "Erro ao responder." }]);
+        setMessages([
+          ...next,
+          { role: "assistant", content: data?.error || "Erro ao responder." },
+        ]);
       }
-    } catch (e) {
-      setMessages([...next, { role: "assistant", content: "Falha de rede ao chamar /api/chat." }]);
+    } catch {
+      setMessages([
+        ...next,
+        { role: "assistant", content: "Falha de rede ao chamar /api/chat." },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -60,14 +80,18 @@ export default function ChatPage() {
             </div>
           </div>
         ))}
-        {loading && <div className="msg assistant"><div className="bubble">Gerando resposta…</div></div>}
+        {loading && (
+          <div className="msg assistant">
+            <div className="bubble">Gerando resposta…</div>
+          </div>
+        )}
       </div>
 
       {/* Fontes */}
       {lastSources?.length > 0 && (
         <div className="sources">
           <b>Fontes:</b>{" "}
-          {lastSources.map((s: any, i: number) => (
+          {lastSources.map((s, i) => (
             <span key={s.id}>
               #{s.i} {s.title || s.source}
               {s.url ? ` (${s.url})` : ""}
@@ -81,8 +105,8 @@ export default function ChatPage() {
       <div className="chat-input">
         <input
           value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && send()}
+          onChange={(ev) => setInput(ev.target.value)}
+          onKeyDown={(ev) => ev.key === "Enter" && send()}
           placeholder="Pergunte sobre experiência, projetos, skills..."
         />
         <button onClick={send}>Enviar</button>

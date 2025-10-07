@@ -1,4 +1,3 @@
-
 import OpenAI from "openai";
 import { supabase } from "./supabase";
 
@@ -10,19 +9,21 @@ export type RetrievedDoc = {
   title: string | null;
   url: string | null;
   content: string;
-  metadata: any;
+  metadata: Record<string, unknown>;
   similarity: number;
 };
+
+type RetrievedRow = Omit<RetrievedDoc, "similarity">;
 
 export async function retrieveContext(query: string, k = 6): Promise<RetrievedDoc[]> {
   // 1) Embedding da pergunta
   const emb = await openai.embeddings.create({
-    model: "text-embedding-3-small", // 👈
+    model: "text-embedding-3-small", // 1536 dims
     input: query,
-  });  
+  });
   const embedding = emb.data[0].embedding;
 
-  // 2) Busca via RPC (recomendado)
+  // 2) Busca via RPC
   const { data, error } = await supabase.rpc("match_documents", {
     query_embedding: embedding,
     match_count: k,
@@ -30,23 +31,25 @@ export async function retrieveContext(query: string, k = 6): Promise<RetrievedDo
   });
 
   if (error) {
-    // Fallback simples (não-ideal): ler alguns registros
+    // fallback (sem índice) — retorna alguns registros
     const { data: rows, error: err2 } = await supabase
       .from("documents")
       .select("*")
       .limit(k);
+
     if (err2) throw err2;
-    // normalizar saída
-    return (rows ?? []).map((r: any) => ({
-      id: r.id,
-      source: r.source,
-      title: r.title,
-      url: r.url,
-      content: r.content,
-      metadata: r.metadata,
+
+    return (rows ?? []).map((r) => ({
+      id: (r as any).id,
+      source: (r as any).source,
+      title: (r as any).title,
+      url: (r as any).url,
+      content: (r as any).content,
+      metadata: (r as any).metadata ?? {},
       similarity: 0,
     }));
   }
 
+  // data já vem com similarity
   return (data ?? []) as RetrievedDoc[];
 }
