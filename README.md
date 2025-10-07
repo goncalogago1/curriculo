@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Portfolio + Chatbot (RAG) — Overlay
 
-First, run the development server:
+Este pacote adiciona **chatbot com RAG** ao seu projeto **Next.js (App Router)**.
 
+## Como usar (passo a passo)
+
+### 1) Criar o projeto base (se ainda não criou)
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx create-next-app@latest meu-portfolio --ts --eslint --app --src-dir=false --import-alias "@/*"
+cd meu-portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2) Copiar este overlay
+Descompacte o conteúdo deste ZIP **na raiz** do projeto (permita mesclar pastas).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Estrutura adicionada:
+```
+app/api/chat/route.ts
+app/chat/page.tsx
+app/page.tsx
+lib/supabase.ts
+lib/rag.ts
+scripts/ingest.ts
+sql/pgvector_setup.sql
+public/PUT_YOUR_CV_HERE.txt
+.env.example
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3) Instalar dependências
+```bash
+npm i openai @supabase/supabase-js pdf-parse
+npm i -D ts-node @types/node @types/pdf-parse
+```
 
-## Learn More
+### 4) Supabase
+1. Crie um projeto em https://supabase.com e obtenha:
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+2. No **SQL Editor**, cole o conteúdo de `sql/pgvector_setup.sql` e execute.
+   - Isso cria a extensão `pgvector`, a tabela `documents`, índices e a função RPC `match_documents`.
 
-To learn more about Next.js, take a look at the following resources:
+> Nota: para MVP, pode deixar **RLS desativado** na tabela `documents`. Guarde as chaves de Supabase **apenas no backend** (route handler).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 5) Variáveis de ambiente
+Crie um arquivo `.env.local` (baseado em `.env.example`):
+```
+OPENAI_API_KEY=sk-...
+SUPABASE_URL=https://xxxxxxxx.supabase.co
+SUPABASE_ANON_KEY=eyJ...
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 6) Adicionar o seu CV
+Coloque o ficheiro `cv.pdf` em `public/cv.pdf` (substitui o marcador).
 
-## Deploy on Vercel
+### 7) Ingestão do CV (embeddings)
+```bash
+npx ts-node scripts/ingest.ts
+```
+Se preferir, adicione no `package.json`:
+```json
+{
+  "scripts": {
+    "ingest": "ts-node scripts/ingest.ts"
+  }
+}
+```
+e rode:
+```bash
+npm run ingest
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 8) Rodar localmente
+```bash
+npm run dev
+# abra http://localhost:3000
+# teste o chat em /chat
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 9) Deploy na Vercel
+- Crie um repositório no GitHub e faça `git push`.
+- Em https://vercel.com, **Import Project** → selecione o repo.
+- Em **Settings → Environment Variables**, insira as mesmas variáveis do `.env.local`.
+- Deploy. Acesse `https://SEUAPP.vercel.app/chat`.
+
+### 10) Dicas rápidas
+- Mantenha o `systemPrompt` estrito (“responder apenas com base nas fontes”).
+- Não suba PII na tabela. Redija ou oculte dados sensíveis.
+- Pode adicionar LinkedIn/Projetos criando novos scripts de ingestão (mesmo fluxo).
+- Para melhorar relevância, aumente K no retrieve ou adicione re-ranker.
+
+Bom trabalho! 🚀
