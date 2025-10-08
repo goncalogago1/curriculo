@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
     <main>
@@ -25,11 +27,14 @@ export default function Home() {
           </div>
           <div className="hero__right">
             <div className="profile-card">
-            <img
-              src="/1690800862967.jpeg"
-              alt="Fotografia de perfil de Gonçalo Gago"
-              className="avatar"
-            />
+              <Image
+                src="/1690800862967.jpeg"  // ou /foto-perfil.jpeg se renomeou
+                alt="Fotografia de perfil de Gonçalo Gago"
+                width={140}
+                height={140}
+                className="avatar"
+                priority
+              />
               <div className="profile-card__info">
                 <p><b>Disponível</b> para projetos e entrevistas</p>
                 <ul>
@@ -63,7 +68,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROJETOS RECENTES */}
+      {/* PROJETOS */}
       <section className="section">
         <div className="container">
           <h2>Projetos em Destaque</h2>
