@@ -24,8 +24,10 @@ export default function ChatPage() {
     const text = input.trim();
     if (!text) return;
 
-    const next = [...messages, { role: "user", content: text }];
-    setMessages(next);
+    // ✅ garante literal para 'role'
+    const userMsg: Msg = { role: "user", content: text };
+    setMessages((prev) => [...prev, userMsg]);
+
     setInput("");
     setLoading(true);
 
@@ -36,22 +38,26 @@ export default function ChatPage() {
         body: JSON.stringify({ message: text }),
       });
 
-      const data: { answer?: string; sources?: Source[]; error?: string } = await res.json();
+      const data: { answer?: string; sources?: Source[]; error?: string } =
+        await res.json();
 
       if (data.answer) {
-        setMessages([...next, { role: "assistant", content: data.answer }]);
+        const assistantMsg: Msg = { role: "assistant", content: data.answer };
+        setMessages((prev) => [...prev, assistantMsg]);
         setLastSources(data.sources ?? []);
       } else {
-        setMessages([
-          ...next,
-          { role: "assistant", content: data.error || "Erro ao responder." },
-        ]);
+        const errMsg: Msg = {
+          role: "assistant",
+          content: data.error || "Erro ao responder.",
+        };
+        setMessages((prev) => [...prev, errMsg]);
       }
     } catch {
-      setMessages([
-        ...next,
-        { role: "assistant", content: "Falha de rede ao chamar /api/chat." },
-      ]);
+      const netErr: Msg = {
+        role: "assistant",
+        content: "Falha de rede ao chamar /api/chat.",
+      };
+      setMessages((prev) => [...prev, netErr]);
     } finally {
       setLoading(false);
     }
@@ -59,7 +65,7 @@ export default function ChatPage() {
 
   return (
     <div className="chat-container">
-      {/* Top bar */}
+      {/* Barra de topo */}
       <div className="chat-header">
         <Link href="/" className="back-link">
           ← Voltar para Início
@@ -67,7 +73,7 @@ export default function ChatPage() {
         <h1>Assistente do Gonçalo</h1>
       </div>
 
-      {/* Chat */}
+      {/* Área do chat */}
       <div className="chat-box">
         {messages.map((m, i) => (
           <div key={i} className={m.role === "user" ? "msg user" : "msg assistant"}>
@@ -87,11 +93,11 @@ export default function ChatPage() {
       {lastSources.length > 0 && (
         <div className="sources">
           <b>Fontes:</b>{" "}
-          {lastSources.map((s, i) => (
+          {lastSources.map((s) => (
             <span key={s.id}>
               #{s.i} {s.title || s.source}
               {s.url ? ` (${s.url})` : ""}
-              {i < lastSources.length - 1 ? " · " : ""}
+              {" · "}
             </span>
           ))}
         </div>
