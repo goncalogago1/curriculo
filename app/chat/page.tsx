@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Msg = { role: "user" | "assistant"; content: string; sources?: string[] };
+type Message = { role: "user" | "assistant"; content: string; sources?: string[] };
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<Msg[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
@@ -18,8 +18,7 @@ export default function ChatPage() {
     const text = input.trim();
     if (!text || loading) return;
 
-    const next = [...messages, { role: "user", content: text }];
-    setMessages(next);
+    setMessages((prev) => [...prev, { role: "user", content: text }]);
     setInput("");
     setLoading(true);
 
@@ -27,21 +26,22 @@ export default function ChatPage() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ messages: [...messages, { role: "user", content: text }] }),
       });
       const data = await res.json();
-      setMessages((m) => [
-        ...m,
+
+      setMessages((prev) => [
+        ...prev,
         {
           role: "assistant",
-          content: data.answer ?? data.content ?? "(no response)",
+          content: data.answer ?? data.content ?? "(No response)",
           sources: data.sources ?? [],
         },
       ]);
     } catch {
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: "Houve um erro. Tenta outra vez." },
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "Something went wrong. Try again." },
       ]);
     } finally {
       setLoading(false);
@@ -51,7 +51,9 @@ export default function ChatPage() {
   return (
     <main className="chat-container">
       <header className="chat-header">
-        <a className="back-link" href="/">&larr; Back to portfolio</a>
+        <a className="back-link" href="/">
+          ← Back to portfolio
+        </a>
         <h1>Assistant</h1>
       </header>
 
@@ -61,7 +63,9 @@ export default function ChatPage() {
             <div className="bubble">
               {m.content}
               {m.sources && m.sources.length > 0 && (
-                <div className="sources">fontes: {m.sources.join(", ")}</div>
+                <div className="sources">
+                  sources: {m.sources.join(", ")}
+                </div>
               )}
             </div>
           </div>
@@ -74,7 +78,7 @@ export default function ChatPage() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && send()}
-          placeholder="Ask anything about my CV…"
+          placeholder="Ask anything about my CV..."
           aria-label="Message"
         />
         <button onClick={send} disabled={loading || !input.trim()}>

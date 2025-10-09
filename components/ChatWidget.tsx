@@ -2,16 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Msg = { role: "user" | "assistant"; content: string; sources?: string[] };
+type Message = { role: "user" | "assistant"; content: string; sources?: string[] };
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<Msg[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const endRef = useRef<HTMLDivElement | null>(null);
 
-  // auto-scroll sempre que entra nova msg
+  // Auto-scroll to bottom when messages change
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, open]);
@@ -20,8 +20,8 @@ export default function ChatWidget() {
     const text = input.trim();
     if (!text || loading) return;
 
-    const next = [...messages, { role: "user", content: text }];
-    setMessages(next);
+    // Add user message directly
+    setMessages((prev) => [...prev, { role: "user", content: text }]);
     setInput("");
     setLoading(true);
 
@@ -29,27 +29,26 @@ export default function ChatWidget() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ messages: [...messages, { role: "user", content: text }] }),
       });
 
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const answer: Msg = {
-        role: "assistant",
-        content: data.answer ?? data.content ?? "(no response)",
-        sources: data.sources ?? [],
-      };
-      setMessages((m) => [...m, answer]);
-    } catch (e) {
-      setMessages((m) => [
-        ...m,
+
+      setMessages((prev) => [
+        ...prev,
         {
           role: "assistant",
-          content:
-            "Desculpa, houve um problema a responder agora. Tenta novamente.",
+          content: data.answer ?? data.content ?? "(No response)",
+          sources: data.sources ?? [],
+        },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Sorry, something went wrong. Please try again.",
         },
       ]);
     } finally {
@@ -63,7 +62,7 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* FAB */}
+      {/* Floating Action Button */}
       <button
         aria-label={open ? "Close chat" : "Open chat"}
         className="chatfab"
@@ -72,31 +71,42 @@ export default function ChatWidget() {
         {open ? "×" : "💬"}
       </button>
 
-      {/* WIDGET */}
-      <section className={`chatwidget ${open ? "chatwidget--open" : ""}`} role="dialog" aria-label="Chat assistant">
+      {/* Chat Widget */}
+      <section
+        className={`chatwidget ${open ? "chatwidget--open" : ""}`}
+        role="dialog"
+        aria-label="Chat assistant"
+      >
         <header className="chatwidget__header">
           <div className="chatwidget__title">CV Gonçalo Gago Assistant</div>
-          <button className="chatwidget__close" onClick={() => setOpen(false)} aria-label="Close">×</button>
+          <button
+            className="chatwidget__close"
+            onClick={() => setOpen(false)}
+            aria-label="Close"
+          >
+            ×
+          </button>
         </header>
 
         <div className="chatwidget__body">
-          <div className="chatwidget__messages" id="chat-scroll">
+          <div className="chatwidget__messages">
             {messages.length === 0 && (
               <div className="chatwidget__empty">
-                Pergunta qualquer coisa sobre o meu CV ⭐
+                Ask me anything about my CV ⭐
               </div>
             )}
 
             {messages.map((m, i) => (
               <div
                 key={i}
-                className={`bubble ${m.role === "user" ? "bubble--user" : "bubble--bot"}`}
-                role="article"
+                className={`bubble ${
+                  m.role === "user" ? "bubble--user" : "bubble--bot"
+                }`}
               >
                 {m.content}
                 {m.sources && m.sources.length > 0 && (
                   <div className="chatwidget__sources">
-                    fontes: {m.sources.join(", ")}
+                    sources: {m.sources.join(", ")}
                   </div>
                 )}
               </div>
@@ -109,11 +119,11 @@ export default function ChatWidget() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKey}
-              placeholder="Escreve a tua pergunta…"
+              placeholder="Type your question..."
               aria-label="Message"
             />
             <button onClick={send} disabled={loading || !input.trim()}>
-              {loading ? "…" : "Enviar"}
+              {loading ? "…" : "Send"}
             </button>
           </div>
         </div>
