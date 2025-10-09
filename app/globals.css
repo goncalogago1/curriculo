@@ -1,19 +1,24 @@
 /* ========= THEME (LIGHT) ========= */
-:root{
-  --bg: #ffffff;
-  --bg-soft: #f7fbfb;
-  --card: #ffffff;
-  --text: #0b1324;
-  --muted: #56607a;
-  --brand: #0ea5a4;      /* teal-600 */
-  --brand-2: #2563eb;    /* blue-600 */
-  --accent: #059669;     /* emerald-600 */
-  --border: #e6eaef;
-  --shadow: 0 10px 24px rgba(11, 19, 36, 0.06);
+:root {
+  /* --- Base --- */
+  --bg: #0a0a0a;             /* preto suave Apple */
+  --bg-soft: #1a1a1a;        /* cinza escuro */
+  --card: #1c1c1e;           /* background dos blocos */
+  --text: #f5f5f7;           /* texto quase branco */
+  --muted: #a1a1aa;          /* cinza subtil */
+  --border: #2c2c2e;         /* borda leve */
 
+  /* --- Branding & Accent --- */
+  --brand: #0ea5a4;          /* teal elegante */
+  --brand-2: #2563eb;        /* azul Apple-like */
+  --accent: #4ade80;         /* verde suave (emerald) */
+
+  /* --- Shadows & Gradients --- */
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   --grad: linear-gradient(135deg, var(--brand), var(--brand-2));
-  --chip: linear-gradient(180deg, #e9fbfb, #f6fbff);
+  --chip: linear-gradient(180deg, #1f1f1f, #111111);
 }
+
 
 html, body {
   background: var(--bg);

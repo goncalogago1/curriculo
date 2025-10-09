@@ -11,19 +11,17 @@ export default function Home() {
             <span className="pill">AI & Data Consultant</span>
             <h1 id="title">Gonçalo Gago</h1>
             <p className="subtitle">
-              I turn data into decisions through <b>Analytics</b>, <b>Data Engineering</b> and production-grade <b>LLM/RAG</b>.
-              Hands-on with <b>MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>, <b>Python</b>, and Collibra.
+              I transform complex data into actionable insights through <b>Analytics</b>, <b>Data Engineering</b> and production-grade <b>LLM/RAG</b> solutions. 
+              Experienced in <b>Collibra</b>, <b>MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>, and <b>Python</b>, delivering scalable data platforms and AI-powered applications.
             </p>
 
             <div className="cta" role="group" aria-label="Actions">
               <a className="btn btn--primary" href="/chat">Talk to my assistant</a>
-              <a className="btn btn--ghost" href="/cv.pdf" download>Download résumé (PDF)</a>
+              <a className="btn btn--ghost" href="/cv.pdf" download>Download CV(PDF)</a>
             </div>
 
             <div className="links" aria-label="Links">
               <a href="https://www.linkedin.com/in/goncalo-gago/" target="_blank" rel="noreferrer">LinkedIn</a>
-              <span>•</span>
-              <a href="https://github.com/goncalogago1" target="_blank" rel="noreferrer">GitHub</a>
               <span>•</span>
               <a href="mailto:goncalogago@gmail.com">Contact</a>
             </div>
@@ -218,7 +216,7 @@ export default function Home() {
           <span>© {new Date().getFullYear()} Gonçalo Gago</span>
           <nav className="footer__nav" aria-label="Footer">
             <a href="/chat">Assistant</a>
-            <a href="/cv.pdf" download>Résumé (PDF)</a>
+            <a href="/cv.pdf" download>CV (PDF)</a>
             <a href="mailto:goncalogago@gmail.com">Contact</a>
           </nav>
         </div>
