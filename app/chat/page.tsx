@@ -1,85 +1,83 @@
+// app/chat/page.tsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 
-type Message = { role: "user" | "assistant"; content: string; sources?: string[] };
+type Msg = { role: "user" | "assistant"; content: string; sources?: string[] };
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const endRef = useRef<HTMLDivElement | null>(null);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    bottomRef.current?.scrollIntoView({ block: "end" });
   }, [messages]);
 
   async function send() {
     const text = input.trim();
-    if (!text || loading) return;
-
-    setMessages((prev) => [...prev, { role: "user", content: text }]);
+    if (!text) return;
+    const next = [...messages, { role: "user", content: text } as Msg];
+    setMessages(next);
     setInput("");
     setLoading(true);
-
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [...messages, { role: "user", content: text }] }),
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ messages: next }),
       });
       const data = await res.json();
-
-      setMessages((prev) => [
-        ...prev,
+      const reply: Msg = {
+        role: "assistant",
+        content: data?.answer ?? "…",
+        sources: data?.sources ?? [],
+      };
+      setMessages((m) => [...m, reply]);
+    } catch (e) {
+      setMessages((m) => [
+        ...m,
         {
           role: "assistant",
-          content: data.answer ?? data.content ?? "(No response)",
-          sources: data.sources ?? [],
+          content:
+            "Sorry, something went wrong. Try again in a moment or email me at goncalogago@gmail.com.",
         },
-      ]);
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "Something went wrong. Try again." },
       ]);
     } finally {
       setLoading(false);
     }
   }
 
+  function onKey(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  }
+
   return (
     <main className="chat-container">
-      <header className="chat-header">
-        <a className="back-link" href="/">
-          ← Back to portfolio
-        </a>
+      <div className="chat-header">
+        <a className="back-link" href="/">← Back to portfolio</a>
         <h1>Assistant</h1>
-      </header>
+      </div>
 
       <div className="chat-box">
         {messages.map((m, i) => (
           <div key={i} className={`msg ${m.role}`}>
-            <div className="bubble">
-              {m.content}
-              {m.sources && m.sources.length > 0 && (
-                <div className="sources">
-                  sources: {m.sources.join(", ")}
-                </div>
-              )}
-            </div>
+            <div className="bubble">{m.content}</div>
           </div>
         ))}
-        <div ref={endRef} />
+        <div ref={bottomRef} />
       </div>
 
       <div className="chat-input">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && send()}
-          placeholder="Ask anything about my CV..."
-          aria-label="Message"
+          onKeyDown={onKey}
+          placeholder="Ask anything about my skills, projects, CV…"
         />
         <button onClick={send} disabled={loading || !input.trim()}>
           {loading ? "…" : "Send"}

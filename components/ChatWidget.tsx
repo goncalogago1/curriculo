@@ -2,26 +2,33 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Message = { role: "user" | "assistant"; content: string; sources?: string[] };
+type Msg = { role: "user" | "assistant"; content: string };
+type Source = {
+  id: number;
+  i: number;
+  title?: string;
+  url?: string;
+  source?: string;
+  similarity?: number;
+};
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const endRef = useRef<HTMLDivElement | null>(null);
+  const [sources, setSources] = useState<Source[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll to bottom when messages change
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [messages, open]);
+    if (open) inputRef.current?.focus();
+  }, [open]);
 
   async function send() {
     const text = input.trim();
     if (!text || loading) return;
-
-    // Add user message directly
-    setMessages((prev) => [...prev, { role: "user", content: text }]);
+    const userMsg: Msg = { role: "user", content: text };
+    setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setLoading(true);
 
@@ -29,105 +36,105 @@ export default function ChatWidget() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [...messages, { role: "user", content: text }] }),
+        body: JSON.stringify({ message: text }),
       });
+      const data: { answer?: string; sources?: Source[]; error?: string } = await res.json();
 
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: data.answer ?? data.content ?? "(No response)",
-          sources: data.sources ?? [],
-        },
-      ]);
+      if (data.answer) {
+        const bot: Msg = { role: "assistant", content: data.answer };
+        setMessages((prev) => [...prev, bot]);
+        setSources(data.sources ?? []);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: data.error || "Error answering. Try again." },
+        ]);
+      }
     } catch {
       setMessages((prev) => [
         ...prev,
-        {
-          role: "assistant",
-          content: "Sorry, something went wrong. Please try again.",
-        },
+        { role: "assistant", content: "Network error calling /api/chat." },
       ]);
     } finally {
       setLoading(false);
     }
   }
 
-  function onKey(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter") send();
+  function onKeyDown(ev: React.KeyboardEvent<HTMLInputElement>) {
+    if (ev.key === "Enter") send();
   }
 
   return (
     <>
-      {/* Floating Action Button */}
+      {/* FAB */}
       <button
-        aria-label={open ? "Close chat" : "Open chat"}
         className="chatfab"
+        aria-label={open ? "Close assistant" : "Open assistant"}
         onClick={() => setOpen((v) => !v)}
       >
         {open ? "×" : "💬"}
       </button>
 
-      {/* Chat Widget */}
-      <section
+      {/* PANEL */}
+      <div
         className={`chatwidget ${open ? "chatwidget--open" : ""}`}
         role="dialog"
-        aria-label="Chat assistant"
+        aria-modal="true"
+        aria-label="CV Goncalo Gago Assistant"
       >
-        <header className="chatwidget__header">
-          <div className="chatwidget__title">CV Gonçalo Gago Assistant</div>
-          <button
-            className="chatwidget__close"
-            onClick={() => setOpen(false)}
-            aria-label="Close"
-          >
+        <div className="chatwidget__header">
+          <div className="chatwidget__title">Assistant</div>
+          <button className="chatwidget__close" aria-label="Close" onClick={() => setOpen(false)}>
             ×
           </button>
-        </header>
+        </div>
 
         <div className="chatwidget__body">
           <div className="chatwidget__messages">
             {messages.length === 0 && (
               <div className="chatwidget__empty">
-                Ask me anything about my CV ⭐
+                Ask about experience, projects, skills…
               </div>
             )}
-
             {messages.map((m, i) => (
               <div
                 key={i}
-                className={`bubble ${
-                  m.role === "user" ? "bubble--user" : "bubble--bot"
-                }`}
+                className={m.role === "user" ? "bubble bubble--user" : "bubble bubble--bot"}
               >
                 {m.content}
-                {m.sources && m.sources.length > 0 && (
-                  <div className="chatwidget__sources">
-                    sources: {m.sources.join(", ")}
-                  </div>
-                )}
               </div>
             ))}
-            <div ref={endRef} />
+            {loading && <div className="bubble bubble--bot">Thinking…</div>}
           </div>
 
-          <div className="chatwidget__input">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={onKey}
-              placeholder="Type your question..."
-              aria-label="Message"
-            />
-            <button onClick={send} disabled={loading || !input.trim()}>
-              {loading ? "…" : "Send"}
-            </button>
-          </div>
+          {sources.length > 0 && (
+            <div className="chatwidget__sources">
+              <b>Sources:</b>{" "}
+              {sources.map((s, idx) => (
+                <span key={s.id}>
+                  #{s.i} {s.title || s.source}
+                  {s.url ? ` (${s.url})` : ""}
+                  {idx < sources.length - 1 ? " · " : ""}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-      </section>
+
+        <div className="chatwidget__input">
+          <input
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={onKeyDown}
+            placeholder="Type your question…"
+            aria-label="Message"
+          />
+          <button onClick={send} disabled={loading}>
+            Send
+          </button>
+        </div>
+      </div>
     </>
   );
 }
