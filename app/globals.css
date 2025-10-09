@@ -144,3 +144,7 @@ border:1px solid var(--border);box-shadow:var(--shadow)}
 @media(max-width:520px){
   .chatwidget{right:12px;left:12px;width:auto;height:60vh;bottom:86px}
 }
+.lede--wide {
+  max-width: 100%;
+  text-wrap: pretty;
+}

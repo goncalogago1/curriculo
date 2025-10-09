@@ -51,14 +51,14 @@ export default function Home() {
 
           <div className="hero__content">
             <h1 id="title">I build data products that drive decisions.</h1>
-            <p className="lede subtitle">
-              I’m a <b>Data & AI Consultant</b> based in Lisbon, dedicated to transforming complex data into clear, actionable insights. 
-              My work spans <b>Analytics</b>, <b>Data Engineering</b>, and <b>LLM/RAG</b>, where I design and implement 
-              scalable data solutions that enable better decision-making across organizations.  
-              I have hands-on experience with <b>Collibra</b>, <b>MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>, and <b>Python</b> — 
-              building automated metadata pipelines, custom visualizations, and AI-powered applications for real business impact.  
-              I combine a strong technical foundation with a strategic mindset, helping companies bridge the gap between 
-              data infrastructure and business value.
+            <p className="lede subtitle lede--wide">
+              I’m a Data &amp; AI Consultant based in Lisbon, dedicated to transforming complex data into clear,
+              actionable insights. My work spans <b>Analytics</b>, <b>Data Engineering</b>, and <b>Data Governance</b>,
+              where I design and implement scalable data solutions that enable better decision-making across organizations.
+              I have hands-on experience with <b>Collibra</b>, <b>MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>,
+              and <b>Python</b>, building automated metadata pipelines, custom visualizations, and AI-powered
+              applications for real business impact. I combine a strong technical foundation with a strategic mindset,
+              helping companies bridge the gap between data infrastructure and business value.
             </p>
 
             <div className="chips" role="group" aria-label="Expertise">
