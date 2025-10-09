@@ -80,7 +80,7 @@ export default function ChatWidget() {
         className={`chatwidget ${open ? "chatwidget--open" : ""}`}
         role="dialog"
         aria-modal="true"
-        aria-label="Assistant"
+        aria-label="CV Goncalo Gago Assistant"
       >
         <div className="chatwidget__header">
           <div className="chatwidget__title">Assistant</div>

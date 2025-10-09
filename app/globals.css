@@ -1,18 +1,18 @@
 /* ========= THEME (LIGHT) ========= */
 :root{
   --bg: #ffffff;
-  --bg-soft: #f6f7f9;
+  --bg-soft: #f7fbfb;
   --card: #ffffff;
-  --text: #111827;       /* gray-900 */
-  --muted: #6b7280;      /* gray-500 */
-  --brand: #1d4ed8;      /* blue-700 */
-  --brand-2: #7c3aed;    /* violet-600 */
-  --accent: #0ea5e9;     /* sky-600 */
-  --border: #e5e7eb;
-  --shadow: 0 8px 22px rgba(17, 24, 39, 0.06);
+  --text: #0b1324;
+  --muted: #56607a;
+  --brand: #0ea5a4;      /* teal-600 */
+  --brand-2: #2563eb;    /* blue-600 */
+  --accent: #059669;     /* emerald-600 */
+  --border: #e6eaef;
+  --shadow: 0 10px 24px rgba(11, 19, 36, 0.06);
 
   --grad: linear-gradient(135deg, var(--brand), var(--brand-2));
-  --chip: linear-gradient(180deg, #eef2ff, #f8faff);
+  --chip: linear-gradient(180deg, #e9fbfb, #f6fbff);
 }
 
 html, body {
