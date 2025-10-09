@@ -18,18 +18,24 @@ export default function Home() {
         </div>
       </header>
 
-      {/* HERO — FOTO À ESQUERDA */}
+      {/* BARRA COMPLETA DO PAPEL */}
+      <div className="roleband" aria-label="Role">
+        <div className="container roleband__inner">
+          <span className="roleband__text">AI &amp; Data Consultant</span>
+        </div>
+      </div>
+
+      {/* HERO — FOTO À ESQUERDA (menor) */}
       <section className="hero" aria-labelledby="title">
         <div className="container pro__grid">
           {/* Painel de perfil (ESQUERDA) */}
           <aside className="profile-pane" aria-label="Profile">
             <div className="profile-photo" aria-hidden="true">
-              {/* parent já é position:relative + aspect-ratio no CSS */}
               <Image
                 src="/1690800862967.jpeg"
                 alt="Gonçalo Gago"
                 fill
-                sizes="(max-width: 1024px) 90vw, 360px"
+                sizes="(max-width: 1024px) 90vw, 300px"
                 priority
               />
             </div>
@@ -114,7 +120,7 @@ export default function Home() {
         <div className="container">
           <h2 id="exp-title" className="section-title gradient-underline">Professional Experience</h2>
 
-          <div className="timeline">
+        <div className="timeline">
             <article className="role">
               <header>
                 <h4>Deloitte — Tech Consultant · Data &amp; AI</h4>
