@@ -1,3 +1,4 @@
+// app/page.tsx
 import Image from "next/image";
 import ChatWidget from "@/components/ChatWidget";
 
@@ -17,50 +18,38 @@ export default function Home() {
         </div>
       </header>
 
-      {/* TOP CARD (logo abaixo da topbar) */}
-      <section className="topcard" aria-label="Quick actions">
-        <div className="container">
-          <div className="topcard__wrap">
+      {/* HERO */}
+      <section className="hero" aria-labelledby="title">
+        <div className="container pro__grid">
+          {/* Barra superior com localização + CTAs */}
+          <div className="profile-topbar" aria-label="Intro actions">
             <span className="pill">AI &amp; Data Consultant</span>
-            <div className="topcard__meta">
-              <span>📍 Lisbon, Portugal</span>
-              <span>• Open to projects & interviews</span>
-            </div>
-            <div className="topcard__actions">
+            <span className="loc">📍 Lisbon, Portugal</span>
+            <span className="loc">• Open to projects &amp; interviews</span>
+            <div className="actions">
               <a className="btn btn--primary" href="/chat">Talk to my assistant</a>
               <a className="btn btn--ghost" href="/cv.pdf" download>Download CV (PDF)</a>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* HERO — FOTO PEQUENA À ESQUERDA */}
-      <section className="hero" aria-labelledby="title">
-        <div className="container pro__grid">
-          <aside className="profile-pane" aria-label="Profile photo">
+          {/* Painel de perfil (ESQUERDA) */}
+          <aside className="profile-pane" aria-label="Profile">
             <div className="profile-photo" aria-hidden="true">
               <Image
                 src="/1690800862967.jpeg"
                 alt="Gonçalo Gago"
                 fill
-                sizes="(max-width: 1024px) 90vw, 220px"
+                sizes="(max-width: 1024px) 90vw, 300px"
                 priority
               />
             </div>
           </aside>
 
+          {/* Conteúdo (DIREITA) */}
           <div className="hero__content">
             <h1 id="title">I build data products that drive decisions.</h1>
-            <p className="lede subtitle lede--wide">
-              I’m a Data &amp; AI Consultant based in Lisbon, dedicated to transforming complex data into clear,
-              actionable insights. My work spans <b>Analytics</b>, <b>Data Engineering</b>, and <b>Data Governance</b>,
-              where I design and implement scalable data solutions that enable better decision-making across organizations.
-              I have hands-on experience with <b>Collibra</b>, <b>MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>,
-              and <b>Python</b>, building automated metadata pipelines, custom visualizations, and AI-powered
-              applications for real business impact. I combine a strong technical foundation with a strategic mindset,
-              helping companies bridge the gap between data infrastructure and business value.
-            </p>
 
+            {/* Chips */}
             <div className="chips" role="group" aria-label="Expertise">
               <span className="chip chip--blue">Analytics</span>
               <span className="chip chip--teal">Engineering</span>
@@ -73,6 +62,7 @@ export default function Home() {
               <a id="contact" href="mailto:goncalogago@gmail.com">Contact</a>
             </div>
 
+            {/* Stats */}
             <div className="stats">
               <div className="stats__inner">
                 <div className="stat">
@@ -90,23 +80,35 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* --- LEDE A LARGURA TOTAL (SPAN 2 COLS) --- */}
+          <p className="lede lede--full">
+            I’m a Data &amp; AI Consultant based in Lisbon, dedicated to transforming complex data
+            into clear, actionable insights. My work spans <b>Analytics</b>, <b>Data Engineering</b>, and
+            <b> Data Governance</b>, where I design and implement scalable data solutions that enable better
+            decision-making across organizations. I have hands-on experience with <b>Collibra</b>,
+            <b> MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>, and <b>Python</b>, building automated
+            metadata pipelines, custom visualizations, and AI-powered applications for real business impact.
+            I combine a strong technical foundation with a strategic mindset, helping companies bridge the
+            gap between data infrastructure and business value.
+          </p>
         </div>
       </section>
 
       {/* CAPABILITIES */}
       <section id="capabilities" className="section" aria-labelledby="cap-title">
         <div className="container">
-          <h2 id="cap-title" className="section-title gradient-underline">Capabilities</h2>
+          <h2 id="cap-title" className="section-title">Capabilities</h2>
           <div className="grid three">
-            <div className="card tone--blue">
+            <div className="card">
               <h3>Analytics</h3>
               <p>Trusted metrics, semantic layers and executive dashboards with MicroStrategy &amp; Power BI.</p>
             </div>
-            <div className="card tone--teal">
+            <div className="card">
               <h3>Data Engineering</h3>
               <p>End-to-end ETL and integration flows on SQL Server &amp; Python for KPI monitoring.</p>
             </div>
-            <div className="card tone--violet">
+            <div className="card">
               <h3>Data Governance</h3>
               <p>Collibra setup, lineage and workflow automation (Edge, REST APIs).</p>
             </div>
@@ -117,7 +119,8 @@ export default function Home() {
       {/* EXPERIENCE */}
       <section id="work" className="section" aria-labelledby="exp-title">
         <div className="container">
-          <h2 id="exp-title" className="section-title gradient-underline">Professional Experience</h2>
+          <h2 id="exp-title" className="section-title">Professional Experience</h2>
+
           <div className="timeline">
             <article className="role">
               <header>
@@ -168,26 +171,26 @@ export default function Home() {
       {/* EDUCATION + CERTS */}
       <section className="section" aria-labelledby="edu-title">
         <div className="container">
-          <h2 id="edu-title" className="section-title gradient-underline">Education &amp; Certifications</h2>
-          <div className="grid two">
-            <div className="card">
-              <h3>Education</h3>
-              <ul className="bullets">
-                <li><b>Postgraduate, Applied AI &amp; ML</b> — ISEG (2024–2025). Final project: company chatbot with LLM/NLP.</li>
-                <li><b>Integrated Master’s, E&amp;CE</b> — FCT NOVA (2017–2023). Thesis on analytics for AGV planning.</li>
-                <li><b>Erasmus</b> — AGH University, Kraków (2021–2022).</li>
-                <li><b>High School Diploma</b> — Keyser HS, WV, USA (2016–2017).</li>
-              </ul>
-            </div>
-            <div className="card">
-              <h3>Certifications</h3>
-              <ul className="bullets">
-                <li>MicroStrategy Developer &amp; Departmental Analyst (2025)</li>
-                <li>AWS Certified Cloud Practitioner (2023)</li>
-                <li>Collibra Solution Architect (2023)</li>
-                <li>Qlik Data Analytics (2023)</li>
-              </ul>
-            </div>
+          <h2 id="edu-title" className="section-title">Education &amp; Certifications</h2>
+        </div>
+        <div className="container grid two">
+          <div className="card">
+            <h3>Education</h3>
+            <ul className="bullets">
+              <li><b>Postgraduate, Applied AI &amp; ML</b> — ISEG (2024–2025). Final project: company chatbot with LLM/NLP.</li>
+              <li><b>Integrated Master’s, E&amp;CE</b> — FCT NOVA (2017–2023). Thesis on analytics for AGV planning.</li>
+              <li><b>Erasmus</b> — AGH University, Kraków (2021–2022).</li>
+              <li><b>High School Diploma</b> — Keyser HS, WV, USA (2016–2017).</li>
+            </ul>
+          </div>
+          <div className="card">
+            <h3>Certifications</h3>
+            <ul className="bullets">
+              <li>MicroStrategy Developer &amp; Departmental Analyst (2025)</li>
+              <li>AWS Certified Cloud Practitioner (2023)</li>
+              <li>Collibra Solution Architect (2023)</li>
+              <li>Qlik Data Analytics (2023)</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -195,7 +198,7 @@ export default function Home() {
       {/* PROJECTS */}
       <section id="projects" className="section" aria-labelledby="proj-title">
         <div className="container">
-          <h2 id="proj-title" className="section-title gradient-underline">Personal Projects &amp; Activities</h2>
+          <h2 id="proj-title" className="section-title">Personal Projects &amp; Activities</h2>
           <div className="grid two">
             <div className="card">
               <h3>Crypto Market Analysis — (ongoing)</h3>
@@ -212,22 +215,22 @@ export default function Home() {
       {/* SKILLS */}
       <section className="section" aria-labelledby="skills-title">
         <div className="container">
-          <h2 id="skills-title" className="section-title gradient-underline">Skills &amp; Languages</h2>
-          <div className="grid two">
-            <div className="card">
-              <h3>Skills</h3>
-              <p><b>Programming:</b> Python, SQL, VBA, Java, JavaScript, HTML/CSS, Groovy, C/C++</p>
-              <p><b>Tools:</b> MicroStrategy, Power BI, Qlik, AWS, Airflow, Spark, Postman, Git, Excel, Collibra, Databricks, Confluence, Jira</p>
-              <p><b>Engineering:</b> SQL Server, ETL pipelines, performance tuning</p>
-              <p><b>AI:</b> OpenAI API, RAG (pgvector/Supabase)</p>
-            </div>
-            <div className="card">
-              <h3>Languages</h3>
-              <p>Portuguese (Native) · English (Fluent) · Spanish (Elementary)</p>
-              <div className="cta">
-                <a className="btn btn--primary" href="mailto:goncalogago@gmail.com">Work with me</a>
-                <a className="btn btn--ghost" href="/chat">Ask the assistant</a>
-              </div>
+          <h2 id="skills-title" className="section-title">Skills &amp; Languages</h2>
+        </div>
+        <div className="container grid two">
+          <div className="card">
+            <h3>Skills</h3>
+            <p><b>Programming:</b> Python, SQL, VBA, Java, JavaScript, HTML/CSS, Groovy, C/C++</p>
+            <p><b>Tools:</b> MicroStrategy, Power BI, Qlik, AWS, Airflow, Spark, Postman, Git, Excel, Collibra, Databricks, Confluence, Jira</p>
+            <p><b>Engineering:</b> SQL Server, ETL pipelines, performance tuning</p>
+            <p><b>AI:</b> OpenAI API, RAG (pgvector/Supabase)</p>
+          </div>
+          <div className="card">
+            <h3>Languages</h3>
+            <p>Portuguese (Native) · English (Fluent) · Spanish (Elementary)</p>
+            <div className="cta">
+              <a className="btn btn--primary" href="mailto:goncalogago@gmail.com">Work with me</a>
+              <a className="btn btn--ghost" href="/chat">Ask the assistant</a>
             </div>
           </div>
         </div>
