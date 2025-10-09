@@ -37,7 +37,7 @@ async function main() {
   }
 
   const pdfBuffer = fs.readFileSync(pdfPath);
-  const parsed = await pdfParse(pdfBuffer);
+  const parsed = await pdfParse.default(pdfBuffer); // 👈 corrigido aqui
   const fullText = parsed.text.replace(/\s+\n/g, "\n").trim();
 
   const chunks = chunkText(fullText);
