@@ -297,4 +297,47 @@
   .chat-input button:hover {
     opacity: 0.9;
   }
+  .section-title {
+    font-size: 22px;
+    margin: 0 0 14px;
+  }
+  
+  /* Stats bar below the hero */
+  .stats {
+    margin-top: 18px;
+  }
+  .stats__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 900px) {
+    .stats__inner { grid-template-columns: 1fr; }
+  }
+  .stat {
+    background: linear-gradient(180deg, rgba(106,167,255,.06), rgba(123,92,255,.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .stat__num { font-weight: 800; letter-spacing: .03em; }
+  .stat__label { color: var(--muted); }
+  
+  /* CTA banner */
+  .cta-banner {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .cta-banner__inner {
+    background: linear-gradient(90deg, rgba(106,167,255,.10), rgba(123,92,255,.08));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  @media (max-width: 900px) {
+    .cta-banner__inner { flex-direction: column; align-items: flex-start; }
+  }
+  .muted { color: var(--muted); }
   
