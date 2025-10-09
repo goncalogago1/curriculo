@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ChatWidget from "@/components/ChatWidget"; // 👈 importa
 
 export default function Home() {
   return (
@@ -222,6 +223,8 @@ export default function Home() {
           </nav>
         </div>
       </footer>
+      {/* Chat flutuante */}
+      <ChatWidget />  {/* 👈 aqui */}
     </main>
   );
 }
