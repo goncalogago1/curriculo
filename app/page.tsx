@@ -25,7 +25,7 @@ export default function Home() {
           <div className="profile-topbar" aria-label="Intro actions">
             <span className="pill">AI &amp; Data Consultant</span>
             <span className="loc">📍 Lisbon, Portugal</span>
-            <span className="loc">• Open to projects &amp; interviews</span>
+            <span className="loc">     Open to projects &amp; interviews</span>
             <div className="actions">
               <a className="btn btn--primary" href="/chat">Talk to my assistant</a>
               <a className="btn btn--ghost" href="/cv.pdf" download>Download CV (PDF)</a>
