@@ -231,3 +231,115 @@ main { min-height: 100vh; }
 /* página /chat usa o mesmo layout visual */
 .chat-container{ display:flex; flex-direction:column; max-width:800px; margin:0 auto; min-height:100vh; padding:0 16px 24px;}
 .chat-box{ flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:10px;}
+/* ======== /chat – cabeçalho ======== */
+.chat-header{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:6px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+  margin-bottom:12px;
+}
+.chat-header h1{
+  font-size:18px;
+  margin:0;
+  font-weight:800;
+}
+.back-link{
+  color: var(--brand);
+  text-decoration:none;
+  font-size:14px;
+}
+.back-link:hover{ text-decoration: underline; }
+
+/* ======== /chat – mensagem ======== */
+.msg{ display:flex; align-items:flex-start; }
+.msg.user{ justify-content:flex-end; }
+.msg.assistant{ justify-content:flex-start; }
+
+/* Reutiliza .bubble base já definida; acrescento pequenas afinações para /chat */
+.chat-box .bubble{
+  max-width: 82%;
+  background:#101012;
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:10px 12px;
+  border-radius:10px;
+  box-shadow: var(--shadow);
+}
+.msg.user .bubble{
+  background: var(--grad);
+  color:#0a0a0a;
+  border-color:transparent;
+}
+
+/* bloco opcional de fontes/links da resposta */
+.sources{
+  font-size:12px;
+  color: var(--muted);
+  border-top:1px solid var(--border);
+  padding-top:6px;
+  margin-top:6px;
+}
+
+/* ======== /chat – input ======== */
+.chat-input{
+  display:flex;
+  gap:8px;
+  border-top:1px solid var(--border);
+  padding-top:10px;
+  margin-top:12px;
+}
+
+.chat-input input{
+  flex:1;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:#101012;
+  color:var(--text);
+  box-shadow: var(--shadow);
+}
+
+.chat-input button{
+  background: var(--grad);
+  color:#0a0a0a;
+  border:0;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+}
+.chat-input button:hover{ filter:brightness(1.05); }
+.chat-input button:disabled{ opacity:.7; cursor: default; }
+
+/* ======== /chat – scroll & layout ======== */
+.chat-container{
+  display:flex;
+  flex-direction:column;
+  max-width:800px;
+  margin:0 auto;
+  min-height:100vh;
+  padding:0 16px 24px;
+}
+.chat-box{
+  flex:1;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  scroll-behavior:smooth;
+}
+
+/* iOS/Android scroll suave e isolamento do scroll */
+.chat-box{ overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+
+/* Acessibilidade: foco visível */
+a:focus,
+button:focus,
+input:focus{
+  outline: 2px solid color-mix(in srgb, var(--brand) 70%, white 30%);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
