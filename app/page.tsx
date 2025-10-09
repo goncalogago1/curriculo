@@ -32,24 +32,23 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Painel de perfil (ESQUERDA) */}
+          {/* FOTO — MENOR */}
           <aside className="profile-pane" aria-label="Profile">
             <div className="profile-photo" aria-hidden="true">
               <Image
                 src="/1690800862967.jpeg"
                 alt="Gonçalo Gago"
                 fill
-                sizes="(max-width: 1024px) 90vw, 300px"
+                sizes="(max-width: 1024px) 90vw, 240px"
                 priority
               />
             </div>
           </aside>
 
-          {/* Conteúdo (DIREITA) */}
+          {/* CONTEÚDO */}
           <div className="hero__content">
             <h1 id="title">I build data products that drive decisions.</h1>
 
-            {/* Chips */}
             <div className="chips" role="group" aria-label="Expertise">
               <span className="chip chip--blue">Analytics</span>
               <span className="chip chip--teal">Engineering</span>
@@ -81,7 +80,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* --- LEDE A LARGURA TOTAL (SPAN 2 COLS) --- */}
+          {/* LEDE A LARGURA TOTAL (curta à Capabilities) */}
           <p className="lede lede--full">
             I’m a Data &amp; AI Consultant based in Lisbon, dedicated to transforming complex data
             into clear, actionable insights. My work spans <b>Analytics</b>, <b>Data Engineering</b>, and
@@ -95,8 +94,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CAPABILITIES */}
-      <section id="capabilities" className="section" aria-labelledby="cap-title">
+      {/* CAPABILITIES — com menos espaço em cima */}
+      <section id="capabilities" className="section section--tight" aria-labelledby="cap-title">
         <div className="container">
           <h2 id="cap-title" className="section-title">Capabilities</h2>
           <div className="grid three">
