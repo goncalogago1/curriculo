@@ -53,16 +53,25 @@ export default function Home() {
         {/* vibrant highlight strip */}
         <div className="stats">
           <div className="container stats__inner">
-            <div className="stat"><span className="stat__num">Analytics</span><span className="stat__label">Semantic models & exec dashboards</span></div>
-            <div className="stat"><span className="stat__num">Engineering</span><span className="stat__label">ETL pipelines & SQL Server</span></div>
-            <div className="stat"><span className="stat__num">AI</span><span className="stat__label">RAG assistants in production</span></div>
+            <div className="stat">
+              <span className="stat__num">Analytics</span>
+              <span className="stat__label">Semantic models & exec dashboards</span>
+            </div>
+            <div className="stat">
+              <span className="stat__num">Engineering</span>
+              <span className="stat__label">ETL pipelines & SQL Server</span>
+            </div>
+            <div className="stat">
+              <span className="stat__num">AI</span>
+              <span className="stat__label">RAG assistants in production</span>
+            </div>
           </div>
         </div>
 
         <div className="hero__bg" />
       </section>
 
-      {/* CAPABILITIES — Governance por último */}
+      {/* CAPABILITIES — Governance last */}
       <section className="section" aria-labelledby="capabilities">
         <div className="container">
           <h2 id="capabilities" className="section-title">Capabilities</h2>
@@ -83,7 +92,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* EXPERIENCE — do CV */}
+      {/* EXPERIENCE */}
       <section className="section" aria-labelledby="experience">
         <div className="container">
           <h2 id="experience" className="section-title">Professional Experience</h2>
@@ -94,10 +103,10 @@ export default function Home() {
                 <span>Jun 2023 – Present · Lisbon</span>
               </header>
               <ul>
-                <li>Delivered projects in Governance, Engineering and Analytics for large organizations. :contentReference[oaicite:1]{index=1}</li>
-                <li>Implemented and optimized <b>Collibra</b> for catalog, lineage and workflows (Java/Python/REST). :contentReference[oaicite:2]{index=2}</li>
-                <li>Designed ETL pipelines on <b>SQL Server</b> feeding <b>Power BI</b>/<b>MicroStrategy</b> KPIs. :contentReference[oaicite:3]{index=3}</li>
-                <li>Built custom JavaScript visualisations; improved pipeline performance with Python. :contentReference[oaicite:4]{index=4}</li>
+                <li>Projects across Governance, Engineering and Analytics for large organizations.</li>
+                <li>Implemented and optimized <b>Collibra</b> (catalog, lineage, workflows) with Java/Python/REST.</li>
+                <li>Designed ETL pipelines on <b>SQL Server</b> feeding KPIs in <b>Power BI</b>/<b>MicroStrategy</b>.</li>
+                <li>Custom JavaScript visualisations; Python performance improvements for data loads.</li>
               </ul>
             </div>
 
@@ -107,7 +116,7 @@ export default function Home() {
                 <span>Apr 2023 – May 2023 · Lisbon</span>
               </header>
               <ul>
-                <li>Automated course generation using <b>Python</b> + <b>OpenAI API</b>. :contentReference[oaicite:5]{index=5}</li>
+                <li>Automated course generation using <b>Python</b> + <b>OpenAI API</b>.</li>
               </ul>
             </div>
 
@@ -117,7 +126,7 @@ export default function Home() {
                 <span>May 2022 – Nov 2022 · Palmela</span>
               </header>
               <ul>
-                <li>Analysed AGV intra-logistics in <b>Qlik Sense</b>; recommended reallocation of unused robot. :contentReference[oaicite:6]{index=6}</li>
+                <li>Analysed AGV intra-logistics in <b>Qlik Sense</b>; recommended reallocation of unused robot.</li>
               </ul>
             </div>
 
@@ -127,7 +136,7 @@ export default function Home() {
                 <span>Feb 2020 – Mar 2020 · Lisbon</span>
               </header>
               <ul>
-                <li>Corporate IT & data management exposure; strengthened <b>Excel</b> and <b>SQL</b> foundations. :contentReference[oaicite:7]{index=7}</li>
+                <li>Corporate IT & data management exposure; stronger <b>Excel</b> and <b>SQL</b> foundations.</li>
               </ul>
             </div>
           </div>
@@ -142,19 +151,19 @@ export default function Home() {
             <div className="card">
               <h3>Education</h3>
               <ul className="bullets">
-                <li><b>Postgraduate, Applied AI & ML</b> — ISEG Exec. Education, Univ. Lisbon (Mar 2024 – Feb 2025). Final project: custom company chatbot with LLM/NLP. :contentReference[oaicite:8]{index=8}</li>
-                <li><b>Integrated Master’s, Electrical & Computer Eng.</b> — FCT NOVA (2017 – 2023). Thesis on analytics for AGV planning. :contentReference[oaicite:9]{index=9}</li>
-                <li><b>Erasmus</b> — AGH Univ., Kraków (Sep 2021 – Feb 2022). :contentReference[oaicite:10]{index=10}</li>
-                <li><b>High School Diploma</b> — Keyser High School, WV, USA (2016 – 2017). :contentReference[oaicite:11]{index=11}</li>
+                <li><b>Postgraduate, Applied AI & ML</b> — ISEG Executive Education, Univ. Lisbon (Mar 2024 – Feb 2025). Final project: company chatbot with LLM/NLP.</li>
+                <li><b>Integrated Master’s, Electrical & Computer Eng.</b> — FCT NOVA (2017 – 2023). Thesis on analytics for AGV planning.</li>
+                <li><b>Erasmus</b> — AGH University, Kraków (Sep 2021 – Feb 2022).</li>
+                <li><b>High School Diploma</b> — Keyser High School, WV, USA (2016 – 2017).</li>
               </ul>
             </div>
             <div className="card">
               <h3>Certifications</h3>
               <ul className="bullets">
-                <li>MicroStrategy Developer & Departmental Analyst (2025) :contentReference[oaicite:12]{index=12}</li>
-                <li>AWS Certified Cloud Practitioner (2023) :contentReference[oaicite:13]{index=13}</li>
-                <li>Collibra Solution Architect (2023) :contentReference[oaicite:14]{index=14}</li>
-                <li>Qlik Data Analytics (2023) :contentReference[oaicite:15]{index=15}</li>
+                <li>MicroStrategy Developer & Departmental Analyst (2025)</li>
+                <li>AWS Certified Cloud Practitioner (2023)</li>
+                <li>Collibra Solution Architect (2023)</li>
+                <li>Qlik Data Analytics (2023)</li>
               </ul>
             </div>
           </div>
@@ -168,11 +177,11 @@ export default function Home() {
           <div className="grid two">
             <div className="card">
               <h3>Crypto Market Analysis — (ongoing)</h3>
-              <p>Python tool that pulls Binance data, analyses pair correlations, z-score and hedge ratio. :contentReference[oaicite:16]{index=16}</p>
+              <p>Python tool that pulls Binance data and analyses pair correlations, z-score and hedge ratio.</p>
             </div>
             <div className="card">
               <h3>Volunteering & Exchanges</h3>
-              <p>Missão País, Just a Change, Banco Alimentar, Projeto +; international camps in Norway, Iceland, Luxembourg. :contentReference[oaicite:17]{index=17}</p>
+              <p>Missão País, Just a Change, Banco Alimentar, Projeto +; international camps in Norway, Iceland, Luxembourg.</p>
             </div>
           </div>
         </div>
@@ -182,22 +191,21 @@ export default function Home() {
       <section className="section" aria-labelledby="skills">
         <div className="container">
           <h2 id="skills" className="section-title">Skills & Languages</h2>
-          <div className="grid two">
-            <div className="card">
-              <h3>Skills</h3>
-              <p><b>Programming:</b> Python, SQL, VBA, Java, JavaScript, HTML/CSS, Groovy</p>
-              <p><b>Tools/Platforms:</b> MicroStrategy, Power BI, Qlik Sense, AWS, Airflow, Spark, Postman, Git, Excel, Collibra, Databricks, Confluence, Jira</p>
-              <p><b>Data Engineering:</b> SQL Server, ETL pipelines, performance tuning</p>
-              <p><b>AI:</b> OpenAI API, RAG with pgvector/Supabase</p>
-              <p className="muted">Source: résumé. :contentReference[oaicite:18]{index=18}</p>
-            </div>
-            <div className="card">
-              <h3>Languages</h3>
-              <p>Portuguese (Native) · English (Fluent) · Spanish (Elementary) :contentReference[oaicite:19]{index=19}</p>
-              <div className="cta">
-                <a className="btn btn--primary" href="mailto:goncalogago@gmail.com">Work with me</a>
-                <a className="btn btn--ghost" href="/chat">Ask the assistant</a>
-              </div>
+        </div>
+        <div className="container grid two">
+          <div className="card">
+            <h3>Skills</h3>
+            <p><b>Programming:</b> Python, SQL, VBA, Java, JavaScript, HTML/CSS, Groovy</p>
+            <p><b>Tools/Platforms:</b> MicroStrategy, Power BI, Qlik Sense, AWS, Airflow, Spark, Postman, Git, Excel, Collibra, Databricks, Confluence, Jira</p>
+            <p><b>Data Engineering:</b> SQL Server, ETL pipelines, performance tuning</p>
+            <p><b>AI:</b> OpenAI API, RAG with pgvector/Supabase</p>
+          </div>
+          <div className="card">
+            <h3>Languages</h3>
+            <p>Portuguese (Native) · English (Fluent) · Spanish (Elementary)</p>
+            <div className="cta">
+              <a className="btn btn--primary" href="mailto:goncalogago@gmail.com">Work with me</a>
+              <a className="btn btn--ghost" href="/chat">Ask the assistant</a>
             </div>
           </div>
         </div>
