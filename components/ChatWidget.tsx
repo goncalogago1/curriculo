@@ -83,7 +83,7 @@ export default function ChatWidget() {
         aria-label="CV Goncalo Gago Assistant"
       >
         <div className="chatwidget__header">
-          <div className="chatwidget__title">Assistant</div>
+          <div className="chatwidget__title">CV Goncalo Gago Assistant</div>
           <button className="chatwidget__close" aria-label="Close" onClick={() => setOpen(false)}>
             ×
           </button>
