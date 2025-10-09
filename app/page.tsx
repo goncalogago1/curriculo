@@ -25,35 +25,40 @@ export default function Home() {
         </div>
       </div>
 
-      {/* HERO — FOTO À ESQUERDA (menor) */}
+      {/* TOP CARD (substitui a “caixa” antiga e sobe para o topo) */}
+      <section className="topcard" aria-label="Quick actions">
+        <div className="container">
+          <div className="topcard__wrap">
+            <span className="pill">AI &amp; Data Consultant</span>
+            <div className="topcard__meta">
+              <span>📍 Lisbon, Portugal</span>
+              <span>• Open to projects & interviews</span>
+            </div>
+            <div className="topcard__actions">
+              <a className="btn btn--primary" href="/chat">Talk to my assistant</a>
+              <a className="btn btn--ghost" href="/cv.pdf" download>Download CV (PDF)</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HERO — FOTO À ESQUERDA (ainda mais pequena) */}
       <section className="hero" aria-labelledby="title">
         <div className="container pro__grid">
-          {/* Painel de perfil (ESQUERDA) */}
-          <aside className="profile-pane" aria-label="Profile">
+          {/* Foto / painel esquerdo */}
+          <aside className="profile-pane" aria-label="Profile photo">
             <div className="profile-photo" aria-hidden="true">
               <Image
                 src="/1690800862967.jpeg"
                 alt="Gonçalo Gago"
                 fill
-                sizes="(max-width: 1024px) 90vw, 300px"
+                sizes="(max-width: 1024px) 90vw, 220px"
                 priority
               />
             </div>
-
-            <div className="profile-meta">
-              <span className="pill">AI &amp; Data Consultant</span>
-              <ul>
-                <li>Lisbon, Portugal</li>
-                <li>Open to projects & interviews</li>
-              </ul>
-              <div className="profile-actions">
-                <a className="btn btn--primary" href="/chat">Talk to my assistant</a>
-                <a className="btn btn--ghost" href="/cv.pdf" download>Download CV (PDF)</a>
-              </div>
-            </div>
           </aside>
 
-          {/* Conteúdo (DIREITA) */}
+          {/* Conteúdo (direita) */}
           <div className="hero__content">
             <h1 id="title">I build data products that drive decisions.</h1>
             <p className="lede subtitle">
@@ -73,8 +78,7 @@ export default function Home() {
               <a id="contact" href="mailto:goncalogago@gmail.com">Contact</a>
             </div>
 
-            {/* Chips/Stats */}
-            <div className="stats pro__stats">
+            <div className="stats">
               <div className="stats__inner">
                 <div className="stat">
                   <span className="stat__num">+30</span>
@@ -120,7 +124,7 @@ export default function Home() {
         <div className="container">
           <h2 id="exp-title" className="section-title gradient-underline">Professional Experience</h2>
 
-        <div className="timeline">
+          <div className="timeline">
             <article className="role">
               <header>
                 <h4>Deloitte — Tech Consultant · Data &amp; AI</h4>
@@ -198,7 +202,7 @@ export default function Home() {
       <section id="projects" className="section" aria-labelledby="proj-title">
         <div className="container">
           <h2 id="proj-title" className="section-title gradient-underline">Personal Projects &amp; Activities</h2>
-          <div className="grid two">
+        <div className="grid two">
             <div className="card">
               <h3>Crypto Market Analysis — (ongoing)</h3>
               <p>Python tool that pulls Binance data and analyses pair correlations, z-score and hedge ratio.</p>
