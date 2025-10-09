@@ -1,5 +1,5 @@
 import fs from "fs";
-import pdf from "pdf-parse";
+import * as pdfParse from "pdf-parse";
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
 import dotenv from "dotenv";
@@ -32,7 +32,7 @@ function chunkText(text, size = 1000, overlap = 200) {
 // --- Ingestão ---
 async function ingestPDF(filePath, source = "cv") {
   const dataBuffer = fs.readFileSync(filePath);
-  const parsed = await pdf(dataBuffer);
+  const parsed = await pdfParse(dataBuffer);
   const text = parsed.text;
   const chunks = chunkText(text);
 

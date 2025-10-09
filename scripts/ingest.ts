@@ -7,7 +7,7 @@ import path from "path";
 import OpenAI from "openai";
 import { supabase } from "@/lib/supabase";
 // pdf-parse: se der erro com default, use a linha 2 (namespace)
-import pdfParse from "pdf-parse";
+import * as pdfParse from "pdf-parse"; // ✅ <- corrigido
 // import * as pdfParse from "pdf-parse"; // <- alternativa se a de cima falhar
 
 
