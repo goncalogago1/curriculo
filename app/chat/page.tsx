@@ -1,4 +1,3 @@
-// app/chat/page.tsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -9,75 +8,74 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const bottomRef = useRef<HTMLDivElement | null>(null);
+  const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ block: "end" });
+    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages]);
 
   async function send() {
     const text = input.trim();
-    if (!text) return;
-    const next = [...messages, { role: "user", content: text } as Msg];
+    if (!text || loading) return;
+
+    const next = [...messages, { role: "user", content: text }];
     setMessages(next);
     setInput("");
     setLoading(true);
+
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: next }),
       });
       const data = await res.json();
-      const reply: Msg = {
-        role: "assistant",
-        content: data?.answer ?? "…",
-        sources: data?.sources ?? [],
-      };
-      setMessages((m) => [...m, reply]);
-    } catch (e) {
       setMessages((m) => [
         ...m,
         {
           role: "assistant",
-          content:
-            "Sorry, something went wrong. Try again in a moment or email me at goncalogago@gmail.com.",
+          content: data.answer ?? data.content ?? "(no response)",
+          sources: data.sources ?? [],
         },
+      ]);
+    } catch {
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", content: "Houve um erro. Tenta outra vez." },
       ]);
     } finally {
       setLoading(false);
     }
   }
 
-  function onKey(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      send();
-    }
-  }
-
   return (
     <main className="chat-container">
-      <div className="chat-header">
-        <a className="back-link" href="/">← Back to portfolio</a>
+      <header className="chat-header">
+        <a className="back-link" href="/">&larr; Back to portfolio</a>
         <h1>Assistant</h1>
-      </div>
+      </header>
 
       <div className="chat-box">
         {messages.map((m, i) => (
           <div key={i} className={`msg ${m.role}`}>
-            <div className="bubble">{m.content}</div>
+            <div className="bubble">
+              {m.content}
+              {m.sources && m.sources.length > 0 && (
+                <div className="sources">fontes: {m.sources.join(", ")}</div>
+              )}
+            </div>
           </div>
         ))}
-        <div ref={bottomRef} />
+        <div ref={endRef} />
       </div>
 
       <div className="chat-input">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={onKey}
-          placeholder="Ask anything about my skills, projects, CV…"
+          onKeyDown={(e) => e.key === "Enter" && send()}
+          placeholder="Ask anything about my CV…"
+          aria-label="Message"
         />
         <button onClick={send} disabled={loading || !input.trim()}>
           {loading ? "…" : "Send"}

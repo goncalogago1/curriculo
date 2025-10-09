@@ -211,3 +211,23 @@ main { min-height: 100vh; }
 @media (max-width: 520px){
   .chatwidget{ right: 12px; left: 12px; width: auto; height: 60vh; bottom: 86px; }
 }
+/* FIX: permitir scroll interno no widget */
+.chatwidget__body { min-height: 0; }
+.chatwidget__messages { min-height: 0; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+
+/* --- Chat widget: scroll suave no iOS/Android e isolamento do scroll --- */
+.chatwidget__messages{
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* altura mais robusta para o painel flutuante */
+.chatwidget{
+  height: clamp(380px, 70vh, 560px);
+  max-height: calc(100vh - 120px);
+}
+
+/* página /chat usa o mesmo layout visual */
+.chat-container{ display:flex; flex-direction:column; max-width:800px; margin:0 auto; min-height:100vh; padding:0 16px 24px;}
+.chat-box{ flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:10px;}
