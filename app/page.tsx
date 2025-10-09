@@ -195,7 +195,7 @@ export default function Home() {
         <div className="container grid two">
           <div className="card">
             <h3>Skills</h3>
-            <p><b>Programming:</b> Python, SQL, VBA, Java, JavaScript, HTML/CSS, Groovy,aaaa,bbb,ccc,vvvv</p>
+            <p><b>Programming:</b> Python, SQL, VBA, Java, JavaScript, HTML/CSS, Groovy,C++,C </p>
             <p><b>Tools/Platforms:</b> MicroStrategy, Power BI, Qlik Sense, AWS, Airflow, Spark, Postman, Git, Excel, Collibra, Databricks, Confluence, Jira, Note</p>
             <p><b>Data Engineering:</b> SQL Server, ETL pipelines, performance tuning</p>
             <p><b>AI:</b> OpenAI API, RAG with pgvector/Supabase</p>
