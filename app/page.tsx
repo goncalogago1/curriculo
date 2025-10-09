@@ -1,4 +1,3 @@
-// app/page.tsx
 import Image from "next/image";
 import ChatWidget from "@/components/ChatWidget";
 
@@ -18,14 +17,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* BARRA COMPLETA DO PAPEL */}
-      <div className="roleband" aria-label="Role">
-        <div className="container roleband__inner">
-          <span className="roleband__text">AI &amp; Data Consultant</span>
-        </div>
-      </div>
-
-      {/* TOP CARD (substitui a “caixa” antiga e sobe para o topo) */}
+      {/* TOP CARD (logo abaixo da topbar) */}
       <section className="topcard" aria-label="Quick actions">
         <div className="container">
           <div className="topcard__wrap">
@@ -42,10 +34,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HERO — FOTO À ESQUERDA (ainda mais pequena) */}
+      {/* HERO — FOTO PEQUENA À ESQUERDA */}
       <section className="hero" aria-labelledby="title">
         <div className="container pro__grid">
-          {/* Foto / painel esquerdo */}
           <aside className="profile-pane" aria-label="Profile photo">
             <div className="profile-photo" aria-hidden="true">
               <Image
@@ -58,7 +49,6 @@ export default function Home() {
             </div>
           </aside>
 
-          {/* Conteúdo (direita) */}
           <div className="hero__content">
             <h1 id="title">I build data products that drive decisions.</h1>
             <p className="lede subtitle">
@@ -123,7 +113,6 @@ export default function Home() {
       <section id="work" className="section" aria-labelledby="exp-title">
         <div className="container">
           <h2 id="exp-title" className="section-title gradient-underline">Professional Experience</h2>
-
           <div className="timeline">
             <article className="role">
               <header>
@@ -202,7 +191,7 @@ export default function Home() {
       <section id="projects" className="section" aria-labelledby="proj-title">
         <div className="container">
           <h2 id="proj-title" className="section-title gradient-underline">Personal Projects &amp; Activities</h2>
-        <div className="grid two">
+          <div className="grid two">
             <div className="card">
               <h3>Crypto Market Analysis — (ongoing)</h3>
               <p>Python tool that pulls Binance data and analyses pair correlations, z-score and hedge ratio.</p>
