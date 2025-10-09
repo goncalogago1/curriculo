@@ -1,118 +1,88 @@
+// app/chat/page.tsx
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
-type Msg = { role: "user" | "assistant"; content: string };
-
-export interface Source {
-  id: number;
-  i: number;
-  title?: string;
-  url?: string;
-  source?: string;
-  similarity?: number;
-}
+type Msg = { role: "user" | "assistant"; content: string; sources?: string[] };
 
 export default function ChatPage() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [lastSources, setLastSources] = useState<Source[]>([]);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ block: "end" });
+  }, [messages]);
 
   async function send() {
     const text = input.trim();
     if (!text) return;
-
-    // ✅ garante literal para 'role'
-    const userMsg: Msg = { role: "user", content: text };
-    setMessages((prev) => [...prev, userMsg]);
-
+    const next = [...messages, { role: "user", content: text } as Msg];
+    setMessages(next);
     setInput("");
     setLoading(true);
-
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }),
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ messages: next }),
       });
-
-      const data: { answer?: string; sources?: Source[]; error?: string } =
-        await res.json();
-
-      if (data.answer) {
-        const assistantMsg: Msg = { role: "assistant", content: data.answer };
-        setMessages((prev) => [...prev, assistantMsg]);
-        setLastSources(data.sources ?? []);
-      } else {
-        const errMsg: Msg = {
-          role: "assistant",
-          content: data.error || "Erro ao responder.",
-        };
-        setMessages((prev) => [...prev, errMsg]);
-      }
-    } catch {
-      const netErr: Msg = {
+      const data = await res.json();
+      const reply: Msg = {
         role: "assistant",
-        content: "Falha de rede ao chamar /api/chat.",
+        content: data?.answer ?? "…",
+        sources: data?.sources ?? [],
       };
-      setMessages((prev) => [...prev, netErr]);
+      setMessages((m) => [...m, reply]);
+    } catch (e) {
+      setMessages((m) => [
+        ...m,
+        {
+          role: "assistant",
+          content:
+            "Sorry, something went wrong. Try again in a moment or email me at goncalogago@gmail.com.",
+        },
+      ]);
     } finally {
       setLoading(false);
     }
   }
 
+  function onKey(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  }
+
   return (
-    <div className="chat-container">
-      {/* Barra de topo */}
+    <main className="chat-container">
       <div className="chat-header">
-        <Link href="/" className="back-link">
-          ← Voltar para Início
-        </Link>
-        <h1>Assistente do Gonçalo</h1>
+        <a className="back-link" href="/">← Back to portfolio</a>
+        <h1>Assistant</h1>
       </div>
 
-      {/* Área do chat */}
       <div className="chat-box">
         {messages.map((m, i) => (
-          <div key={i} className={m.role === "user" ? "msg user" : "msg assistant"}>
-            <div className="bubble">
-              <b>{m.role === "user" ? "Você" : "Assistente"}:</b> {m.content}
-            </div>
+          <div key={i} className={`msg ${m.role}`}>
+            <div className="bubble">{m.content}</div>
           </div>
         ))}
-        {loading && (
-          <div className="msg assistant">
-            <div className="bubble">Gerando resposta…</div>
-          </div>
-        )}
+        <div ref={bottomRef} />
       </div>
 
-      {/* Fontes */}
-      {lastSources.length > 0 && (
-        <div className="sources">
-          <b>Fontes:</b>{" "}
-          {lastSources.map((s) => (
-            <span key={s.id}>
-              #{s.i} {s.title || s.source}
-              {s.url ? ` (${s.url})` : ""}
-              {" · "}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Input */}
       <div className="chat-input">
         <input
           value={input}
-          onChange={(ev) => setInput(ev.target.value)}
-          onKeyDown={(ev) => ev.key === "Enter" && send()}
-          placeholder="Pergunte sobre experiência, projetos, skills..."
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={onKey}
+          placeholder="Ask anything about my skills, projects, CV…"
         />
-        <button onClick={send}>Enviar</button>
+        <button onClick={send} disabled={loading || !input.trim()}>
+          {loading ? "…" : "Send"}
+        </button>
       </div>
-    </div>
+    </main>
   );
 }
