@@ -1,25 +1,4 @@
-Detailed Project Experience
-Deloitte — Data & AI Tech Consultant (Jun 2023 – Present)
-
-During my time at Deloitte, I contributed to three major projects across Data Governance, Data Engineering, and Data Visualization:
-
-Data Governance with Collibra
-I worked on the implementation and optimization of the Collibra Data Intelligence Platform for a large energy sector client. This involved setting up metadata ingestion pipelines, configuring governance workflows, automating lineage creation, and troubleshooting integration issues with multiple systems (SAP, Dremio, Power BI). Using Collibra REST APIs and Python, I streamlined metadata ingestion processes, significantly improving data governance and discoverability.
-
-DataHub & Power BI Proof of Concept (Large-scale PDF Optimization)
-I participated in the creation of a DataHub and a Power BI proof of concept to demonstrate the scalability of reporting for high-volume data. The project involved generating over 1,300 PDF reports automatically. Initially, the client used outdated tools with manual processes, which were slow and prone to errors. I optimized the data model and report generation pipeline, improving processing time and enabling the automatic production of thousands of reports in a fraction of the original time.
-
-Project — MicroStrategy & ETL Optimization
-Internally, I supported Deloitte teams by developing and optimizing MicroStrategy dashboards, designing ETL pipelines, and improving data loading processes using Python. I created end-to-end automated workflows to reduce manual refresh time and improve dashboard responsiveness, ensuring data was always up to date for internal decision-making.
-
-Miles in the Sky — AI Course Builder (Apr 2023 – May 2023)
-
-I developed an AI-powered course creation tool integrating OpenAI APIs. This involved designing prompt engineering strategies to generate optimized course content dynamically. By fine-tuning prompts and integrating them with Python scripts, the tool produced high-quality learning materials automatically, reducing manual content creation time and improving the relevance of generated outputs.
-
-Autoeuropa Volkswagen — Logistics Planning Intern (May 2022 – Nov 2022)
-
-At Autoeuropa, I analyzed operational data from a fleet of 120 Automated Guided Vehicles (AGVs) responsible for transporting parts to assembly lines. Using Qlik Sense dashboards, I visualized insights related to AGV performance, routes, and battery status. Through data analysis, I identified underutilized AGVs and proposed reallocating them to another production line. This led to tangible operational optimization and better resource utilization.
-
+Education and Project:
 ISEG Executive Education – University of Lisbon | Mar 2024 – Feb 2025
 
 I completed a postgraduate program in Applied Artificial Intelligence & Machine Learning, delivered in partnership with Amazon Web Services (AWS). This intensive 140-hour program combined theoretical foundations with practical applications in real-world business contexts, covering supervised and unsupervised learning, deep learning, generative AI, time series forecasting, and AI deployment and monitoring. The curriculum emphasized end-to-end machine learning project development, from data preprocessing and model design to deployment in enterprise environments.

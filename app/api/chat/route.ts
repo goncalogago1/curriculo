@@ -16,7 +16,9 @@ function sourceLabel(r: RetrievedDoc, i: number) {
 
   // 🧠 mapeamento manual:
   if ([1, 2, 3].includes(chunk)) return `cv.pdf — chunk ${chunk}`;
-  if (chunk === 4) return `text.txt — chunk ${chunk}`;
+  if (chunk === 4) return `Education.txt — chunk ${chunk}`;
+  if (chunk === 5) return `Work.txt — chunk ${chunk}`;
+
 
   // fallback
   if (r.title) return r.title;
@@ -67,6 +69,7 @@ export async function POST(req: NextRequest) {
     Answer using ONLY the provided context snippets when relevant.
     If the question is outside scope (CV/experience/projects) or there isn't enough evidence, say that politely.
     Be concise and factual.
+    If you used context, add a short "Sources" list at the end (e.g., "CV — chunk 3").
     Do NOT invent names, dates, or numbers.
     Use plain text only (no Markdown), never use bold or italics.
     `.trim();    
