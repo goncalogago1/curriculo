@@ -67,7 +67,6 @@ export async function POST(req: NextRequest) {
     Answer using ONLY the provided context snippets when relevant.
     If the question is outside scope (CV/experience/projects) or there isn't enough evidence, say that politely.
     Be concise and factual.
-    If you used context, add a short "Sources" list at the end (e.g., "CV — chunk 3").
     Do NOT invent names, dates, or numbers.
     Use plain text only (no Markdown), never use bold or italics.
     `.trim();    
