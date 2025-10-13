@@ -101,16 +101,22 @@ export default function ChatWidget() {
 
           {sources.length > 0 && (
             <div className="chatwidget__sources">
-              <b>Sources:</b>{" "}
-              {sources.map((s, idx) => (
-                <span key={s.id}>
-                  {/* 👇 usar o label gerado no backend (ex.: "CV — chunk 3") */}
-                  {s.label || `Source #${s.i}`}
-                  {idx < sources.length - 1 ? " · " : ""}
+                <b>Sources:</b>{" "}
+                {Array.from(
+                new Set( // 🔥 remove duplicados
+                    sources.map((s) =>
+                    // simplifica label: remove “— chunk X”
+                    (s.label || `Source #${s.i}`).replace(/ — chunk \d+$/, "")
+                    )
+                )
+                ).map((label, idx, arr) => (
+                <span key={label}>
+                    {label}
+                    {idx < arr.length - 1 ? "   " : ""}
                 </span>
-              ))}
+                ))}
             </div>
-          )}
+            )}
         </div>
 
         <div className="chatwidget__input">

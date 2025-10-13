@@ -79,10 +79,17 @@ export default function ChatPage() {
               {m.role === "assistant" && m.sources && m.sources.length > 0 && (
                 <div style={{ marginTop: 8, fontSize: 12, opacity: 0.8 }}>
                   <b>Sources:</b>{" "}
-                  {m.sources.map((s, idx) => (
-                    <span key={`${s.id}-${idx}`}>
-                      {s.label || `Source #${s.i}`}
-                      {idx < m.sources!.length - 1 ? " · " : ""}
+                  {Array.from(
+                    new Set(
+                      (m.sources ?? [])
+                        .map((s) => s.label || `Source #${s.i}`)
+                        // remove " — chunk X" (suporta em dash e hyphen)
+                        .map((lbl) => lbl.replace(/\s?[—-]\s?chunk\s+\d+$/i, ""))
+                    )
+                  ).map((label, idx, arr) => (
+                    <span key={label}>
+                      {label}
+                      {idx < arr.length - 1 ? " · " : ""}
                     </span>
                   ))}
                 </div>
