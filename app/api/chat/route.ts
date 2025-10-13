@@ -30,17 +30,15 @@ export async function POST(req: NextRequest) {
     }
 
     if (!userMessage) {
-      return NextResponse.json(
-        { error: "Empty message." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Empty message." }, { status: 400 });
     }
 
-    // -------- 1) Retrieve contextual snippets (RAG) with safe fallback
+    // 1) Retrieve RAG context (pass site origin so lib/rag.ts can fetch /CV_text.txt)
+    const siteOrigin = req.nextUrl.origin;
     let results: RetrievedDoc[] = [];
     let contextText = "";
     try {
-      results = await retrieveContext(userMessage, 6);
+      results = await retrieveContext(userMessage, 6, { siteOrigin });
       contextText = results
         .map((r, i) => {
           const meta =
@@ -51,12 +49,12 @@ export async function POST(req: NextRequest) {
         })
         .join("\n\n---\n\n");
     } catch {
-      // if RAG fails, continue without context
+      // safe fallback: continue without context
       results = [];
       contextText = "";
     }
 
-    // -------- 2) Build prompts (English)
+    // 2) Prompts (English)
     const systemPrompt = `
 You are the portfolio assistant for Gonçalo Gago.
 Answer using ONLY the provided context snippets when relevant.
@@ -74,7 +72,7 @@ Context (retrieved snippets):
 ${contextText || "(none)"}
 `.trim();
 
-    // -------- 3) Generate answer
+    // 3) Generate answer
     let answer =
       `I received: "${userMessage}". ` +
       `Ask me anything about Gonçalo's skills, projects, or CV.`;
@@ -85,8 +83,7 @@ ${contextText || "(none)"}
         { role: "user", content: userPrompt },
       ];
 
-      // (Optional) include short history (without blowing token budget)
-      // Add the last 4 turns max
+      // include a short tail of history (optional)
       const tail = history.slice(-8);
       for (const m of tail) {
         if (m.role === "user" || m.role === "assistant") {
@@ -106,9 +103,10 @@ ${contextText || "(none)"}
     return NextResponse.json(
       {
         answer,
+        // keep sources normalized; your lib/rag.ts already tags the CV text as "cv"
         sources: results.map((r, i) => ({
           id: r.id,
-          source: r.source,
+          source: r.source,                  // e.g., "cv"
           title: r.title ?? undefined,
           url: r.url ?? undefined,
           similarity: r.similarity ?? 0,

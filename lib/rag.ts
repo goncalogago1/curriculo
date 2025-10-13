@@ -1,7 +1,6 @@
 // lib/rag.ts
 import OpenAI from "openai";
 import { supabase } from "./supabase";
-import cvTextRaw from "@/public/CV_text.txt?raw"; // 👈 importa como string (Next 15 suporta "?raw")
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
@@ -15,30 +14,52 @@ export type RetrievedDoc = {
   similarity: number;
 };
 
-let cachedCVText: string | null = cvTextRaw?.trim() ?? null;
+let cachedCVText: string | null = null;
+
+/**
+ * Fetch CV_text.txt from /public at runtime (server-side) and cache it.
+ * We pass the siteOrigin from the API route to avoid hardcoding URLs.
+ */
+async function getCVText(siteOrigin?: string): Promise<string | null> {
+  if (cachedCVText) return cachedCVText;
+  if (!siteOrigin) return null; // origin not available (should be provided by route)
+  try {
+    const url = new URL("/CV_text.txt", siteOrigin).toString();
+    const res = await fetch(url, { cache: "force-cache" });
+    if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+    const txt = (await res.text()).trim();
+    cachedCVText = txt || null;
+    return cachedCVText;
+  } catch {
+    console.warn("[RAG] Could not load /CV_text.txt; continuing without it.");
+    return null;
+  }
+}
 
 export async function retrieveContext(
   query: string,
-  k = 6
+  k = 6,
+  opts?: { siteOrigin?: string }
 ): Promise<RetrievedDoc[]> {
   // 1) Embed query
   const emb = await openai.embeddings.create({
-    model: "text-embedding-3-small",
+    model: "text-embedding-3-small", // 1536 dims
     input: query,
   });
-  const embedding = emb.data[0].embedding;
+  const queryEmbedding = emb.data[0].embedding;
 
-  // 2) Supabase vector search
+  // 2) Vector search on Supabase
   const { data, error } = await supabase.rpc("match_documents", {
-    query_embedding: embedding,
+    query_embedding: queryEmbedding,
     match_count: k,
-    filter_source: null,
+    filter_source: null, // se quiseres filtrar por "cv", muda para "cv"
   });
 
-  let mainDocs: RetrievedDoc[] = [];
+  let mainDocs: RetrievedDoc[] =
+    (data as RetrievedDoc[] | null) ?? [];
 
   if (error) {
-    console.warn("[RAG] Supabase RPC error, fallback:", error.message);
+    console.warn("[RAG] Supabase RPC error; fallback:", error.message);
     const { data: rows, error: err2 } = await supabase
       .from("documents")
       .select("*")
@@ -46,42 +67,45 @@ export async function retrieveContext(
 
     if (err2) throw err2;
 
-    mainDocs = (rows ?? []).map((r) => ({
-      id: (r as any).id,
-      source: (r as any).source,
-      title: (r as any).title,
-      url: (r as any).url,
-      content: (r as any).content,
-      metadata: (r as any).metadata ?? {},
-      similarity: 0,
-    }));
-  } else {
-    mainDocs = (data ?? []) as RetrievedDoc[];
+    mainDocs =
+      (rows ?? []).map((r: any) => ({
+        id: r.id,
+        source: r.source,
+        title: r.title,
+        url: r.url,
+        content: r.content,
+        metadata: r.metadata ?? {},
+        similarity: 0,
+      })) ?? [];
   }
 
-  // 3) Add CV_text.txt as an additional source
-  if (cachedCVText) {
-    const cvEmbedding = await openai.embeddings.create({
+  // 3) Add CV_text.txt as an extra "cv" source (so results show only "cv")
+  const cvText = await getCVText(opts?.siteOrigin);
+  if (cvText) {
+    // Embed the full CV text
+    const cvEmb = await openai.embeddings.create({
       model: "text-embedding-3-small",
-      input: cachedCVText,
+      input: cvText,
     });
-    const cvVector = cvEmbedding.data[0].embedding;
+    const cvVec = cvEmb.data[0].embedding;
 
-    const dot = embedding.reduce((acc, val, i) => acc + val * cvVector[i], 0);
-    const normQ = Math.sqrt(embedding.reduce((acc, val) => acc + val * val, 0));
-    const normCV = Math.sqrt(cvVector.reduce((acc, val) => acc + val * val, 0));
-    const sim = dot / (normQ * normCV);
+    // Cosine similarity with query
+    const dot = queryEmbedding.reduce((acc, v, i) => acc + v * cvVec[i], 0);
+    const nQ = Math.hypot(...queryEmbedding);
+    const nCV = Math.hypot(...cvVec);
+    const similarity = dot / (nQ * nCV);
 
     mainDocs.push({
-      id: 999999,
-      source: "CV (text)",
+      id: 9_999_999,              // id sentinel
+      source: "cv",               // 👈 mantém apenas "cv"
       title: null,
       url: null,
-      content: cachedCVText,
-      metadata: {},
-      similarity: sim,
+      content: cvText,            // conteúdo textual do CV
+      metadata: { kind: "cv_text" },
+      similarity,
     });
   }
 
+  // 4) Sort by similarity (desc) and limit to k
   return mainDocs.sort((a, b) => b.similarity - a.similarity).slice(0, k);
 }
