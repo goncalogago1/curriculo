@@ -9,7 +9,7 @@ I worked on the implementation and optimization of the Collibra Data Intelligenc
 DataHub & Power BI Proof of Concept (Large-scale PDF Optimization)
 I participated in the creation of a DataHub and a Power BI proof of concept to demonstrate the scalability of reporting for high-volume data. The project involved generating over 1,300 PDF reports automatically. Initially, the client used outdated tools with manual processes, which were slow and prone to errors. I optimized the data model and report generation pipeline, improving processing time and enabling the automatic production of thousands of reports in a fraction of the original time.
 
-Internal Deloitte Project — MicroStrategy & ETL Optimization
+Project — MicroStrategy & ETL Optimization
 Internally, I supported Deloitte teams by developing and optimizing MicroStrategy dashboards, designing ETL pipelines, and improving data loading processes using Python. I created end-to-end automated workflows to reduce manual refresh time and improve dashboard responsiveness, ensuring data was always up to date for internal decision-making.
 
 Miles in the Sky — AI Course Builder (Apr 2023 – May 2023)
