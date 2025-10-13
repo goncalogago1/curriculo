@@ -28,7 +28,7 @@ export default function Home() {
           {/* Barra superior com CTAs */}
           <div className="profile-topbar" aria-label="Intro actions">
             <span className="loc">Lisbon, Portugal</span>
-            <span className="loc">Open to projects & interviews</span>
+            <span className="loc">• Open to projects & interviews</span>
             <div className="actions">
               <a className="btn btn--primary" href="/chat">Talk to my assistant</a>
               <a className="btn btn--ghost" href="/cv.pdf" download>Download CV (PDF)</a>
@@ -44,8 +44,6 @@ export default function Home() {
                 fill
                 sizes="(max-width: 1024px) 90vw, 240px"
                 priority
-                placeholder="blur"
-                blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4ICwAAADQAgCdASoQAAkAAUAmJYwCdAEAP7Gq..." // small blur
               />
             </div>
           </aside>
