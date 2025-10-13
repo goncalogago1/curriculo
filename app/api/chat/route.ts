@@ -12,17 +12,13 @@ const apiKey = process.env.OPENAI_API_KEY?.trim();
 const openai = apiKey ? new OpenAI({ apiKey }) : null;
 
 function sourceLabel(r: RetrievedDoc, i: number) {
-  const src = (r.source || "").toLowerCase();
-  const isCV = src.includes("cv");
-  // tenta apanhar número de chunk a partir de metadata
-  const chunk =
-    (r.metadata as any)?.chunk ??
-    (r.metadata as any)?.chunk_id ??
-    (r.metadata as any)?.page ??
-    i + 1;
+  const chunk = (r.metadata as any)?.chunk ?? (r.metadata as any)?.chunk_id ?? (r.metadata as any)?.page ?? i + 1;
 
-  if (isCV) return `CV — chunk ${chunk}`;
-  // fallback para outras fontes
+  // 🧠 mapeamento manual:
+  if ([1, 2, 3].includes(chunk)) return `cv.pdf — chunk ${chunk}`;
+  if (chunk === 4) return `text.txt — chunk ${chunk}`;
+
+  // fallback
   if (r.title) return r.title;
   if (r.url) return r.url;
   return `Source ${i + 1}`;
@@ -67,20 +63,15 @@ export async function POST(req: NextRequest) {
 
     // 2) Prompts
     const systemPrompt = `
-      You are the portfolio assistant for Gonçalo Gago.
-      You have access to retrieved context snippets from two types of sources:
-      - "CV — chunk 1", "CV — chunk 2", "CV — chunk 3" come from Gonçalo's professional CV (cv.pdf)
-      - "CV — chunk 4" comes from a short personal text/about-me summary
+    You are the portfolio assistant for Gonçalo Gago.
+    Answer using ONLY the provided context snippets when relevant.
+    If the question is outside scope (CV/experience/projects) or there isn't enough evidence, say that politely.
+    Be concise and factual.
+    If you used context, add a short "Sources" list at the end (e.g., "CV — chunk 3").
+    Do NOT invent names, dates, or numbers.
+    Use plain text only (no Markdown), never use bold or italics.
+    `.trim();    
 
-      When answering:
-      - Use ONLY the provided context snippets when relevant.
-      - Be concise, factual, and in plain text (no Markdown, bold, or italics).
-      - NEVER include or repeat the literal source labels (like “CV — chunk 1”) in your answer.
-      - NEVER add a “Sources:” list at the end — this will be handled by the interface automatically.
-      - If the question is outside scope (CV/experience/projects) or there isn't enough information, politely say so.
-      Do NOT invent names, dates, or numbers.
-      `.trim();
-    
     const userPrompt = `
 User question:
 ${userMessage}
