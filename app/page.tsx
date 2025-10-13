@@ -1,20 +1,11 @@
 // app/page.tsx
 import Image from "next/image";
 import dynamic from "next/dynamic";
-
 const ChatWidget = dynamic(() => import("@/components/ChatWidget"), { ssr: false });
 
 export default function Home() {
   return (
-    <main id="main">
-      {/* Skip link (a11y) */}
-      <a
-        href="#work"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3"
-      >
-        Skip to content
-      </a>
-
+    <main>
       {/* TOP BAR */}
       <header className="topbar" role="banner">
         <div className="container topbar__inner">
@@ -37,7 +28,7 @@ export default function Home() {
           {/* Barra superior com CTAs */}
           <div className="profile-topbar" aria-label="Intro actions">
             <span className="loc">Lisbon, Portugal</span>
-            <span className="loc">• Open to projects & interviews</span>
+            <span className="loc">Open to projects & interviews</span>
             <div className="actions">
               <a className="btn btn--primary" href="/chat">Talk to my assistant</a>
               <a className="btn btn--ghost" href="/cv.pdf" download>Download CV (PDF)</a>
@@ -54,7 +45,7 @@ export default function Home() {
                 sizes="(max-width: 1024px) 90vw, 240px"
                 priority
                 placeholder="blur"
-                blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4ICwAAADQAgCdASoQAAkAAUAmJYwCdAEAP7Gq..."
+                blurDataURL="data:image/webp;base64,UklGRiIAAABXRUJQVlA4ICwAAADQAgCdASoQAAkAAUAmJYwCdAEAP7Gq..." // small blur
               />
             </div>
           </aside>
@@ -69,42 +60,37 @@ export default function Home() {
               <span className="chip chip--violet">AI / RAG</span>
             </div>
 
+            
+
             <div className="links" aria-label="Links" style={{ marginBottom: 16 }}>
-              <a
-                href="https://www.linkedin.com/in/goncalo-gago/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>
+              <a href="https://www.linkedin.com/in/goncalo-gago/" target="_blank" rel="noreferrer">LinkedIn</a>
               <span>•</span>
               <a id="contact" href="mailto:goncalogago@gmail.com">Contact</a>
             </div>
 
-            {/* Stats (reforçadas com AI + Pós-graduação) */}
+            {/* Stats rápidos */}
             <div className="stats">
               <div className="stats__inner">
-                <div className="stat">
-                  <span className="stat__num">AI</span>
-                  <span className="stat__label">Applied AI & RAG assistants</span>
-                </div>
-                <div className="stat">
-                  <span className="stat__num">Postgrad</span>
-                  <span className="stat__label">Applied AI & ML (ISEG/AWS)</span>
-                </div>
                 <div className="stat">
                   <span className="stat__num">ETL</span>
                   <span className="stat__label">Scalable SQL Server pipelines</span>
                 </div>
+                <div className="stat">
+                  <span className="stat__num">AI / RAG</span>
+                  <span className="stat__label">Applied AI & RAG Assistants</span>
+                </div>
+                <div className="stat">
+                  <span className="stat__num">Governance</span>
+                  <span className="stat__label">Automated lineage & metadata ingestion</span>
+                </div>
               </div>
             </div>
           </div>
-
           {/* LEDE LONGA (full width) */}
           <p className="lede lede--full">
-            I’m a Data &amp; AI Consultant dedicated to turning complex data into clear,
-            actionable insight. I design and ship scalable solutions across <b>Analytics</b>,
-            <b> Data Engineering</b>, and <b>Data Governance</b> to unlock measurable business impact.
+            I’m a Data &amp; AI Consultant dedicated to turning complex data into clear, actionable insight.
+              I design and ship scalable solutions across <b>Analytics</b>, <b>Data Engineering</b>, and
+              <b> Data Governance</b> to unlock measurable business impact.
             I combine a strong technical foundation with a pragmatic, product mindset. Hands-on with
             <b> MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>, <b>Python</b>, and <b>Collibra</b>,
             I’ve built automated metadata pipelines, scalable reporting, and AI-powered assistants
@@ -113,7 +99,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CAPABILITIES */}
+      {/* CAPABILITIES (Governance por último) */}
       <section id="capabilities" className="section section--tight" aria-labelledby="cap-title">
         <div className="container">
           <h2 id="cap-title" className="section-title">Capabilities</h2>
@@ -134,19 +120,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED CASE STUDIES */}
+      {/* FEATURED CASE STUDIES (novo) */}
       <section id="cases" className="section" aria-labelledby="cases-title">
         <div className="container">
           <h2 id="cases-title" className="section-title">Featured Case Studies</h2>
           <div className="grid three">
-            <article className="card" id="case-collibra">
+            <article className="card">
               <h3>Energy Client — Collibra at Scale</h3>
               <ul className="bullets">
                 <li>Implemented Collibra ingestion, workflows, and lineage automation.</li>
                 <li>Integrated SAP, Dremio, and Power BI via REST APIs + Python scripts.</li>
                 <li>Improved governance discoverability and reduced manual curation time.</li>
               </ul>
-              <div className="cta"><a className="btn btn--ghost" href="#education">Learn more</a></div>
             </article>
 
             <article className="card">
@@ -156,7 +141,6 @@ export default function Home() {
                 <li>Optimized data model &amp; report generation pipeline.</li>
                 <li>Thousands of PDFs produced automatically in a fraction of time.</li>
               </ul>
-              <div className="cta"><a className="btn btn--ghost" href="#projects">Learn more</a></div>
             </article>
 
             <article className="card">
@@ -166,7 +150,6 @@ export default function Home() {
                 <li>Python-driven automations to reduce refresh time.</li>
                 <li>Faster, always-up-to-date exec views for decision-makers.</li>
               </ul>
-              <div className="cta"><a className="btn btn--ghost" href="#work">Learn more</a></div>
             </article>
           </div>
         </div>
@@ -214,7 +197,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TECH STACK */}
+      {/* TECH STACK (novo) */}
       <section id="stack" className="section" aria-labelledby="stack-title">
         <div className="container">
           <h2 id="stack-title" className="section-title">Technical Toolbox</h2>
@@ -247,7 +230,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* EDUCATION + CERTS + FINAL PROJECT */}
+      {/* EDUCATION + CERTS + FINAL PROJECT (SRIJ) */}
       <section id="education" className="section" aria-labelledby="edu-title">
         <div className="container">
           <h2 id="edu-title" className="section-title">Education &amp; Certifications</h2>
@@ -288,7 +271,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROJECTS */}
+      {/* PROJECTS (inclui Crypto) */}
       <section id="projects" className="section" aria-labelledby="proj-title">
         <div className="container">
           <h2 id="proj-title" className="section-title">Personal Projects &amp; Activities</h2>
@@ -312,21 +295,13 @@ export default function Home() {
       {/* CONTACT CTA */}
       <section className="section" aria-labelledby="contact">
         <div className="container">
-          <div
-            className="card"
-            style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}
-          >
+          <div className="card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
             <div>
               <h3 style={{ marginBottom: 6 }}>Let’s build something valuable with your data.</h3>
               <p className="muted">Available for consulting, projects, and interviews.</p>
             </div>
             <div className="cta">
-              <a
-                className="btn btn--primary"
-                href={`mailto:goncalogago@gmail.com?subject=Data%20%26%20AI%20Consulting%20Inquiry&body=Hi%20Gon%C3%A7alo%2C%0A%0AWe'd%20like%20help%20with...`}
-              >
-                Work with me
-              </a>
+              <a className="btn btn--primary" href="mailto:goncalogago@gmail.com">Work with me</a>
               <a className="btn btn--ghost" href="/chat">Ask the assistant</a>
             </div>
           </div>
@@ -347,26 +322,6 @@ export default function Home() {
 
       {/* CHAT */}
       <ChatWidget />
-
-      {/* SEO JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Gonçalo Gago",
-            jobTitle: "Data & AI Consultant",
-            address: { "@type": "PostalAddress", addressLocality: "Lisbon", addressCountry: "PT" },
-            url: "https://goncalogago.pt",
-            sameAs: ["https://www.linkedin.com/in/goncalo-gago/"],
-            knowsAbout: [
-              "Analytics","Data Engineering","Data Governance","Collibra",
-              "MicroStrategy","Power BI","SQL Server","Python","RAG","OpenAI"
-            ],
-          }),
-        }}
-      />
     </main>
   );
 }
