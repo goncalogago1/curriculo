@@ -1,7 +1,6 @@
 // app/page.tsx
 import Image from "next/image";
-import dynamic from "next/dynamic";
-const ChatWidget = dynamic(() => import("@/components/ChatWidget"), { ssr: false });
+import ChatWidget from "@/components/ChatWidget";
 
 export default function Home() {
   return (
