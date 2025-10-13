@@ -11,42 +11,28 @@ type Msg = { role: "user" | "assistant"; content: string };
 const apiKey = process.env.OPENAI_API_KEY?.trim();
 const openai = apiKey ? new OpenAI({ apiKey }) : null;
 
-// --- helpers ---
-function sanitizeAnswer(text: string) {
-  let t = (text || "").trim();
+function sourceLabel(r: RetrievedDoc, i: number) {
+  const src = (r.source || "").toLowerCase();
+  const isCV = src.includes("cv");
+  // tenta apanhar número de chunk a partir de metadata
+  const chunk =
+    (r.metadata as any)?.chunk ??
+    (r.metadata as any)?.chunk_id ??
+    (r.metadata as any)?.page ??
+    i + 1;
 
-  // remover bold em markdown e bullets "*" ou "-"
-  t = t.replace(/\*\*(.*?)\*\*/g, "$1");
-  t = t.replace(/^(\s*)[*-]\s+/gm, "$1• ");
-  // normalizar quebras
-  t = t.replace(/\n{3,}/g, "\n\n");
-
-  return t;
-}
-
-function extractChunkIndex(r: RetrievedDoc): number | undefined {
-  const m = r?.metadata || {};
-  // tenta ler de metadata
-  const direct =
-    (m as any).chunk ??
-    (m as any).chunk_id ??
-    (m as any).page ??
-    (m as any).idx;
-  if (typeof direct === "number") return direct;
-
-  // tenta em title "chunk 3"
-  if (r?.title) {
-    const mm = /chunk\s*(\d+)/i.exec(r.title);
-    if (mm) return Number(mm[1]);
-  }
-  return undefined;
+  if (isCV) return `CV — chunk ${chunk}`;
+  // fallback para outras fontes
+  if (r.title) return r.title;
+  if (r.url) return r.url;
+  return `Source ${i + 1}`;
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
 
-    // suporta { message } e { messages }
+    // Aceita { message } ou { messages: Msg[] }
     let userMessage = "";
     let history: Msg[] = [];
 
@@ -70,10 +56,7 @@ export async function POST(req: NextRequest) {
       results = await retrieveContext(userMessage, 6, { siteOrigin });
       contextText = results
         .map((r, i) => {
-          const meta =
-            `${r.source}` +
-            (r.title ? ` — ${r.title}` : "") +
-            (r.url ? ` — ${r.url}` : "");
+          const meta = sourceLabel(r, i);
           return `Source #${i + 1} (${meta}):\n${r.content}`;
         })
         .join("\n\n---\n\n");
@@ -82,15 +65,16 @@ export async function POST(req: NextRequest) {
       contextText = "";
     }
 
-    // 2) Prompts (note: NÃO peça ao modelo para escrever "Sources")
+    // 2) Prompts
     const systemPrompt = `
-You are the portfolio assistant for Gonçalo Gago.
-Answer only using the provided context snippets when relevant.
-If the question is outside scope (CV/experience/projects) or there isn't enough evidence,
-say that politely. Be concise and factual.
-Do NOT add a "Sources" section — the server will add it if needed.
-Do NOT invent names, dates, or numbers.
-`.trim();
+    You are the portfolio assistant for Gonçalo Gago.
+    Answer using ONLY the provided context snippets when relevant.
+    If the question is outside scope (CV/experience/projects) or there isn't enough evidence, say that politely.
+    Be concise and factual.
+    If you used context, add a short "Sources" list at the end (e.g., "CV — chunk 3").
+    Do NOT invent names, dates, or numbers.
+    Use plain text only (no Markdown), never use bold or italics.
+    `.trim();    
 
     const userPrompt = `
 User question:
@@ -101,7 +85,9 @@ ${contextText || "(none)"}
 `.trim();
 
     // 3) Geração
-    let answer = `I received: "${userMessage}". Ask me anything about Gonçalo's skills, projects, or CV.`;
+    let answer =
+      `I received: "${userMessage}". ` +
+      `Ask me anything about Gonçalo's skills, projects, or CV.`;
 
     if (openai) {
       const chatMessages: { role: "system" | "user" | "assistant"; content: string }[] = [
@@ -109,7 +95,7 @@ ${contextText || "(none)"}
         { role: "user", content: userPrompt },
       ];
 
-      // pequena cauda do histórico (opcional)
+      // pequena cauda de histórico
       const tail = history.slice(-8);
       for (const m of tail) {
         if (m.role === "user" || m.role === "assistant") {
@@ -126,40 +112,19 @@ ${contextText || "(none)"}
       answer = completion.choices[0]?.message?.content ?? "No answer.";
     }
 
-    // 4) Limpeza de markdown (*) e bullets
-    let cleaned = sanitizeAnswer(answer);
-
-    // 5) "Sources: CV — chunk 3." (forçar este formato)
-    //    - Se houver qualquer fonte "cv" (ou derivado), escolhe a mais relevante
-    //    - Extrai chunk; se não houver, usa 3 como fallback (como pediste)
-    const cvHit = results
-      .filter((r) => String(r.source || "").toLowerCase().startsWith("cv"))
-      .sort((a, b) => (b.similarity || 0) - (a.similarity || 0))[0];
-
-    if (cvHit) {
-      const chunk =
-        extractChunkIndex(cvHit) ??
-        // fallback explícito pedido
-        3;
-
-      cleaned += `\n\nSources: CV — chunk ${chunk}.`;
-    } else {
-      // Sem CV no contexto → não mostrar "Sources"
-    }
-
-    // 6) Resposta JSON
+    // 4) Devolve fontes já com label “CV — chunk X”
     return NextResponse.json(
       {
-        answer: cleaned,
-        // devolvemos as fontes brutas (se precisares na UI),
-        // mas a formatação visível já vai no "answer"
+        answer,
         sources: results.map((r, i) => ({
           id: r.id,
           source: r.source,
           title: r.title ?? undefined,
           url: r.url ?? undefined,
           similarity: r.similarity ?? 0,
+          metadata: r.metadata ?? {},
           i: i + 1,
+          label: sourceLabel(r, i), // <<<<<<<<<<<<<< usar isto no UI
         })),
       },
       { status: 200 }

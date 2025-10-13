@@ -1,16 +1,24 @@
+// ChatWidget.tsx
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 
 type Msg = { role: "user" | "assistant"; content: string };
 type Source = {
   id: number;
   i: number;
+  label?: string;     // 👈 usar este
   title?: string;
   url?: string;
   source?: string;
   similarity?: number;
 };
+
+function normalizeAnswer(t: string) {
+  return t
+    .replace(/^\s*[\*\-]\s+/gm, "• ")
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/(^|[^*])\*(.*?)\*(?!\*)/g, "$1$2");
+}
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -20,15 +28,13 @@ export default function ChatWidget() {
   const [sources, setSources] = useState<Source[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (open) inputRef.current?.focus();
-  }, [open]);
+  useEffect(() => { if (open) inputRef.current?.focus(); }, [open]);
 
   async function send() {
     const text = input.trim();
     if (!text || loading) return;
-    const userMsg: Msg = { role: "user", content: text };
-    setMessages((prev) => [...prev, userMsg]);
+
+    setMessages((prev) => [...prev, { role: "user", content: text }]);
     setInput("");
     setLoading(true);
 
@@ -41,20 +47,14 @@ export default function ChatWidget() {
       const data: { answer?: string; sources?: Source[]; error?: string } = await res.json();
 
       if (data.answer) {
-        const bot: Msg = { role: "assistant", content: data.answer };
-        setMessages((prev) => [...prev, bot]);
+        const botText = normalizeAnswer(data.answer);     // 👈 limpa ** e bullets
+        setMessages((prev) => [...prev, { role: "assistant", content: botText }]);
         setSources(data.sources ?? []);
       } else {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.error || "Error answering. Try again." },
-        ]);
+        setMessages((prev) => [...prev, { role: "assistant", content: data.error || "Error answering. Try again." }]);
       }
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "Network error calling /api/chat." },
-      ]);
+      setMessages((prev) => [...prev, { role: "assistant", content: "Network error calling /api/chat." }]);
     } finally {
       setLoading(false);
     }
@@ -66,7 +66,6 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* FAB */}
       <button
         className="chatfab"
         aria-label={open ? "Close assistant" : "Open assistant"}
@@ -75,7 +74,7 @@ export default function ChatWidget() {
         {open ? "×" : "💬"}
       </button>
 
-      {/* PANEL */}
+      {/* 👇 corrigido o template string */}
       <div
         className={`chatwidget ${open ? "chatwidget--open" : ""}`}
         role="dialog"
@@ -84,26 +83,19 @@ export default function ChatWidget() {
       >
         <div className="chatwidget__header">
           <div className="chatwidget__title">CV Goncalo Gago Assistant</div>
-          <button className="chatwidget__close" aria-label="Close" onClick={() => setOpen(false)}>
-            ×
-          </button>
+          <button className="chatwidget__close" aria-label="Close" onClick={() => setOpen(false)}>×</button>
         </div>
 
         <div className="chatwidget__body">
           <div className="chatwidget__messages">
-            {messages.length === 0 && (
-              <div className="chatwidget__empty">
-                Ask about experience, projects, skills…
-              </div>
-            )}
+            {messages.length === 0 && <div className="chatwidget__empty">Ask about experience, projects, skills…</div>}
+
             {messages.map((m, i) => (
-              <div
-                key={i}
-                className={m.role === "user" ? "bubble bubble--user" : "bubble bubble--bot"}
-              >
+              <div key={i} className={m.role === "user" ? "bubble bubble--user" : "bubble bubble--bot"}>
                 {m.content}
               </div>
             ))}
+
             {loading && <div className="bubble bubble--bot">Thinking…</div>}
           </div>
 
@@ -112,8 +104,8 @@ export default function ChatWidget() {
               <b>Sources:</b>{" "}
               {sources.map((s, idx) => (
                 <span key={s.id}>
-                  #{s.i} {s.title || s.source}
-                  {s.url ? ` (${s.url})` : ""}
+                  {/* 👇 usar o label gerado no backend (ex.: "CV — chunk 3") */}
+                  {s.label || `Source #${s.i}`}
                   {idx < sources.length - 1 ? " · " : ""}
                 </span>
               ))}
@@ -130,9 +122,7 @@ export default function ChatWidget() {
             placeholder="Type your question…"
             aria-label="Message"
           />
-          <button onClick={send} disabled={loading}>
-            Send
-          </button>
+          <button onClick={send} disabled={loading}>Send</button>
         </div>
       </div>
     </>

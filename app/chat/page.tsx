@@ -1,9 +1,16 @@
 // app/chat/page.tsx
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 
-type Msg = { role: "user" | "assistant"; content: string; sources?: string[] };
+type Source = { id: number; i: number; label?: string };
+type Msg = { role: "user" | "assistant"; content: string; sources?: Source[] };
+
+function normalizeAnswer(t: string) {
+  return t
+    .replace(/^\s*[\*\-]\s+/gm, "• ")
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/(^|[^*])\*(.*?)\*(?!\*)/g, "$1$2");
+}
 
 export default function ChatPage() {
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -11,17 +18,17 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ block: "end" });
-  }, [messages]);
+  useEffect(() => { bottomRef.current?.scrollIntoView({ block: "end" }); }, [messages]);
 
   async function send() {
     const text = input.trim();
     if (!text) return;
+
     const next = [...messages, { role: "user", content: text } as Msg];
     setMessages(next);
     setInput("");
     setLoading(true);
+
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -29,10 +36,11 @@ export default function ChatPage() {
         body: JSON.stringify({ messages: next }),
       });
       const data = await res.json();
+
       const reply: Msg = {
         role: "assistant",
-        content: data?.answer ?? "…",
-        sources: data?.sources ?? [],
+        content: normalizeAnswer(data?.answer ?? "…"),   // 👈 limpa ** e bullets
+        sources: (data?.sources ?? []) as Source[],      // 👈 objetos com label
       };
       setMessages((m) => [...m, reply]);
     } catch (e) {
@@ -66,7 +74,20 @@ export default function ChatPage() {
       <div className="chat-box">
         {messages.map((m, i) => (
           <div key={i} className={`msg ${m.role}`}>
-            <div className="bubble">{m.content}</div>
+            <div className="bubble">
+              {m.content}
+              {m.role === "assistant" && m.sources && m.sources.length > 0 && (
+                <div style={{ marginTop: 8, fontSize: 12, opacity: 0.8 }}>
+                  <b>Sources:</b>{" "}
+                  {m.sources.map((s, idx) => (
+                    <span key={`${s.id}-${idx}`}>
+                      {s.label || `Source #${s.i}`}
+                      {idx < m.sources!.length - 1 ? " · " : ""}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         ))}
         <div ref={bottomRef} />
