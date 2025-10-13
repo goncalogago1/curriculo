@@ -39,3 +39,21 @@ Building a retrieval-augmented generation (RAG) pipeline to ground the chatbotâ€
 Fine-tuning a LLaMA-based language model on the curated dataset to improve domain accuracy and responsiveness.
 
 The solution combined modern LLM fine-tuning techniques with RAG architecture to ensure both accuracy and compliance with the original legal sources. This project demonstrated the feasibility of applying advanced AI methodologies to regulated domains, where precision and traceability are critical.
+
+Crypto Market Analysis â€“ Personal Project (Ongoing)
+
+In this ongoing personal project, I am building a data analysis and quantitative insights tool for the cryptocurrency market, leveraging Python and the Binance API. The goal is to retrieve, process, and analyze large volumes of real-time and historical price data to identify patterns, correlations, and potential trading opportunities.
+
+The project involves:
+
+Data Acquisition: Automated retrieval of high-frequency cryptocurrency market data from the Binance API, covering multiple trading pairs over more than 200 hours of continuous price data collection.
+
+Data Processing & Storage: Structuring raw JSON streams into clean time series datasets using Python, with efficient handling of large volumes of tick-level and candlestick data.
+
+Statistical Analysis: Implementing correlation analysis between different coin pairs to uncover interdependencies and co-movement patterns in the market.
+
+Indicators & Quantitative Metrics: Calculating advanced statistical indicators such as z-score, hedge ratio, and other mean reversion metrics to support pair trading and arbitrage strategies.
+
+Exploratory Analysis & Visualization: Using libraries like Pandas, NumPy, and Matplotlib to create interactive exploratory visualizations, enabling quick hypothesis testing and strategy evaluation.
+
+This project demonstrates my ability to integrate real-world APIs, handle large-scale time series data, apply quantitative methods, and build end-to-end data pipelines for actionable insights in financial markets.
