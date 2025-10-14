@@ -1,6 +1,8 @@
 // app/chat/page.tsx
 "use client";
 import { useEffect, useRef, useState } from "react";
+import AudioToTextButton from "@/components/AudioToTextButton"; // topo do ficheiro
+
 
 type Source = { id: number; i: number; label?: string };
 type Msg = { role: "user" | "assistant"; content: string; sources?: Source[] };
@@ -101,12 +103,23 @@ export default function ChatPage() {
       </div>
 
       <div className="chat-input">
+        <AudioToTextButton
+          onTranscript={(t) => {
+            // cola o texto transcrito no input
+            setInput((prev) => (prev ? prev + " " + t : t));
+
+            // se quiser auto-enviar quando terminar a transcrição:
+            // setTimeout(() => send(), 50);
+          }}
+        />
+
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKey}
           placeholder="Ask anything about my skills, projects, CV…"
         />
+
         <button onClick={send} disabled={loading || !input.trim()}>
           {loading ? "…" : "Send"}
         </button>

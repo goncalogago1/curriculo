@@ -1,6 +1,8 @@
 // ChatWidget.tsx
 "use client";
 import { useEffect, useRef, useState } from "react";
+import AudioToTextButton from "./AudioToTextButton"; // topo do ficheiro
+
 
 type Msg = { role: "user" | "assistant"; content: string };
 type Source = {
@@ -120,15 +122,22 @@ export default function ChatWidget() {
         </div>
 
         <div className="chatwidget__input">
-          <input
+        <AudioToTextButton
+            onTranscript={(t) => {
+            // coloca o texto no input; se quiser auto-enviar, chama send() depois de setar
+            setInput((prev) => prev ? (prev + " " + t) : t);
+            // opcional: auto-send quando terminar
+            // setTimeout(() => send(), 50);
+            }}
+        />
+        <input
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={onKeyDown}
-            placeholder="Type your question…"
-            aria-label="Message"
-          />
-          <button onClick={send} disabled={loading}>Send</button>
+            placeholder="Escreve ou usa o microfone…"
+        />
+        <button onClick={send} disabled={loading}>{loading ? "..." : "Enviar"}</button>
         </div>
       </div>
     </>

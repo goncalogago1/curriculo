@@ -343,3 +343,12 @@ input:focus{
   outline-offset: 2px;
   border-radius: 6px;
 }
+.mic-btn{
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text);
+}
+.mic-btn:focus{ outline: 2px solid color-mix(in srgb, var(--brand) 70%, white 30%); outline-offset: 2px; }
