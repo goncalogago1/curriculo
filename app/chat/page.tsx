@@ -20,8 +20,12 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => { bottomRef.current?.scrollIntoView({ block: "end" }); }, [messages]);
-
+  useEffect(() => {
+    function h() { send(); }
+    window.addEventListener("asr-autosend", h);
+    return () => window.removeEventListener("asr-autosend", h);
+  }, [messages, input]); // send lê do estado atual
+  
   async function send() {
     const text = input.trim();
     if (!text) return;
