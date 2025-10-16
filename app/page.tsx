@@ -3,45 +3,86 @@ import Image from "next/image";
 import ChatWidget from "@/components/ChatWidget";
 import ProTimeline, { TLItem } from "@/components/ProTimeline";
 
-// no topo do ficheiro:
+/** EXPERIÊNCIA **/
 const career: TLItem[] = [
   {
     id: "deloitte",
     title: "Tech Consultant (Data & AI)",
     company: "Deloitte Portugal",
-    start: "2023-06-01",
+    start: "2023-06-01",             // Jun 2023 — Presente
     // em curso → sem end
-    tags: ["Collibra","Power BI","MicroStrategy","RAG"],
+    tags: ["Collibra", "Power BI", "MicroStrategy", "SQL Server", "Python"],
     color: "#8b5cf6",
   },
   {
-    id: "galp",
-    title: "Data Lineage @ Galp (Edge/Harvester)",
-    company: "Client Project",
-    start: "2024-02-01",
-    end:   "2025-01-31",
-    tags: ["Edge","Harvester","Dremio","S4HANA"],
-    color: "#6366f1",
-  },
-  {
     id: "mts",
-    title: "AI Course Builder",
+    title: "AI Course Developer",
     company: "Miles in the Sky",
-    start: "2023-04-01",
+    start: "2023-04-01",             // Apr 2023 — May 2023
     end:   "2023-05-31",
-    tags: ["OpenAI","Python"],
+    tags: ["OpenAI", "Python"],
     color: "#06b6d4",
   },
   {
     id: "autoeuropa",
     title: "Logistics Planning Intern",
     company: "Autoeuropa Volkswagen",
-    start: "2022-05-01",
+    start: "2022-05-01",             // May 2022 — Nov 2022
     end:   "2022-11-30",
-    tags: ["Qlik Sense","Analytics"],
+    tags: ["Qlik Sense", "Analytics", "AGV"],
     color: "#22c55e",
   },
+  {
+    id: "novobanco",
+    title: "Engineering Intern",
+    company: "Novo Banco",
+    start: "2020-02-01",             // Feb 2020 — Mar 2020
+    end:   "2020-03-31",
+    tags: ["Excel", "SQL"],
+    color: "#f59e0b",
+  },
 ];
+
+/** EDUCAÇÃO **/
+const education: TLItem[] = [
+  {
+    id: "iseg",
+    title: "Postgraduate · Applied AI & ML",
+    company: "ISEG Executive Education — Univ. Lisbon",
+    start: "2024-03-01",             // Mar 2024 — Feb 2025
+    end:   "2025-02-28",
+    tags: ["Python", "ML/DL", "GenAI"],
+    color: "#60a5fa",
+  },
+  {
+    id: "fct",
+    title: "Integrated Master’s · EEE/CE",
+    company: "FCT NOVA",
+    start: "2017-10-01",             // Oct 2017 — Mar 2023
+    end:   "2023-03-31",
+    tags: ["Thesis: AGV Analytics"],
+    color: "#34d399",
+  },
+  {
+    id: "agh",
+    title: "Erasmus Exchange",
+    company: "AGH University of Science and Technology",
+    start: "2021-09-01",             // Sep 2021 — Feb 2022
+    end:   "2022-02-28",
+    tags: ["Intercultural", "MSc year"],
+    color: "#a78bfa",
+  },
+  {
+    id: "keyser",
+    title: "High School Diploma",
+    company: "Keyser High School (WV, USA)",
+    start: "2016-08-01",             // Aug 2016 — Jun 2017
+    end:   "2017-06-30",
+    tags: ["AFS Exchange"],
+    color: "#f87171",
+  },
+];
+
 
 
 export default function Home() {
@@ -332,12 +373,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* TIMELINE — Experience */}
       <section id="timeline" className="section" aria-labelledby="timeline-title">
         <div className="container">
           <h2 id="timeline-title" className="section-title">Timeline</h2>
           <ProTimeline items={career} height={520} />
         </div>
       </section>
+
+      {/* TIMELINE — Education */}
+      <section id="timeline-edu" className="section section--tight" aria-labelledby="edu-tl-title">
+        <div className="container">
+          <h3 id="edu-tl-title" className="section-title" style={{ fontSize: 20, marginTop: -8 }}>
+            Education Timeline
+          </h3>
+          <ProTimeline items={education} height={380} />
+        </div>
+      </section>
+
 
       {/* CONTACT CTA */}
       <section className="section" aria-labelledby="contact">
