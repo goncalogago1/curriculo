@@ -9,8 +9,8 @@ export type TLItem = {
   id: string;
   title: string;
   company: string;
-  start: string;   // "YYYY-MM-DD"
-  end?: string;    // vazio = hoje
+  start: string;
+  end?: string;
   color?: string;
   tags?: string[];
 };
@@ -34,10 +34,10 @@ function buildData(items: TLItem[]) {
     .map((i, idx) => {
       const s = toTs(i.start);
       const e = i.end ? toTs(i.end) : Date.now();
-      const duration = Math.max(e - s, 24 * 3600 * 1000); // >= 1 dia
+      const duration = Math.max(e - s, 24 * 3600 * 1000);
       return {
         id: i.id,
-        row: `${i.title} · ${i.company}`,
+        row: `${i.title} · ${i.company}`, // continua a existir, só não mostramos
         start: s,
         end: e,
         offsetAbs: s,
@@ -66,17 +66,27 @@ function CustomBar(props: any) {
   );
 }
 
+// === label 2 linhas DENTRO da barra ===
 function CenterLabel(props: any) {
-  const { x, y, width, height, value } = props;
-  if (!value || width < 80) return null;
-  const cx = (x ?? 0) + (width ?? 0) / 2;
-  const cy = (y ?? 0) + (height ?? 0) / 2 + 4;
-  return (
-    <g pointerEvents="none">
-      <text x={cx} y={cy} textAnchor="middle" fontSize={12} fill="#111" style={{ mixBlendMode: "multiply" }}>
-        {String(value)}
+  const { x = 0, y = 0, width = 0, height = 0, payload } = props;
+  if (!payload) return null;
+  // se a barra for curta, mostra só a empresa
+  if (width < 140) {
+    const cx = x + width / 2;
+    const cy = y + height / 2 + 4;
+    return (
+      <text x={cx} y={cy} textAnchor="middle" fontSize={12} fill="#0b0b0b" style={{ mixBlendMode: "multiply" }}>
+        {payload.company}
       </text>
-    </g>
+    );
+  }
+  const cx = x + width / 2;
+  const top = y + height / 2 - 2;
+  return (
+    <text x={cx} y={top} textAnchor="middle" fill="#0b0b0b" style={{ mixBlendMode: "multiply" }}>
+      <tspan fontSize="12" fontWeight="600">{payload.title}</tspan>
+      <tspan x={cx} dy="14" fontSize="11" opacity="0.9">{payload.company}</tspan>
+    </text>
   );
 }
 
@@ -86,10 +96,10 @@ function TipContent({ active, payload }: any) {
   if (!p) return null;
   return (
     <div style={{
-      background: "#111", color: "white", padding: "8px 10px",
-      borderRadius: 8, boxShadow: "0 8px 20px rgba(0,0,0,.25)", maxWidth: 320
+      background: "#111", color: "white", padding: "10px 12px",
+      borderRadius: 10, boxShadow: "0 8px 20px rgba(0,0,0,.25)", maxWidth: 340
     }}>
-      <div style={{ fontWeight: 600, marginBottom: 4 }}>{p.title}</div>
+      <div style={{ fontWeight: 700, marginBottom: 4 }}>{p.title}</div>
       <div style={{ opacity: .9, marginBottom: 6 }}>{p.company}</div>
       <div style={{ fontSize: 12, opacity: .85, marginBottom: 6 }}>
         {fmtMonth(p.start)} — {fmtMonth(p.end)}
@@ -110,23 +120,18 @@ function TipContent({ active, payload }: any) {
 
 export default function ProTimeline({ items, height = 420 }: Props) {
   const dataAbs = useMemo(() => buildData(items), [items]);
-
   const minTs = Math.min(...dataAbs.map(d => d.start));
   const maxTs = Math.max(...dataAbs.map(d => d.end));
-
-  const data = dataAbs.map(d => ({
-    ...d,
-    offset: d.offsetAbs - minTs, // relativo ao min
-  }));
+  const data = dataAbs.map(d => ({ ...d, offset: d.offsetAbs - minTs }));
 
   return (
     <div style={{ width: "100%", height }}>
       <ResponsiveContainer>
         <ComposedChart
           data={data}
-          layout="vertical"                 // 👈 essencial para barras horizontais
-          margin={{ top: 16, right: 24, bottom: 24, left: 12 }}
-          barCategoryGap={12}              // espaço entre linhas
+          layout="vertical"
+          margin={{ top: 8, right: 24, bottom: 24, left: 8 }} // 👈 menos espaço à esquerda
+          barCategoryGap={14}
         >
           <defs>
             {data.map(d => (
@@ -137,7 +142,7 @@ export default function ProTimeline({ items, height = 420 }: Props) {
             ))}
           </defs>
 
-          <CartesianGrid strokeOpacity={0.15} />
+          <CartesianGrid strokeOpacity={0.08} />
           <XAxis
             type="number"
             dataKey="offset"
@@ -145,19 +150,15 @@ export default function ProTimeline({ items, height = 420 }: Props) {
             domain={[0, Math.max(1, maxTs - minTs)]}
             ticks={buildTicks(minTs, maxTs)}
           />
-          <YAxis dataKey="row" type="category" width={260} />
+          {/* 👇 sem texto do lado esquerdo */}
+          <YAxis dataKey="row" type="category" width={0} tick={false} axisLine={false} />
 
           <Tooltip content={<TipContent />} />
 
-          {/* empurra a barra até ao start */}
           <Bar dataKey="offset" stackId="t" fill="transparent" isAnimationActive={false} />
-
-          {/* barra visível */}
           <Bar dataKey="duration" stackId="t" shape={<CustomBar />} isAnimationActive={false}>
             <LabelList dataKey="company" content={<CenterLabel />} />
-            {data.map(d => (
-              <Cell key={d.id} fill={`url(#grad-${d.id})`} />
-            ))}
+            {data.map(d => <Cell key={d.id} fill={`url(#grad-${d.id})`} />)}
           </Bar>
         </ComposedChart>
       </ResponsiveContainer>
@@ -171,7 +172,7 @@ function buildTicks(min: number, max: number) {
   d.setDate(1);
   while (d.getTime() <= max) {
     out.push(d.getTime() - min);
-    d.setMonth(d.getMonth() + 3); // trimestral
+    d.setMonth(d.getMonth() + 3); // trimestral; mude para +1 se quiser mensal
   }
   return out.length ? out : [0];
 }
