@@ -332,7 +332,6 @@ export default function Home() {
         </div>
       </section>
 
-      // …no JSX (onde estava a timeline):
       <section id="timeline" className="section" aria-labelledby="timeline-title">
         <div className="container">
           <h2 id="timeline-title" className="section-title">Timeline</h2>
