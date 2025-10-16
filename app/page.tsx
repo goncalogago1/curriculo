@@ -3,14 +3,13 @@ import Image from "next/image";
 import ChatWidget from "@/components/ChatWidget";
 import ProTimeline, { TLItem } from "@/components/ProTimeline";
 
-/** EXPERIÊNCIA **/
+/** EXPERIENCE **/
 const career: TLItem[] = [
   {
     id: "deloitte",
-    title: "Tech Consultant (Data & AI)",
+    title: "Technology Consultant (Data & AI)",
     company: "Deloitte Portugal",
-    start: "2023-06-01",             // Jun 2023 — Presente
-    // em curso → sem end
+    start: "2023-06-01",             // Jun 2023 — Present
     tags: ["Collibra", "Power BI", "MicroStrategy", "SQL Server", "Python"],
     color: "#8b5cf6",
   },
@@ -79,8 +78,6 @@ const career: TLItem[] = [
   },
 ];
 
-
-
 export default function Home() {
   return (
     <main>
@@ -94,6 +91,7 @@ export default function Home() {
             <a href="#capabilities">Capabilities</a>
             <a href="#cases">Case Studies</a>
             <a href="#stack">Tech Stack</a>
+            <a href="#build">How this site was built</a>
             <a href="#education">Education</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
@@ -104,7 +102,7 @@ export default function Home() {
       {/* HERO */}
       <section className="hero" aria-labelledby="title">
         <div className="container pro__grid">
-          {/* Barra superior com CTAs */}
+          {/* Intro bar with CTAs */}
           <div className="profile-topbar" aria-label="Intro actions">
             <span className="loc">Lisbon, Portugal</span>
             <span className="loc">Open to projects & interviews</span>
@@ -114,7 +112,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* FOTO — pequena, à esquerda */}
+          {/* PHOTO — compact, left */}
           <aside className="profile-pane" aria-label="Profile">
             <div className="profile-photo" aria-hidden="true">
               <Image
@@ -127,9 +125,9 @@ export default function Home() {
             </div>
           </aside>
 
-          {/* CONTEÚDO */}
+          {/* CONTENT */}
           <div className="hero__content">
-            <h1 id="title">I build data products that drive decisions.</h1>
+            <h1 id="title">I build data products that move the business.</h1>
 
             <div className="chips" role="group" aria-label="Expertise">
               <span className="chip chip--blue">Analytics</span>
@@ -137,24 +135,22 @@ export default function Home() {
               <span className="chip chip--violet">AI / RAG</span>
             </div>
 
-            
-
             <div className="links" aria-label="Links" style={{ marginBottom: 16 }}>
               <a href="https://www.linkedin.com/in/goncalo-gago/" target="_blank" rel="noreferrer">LinkedIn</a>
               <span>•</span>
               <a id="contact" href="mailto:goncalogago@gmail.com">Contact</a>
             </div>
 
-            {/* Stats rápidos */}
+            {/* Fast stats */}
             <div className="stats">
               <div className="stats__inner">
                 <div className="stat">
                   <span className="stat__num">ETL</span>
-                  <span className="stat__label">Scalable SQL Server pipelines</span>
+                  <span className="stat__label">High-throughput SQL Server pipelines</span>
                 </div>
                 <div className="stat">
                   <span className="stat__num">AI / RAG</span>
-                  <span className="stat__label">Applied AI & RAG Assistants</span>
+                  <span className="stat__label">Domain-grounded assistants in production</span>
                 </div>
                 <div className="stat">
                   <span className="stat__num">Governance</span>
@@ -163,41 +159,41 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* LEDE LONGA (full width) */}
+
+          {/* LEDE (full width) */}
           <p className="lede lede--full">
-            I’m a Data &amp; AI Consultant dedicated to turning complex data into clear, actionable insight.
-              I design and ship scalable solutions across <b>Analytics</b>, <b>Data Engineering</b>, and
-              <b> Data Governance</b> to unlock measurable business impact.
-            I combine a strong technical foundation with a pragmatic, product mindset. Hands-on with
+            I’m a Data &amp; AI Consultant focused on turning complex data into decisive action.
+            I design, implement, and scale solutions across <b>Analytics</b>, <b>Data Engineering</b>, and
+            <b> Data Governance</b> that unlock measurable impact. Hands-on with
             <b> MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>, <b>Python</b>, and <b>Collibra</b>,
-            I’ve built automated metadata pipelines, scalable reporting, and AI-powered assistants
-            that reduce manual effort and improve decision velocity across the business.
+            I’ve shipped automated metadata pipelines, enterprise reporting, and AI assistants
+            that reduce manual effort and speed up decision-making across the business.
           </p>
         </div>
       </section>
 
-      {/* CAPABILITIES (Governance por último) */}
+      {/* CAPABILITIES */}
       <section id="capabilities" className="section section--tight" aria-labelledby="cap-title">
         <div className="container">
           <h2 id="cap-title" className="section-title">Capabilities</h2>
           <div className="grid three">
             <div className="card">
               <h3>Analytics</h3>
-              <p>Semantic models, certified metrics, and executive dashboards (MicroStrategy, Power BI).</p>
+              <p>Semantic models, governed metrics, and executive dashboards (MicroStrategy, Power BI).</p>
             </div>
             <div className="card">
               <h3>Data Engineering</h3>
-              <p>ETL pipelines, performance tuning, data products on SQL Server &amp; Python.</p>
+              <p>ETL pipelines, performance tuning, and SQL/Python data products.</p>
             </div>
             <div className="card">
               <h3>Data Governance</h3>
-              <p>Collibra rollout, lineage automation, workflows (Edge, REST APIs).</p>
+              <p>Collibra rollout, workflow automation, and lineage at scale (Edge, REST APIs).</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FEATURED CASE STUDIES (novo) */}
+      {/* FEATURED CASE STUDIES */}
       <section id="cases" className="section" aria-labelledby="cases-title">
         <div className="container">
           <h2 id="cases-title" className="section-title">Featured Case Studies</h2>
@@ -206,26 +202,24 @@ export default function Home() {
               <h3>Energy Client — Collibra at Scale</h3>
               <ul className="bullets">
                 <li>Implemented Collibra ingestion, workflows, and lineage automation.</li>
-                <li>Integrated SAP, Dremio, and Power BI via REST APIs + Python scripts.</li>
-                <li>Improved governance discoverability and reduced manual curation time.</li>
+                <li>Integrated SAP, Dremio, and Power BI via REST APIs and Python.</li>
+                <li>Improved discoverability and cut manual curation time.</li>
               </ul>
             </article>
-
             <article className="card">
               <h3>DataHub &amp; Power BI — 1,300+ PDFs</h3>
               <ul className="bullets">
-                <li>PoC proving scalable reporting for high-volume data.</li>
-                <li>Optimized data model &amp; report generation pipeline.</li>
-                <li>Thousands of PDFs produced automatically in a fraction of time.</li>
+                <li>PoC validating scalable report generation at high volume.</li>
+                <li>Optimized the semantic model and the export pipeline.</li>
+                <li>Automated thousands of PDFs in a fraction of the time.</li>
               </ul>
             </article>
-
             <article className="card">
               <h3>MicroStrategy &amp; ETL — Internal</h3>
               <ul className="bullets">
-                <li>Developed dashboards and optimized end-to-end pipelines.</li>
-                <li>Python-driven automations to reduce refresh time.</li>
-                <li>Faster, always-up-to-date exec views for decision-makers.</li>
+                <li>Delivered executive dashboards and optimized end-to-end pipelines.</li>
+                <li>Python automation reduced refresh times and operational toil.</li>
+                <li>Reliable, up-to-date views for faster decisions.</li>
               </ul>
             </article>
           </div>
@@ -236,45 +230,42 @@ export default function Home() {
       <section id="work" className="section" aria-labelledby="exp-title">
         <div className="container">
           <h2 id="exp-title" className="section-title">Professional Experience</h2>
-
           <div className="timeline">
             <article className="role">
               <header>
-                <h4>Deloitte — Tech Consultant · Data &amp; AI</h4>
+                <h4>Deloitte — Technology Consultant · Data &amp; AI</h4>
                 <span>Jun 2023 – Present · Lisbon</span>
               </header>
               <ul className="bullets">
-                <li>Governance, Engineering &amp; Analytics projects for large organizations.</li>
+                <li>Governance, Engineering, and Analytics for large organizations.</li>
                 <li><b>Collibra</b> rollout: catalog, lineage, workflows (REST/Python).</li>
                 <li>ETL on <b>SQL Server</b> feeding <b>Power BI</b>/<b>MicroStrategy</b> KPIs.</li>
-                <li>JS visualizations; Python performance gains on data loads.</li>
+                <li>Custom JS visualizations; Python performance improvements on data loads.</li>
               </ul>
             </article>
-
             <article className="role">
               <header>
-                <h4>Miles in the Sky — AI Course Builder</h4>
+                <h4>Miles in the Sky — AI Course Developer</h4>
                 <span>Apr 2023 – May 2023 · Lisbon</span>
               </header>
               <ul className="bullets">
                 <li>OpenAI-powered content generation with robust prompt design in Python.</li>
               </ul>
             </article>
-
             <article className="role">
               <header>
                 <h4>Autoeuropa Volkswagen — Logistics Planning Intern</h4>
                 <span>May 2022 – Nov 2022 · Palmela</span>
               </header>
               <ul className="bullets">
-                <li>Qlik Sense analysis on 120 AGVs; identified underutilization and proposed reallocation.</li>
+                <li>Qlik Sense analysis on 120 AGVs; identified under-utilization and reallocation opportunities.</li>
               </ul>
             </article>
           </div>
         </div>
       </section>
 
-      {/* TECH STACK (novo) */}
+      {/* TECH STACK */}
       <section id="stack" className="section" aria-labelledby="stack-title">
         <div className="container">
           <h2 id="stack-title" className="section-title">Technical Toolbox</h2>
@@ -307,7 +298,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* EDUCATION + CERTS + FINAL PROJECT (SRIJ) */}
+      {/* HOW THIS SITE WAS BUILT */}
+      <section id="build" className="section" aria-labelledby="build-title">
+        <div className="container">
+          <h2 id="build-title" className="section-title">How this site was built</h2>
+          <div className="grid two">
+            <article className="card">
+              <h3>Architecture</h3>
+              <ul className="bullets">
+                <li><b>Next.js</b> App Router with server components for fast loads and SEO.</li>
+                <li><b>React</b> UI with a minimalist, accessible dark theme.</li>
+                <li><b>Tailwind CSS</b>-style utility classes (custom tokens in <code>globals.css</code>).</li>
+              </ul>
+            </article>
+            <article className="card">
+              <h3>Features</h3>
+              <ul className="bullets">
+                <li>Lightweight chat assistant component for quick Q&amp;A.</li>
+                <li>Downloadable PDF resume and clear contact CTAs.</li>
+                <li>Responsive layout, keyboard-navigable sections, and semantic HTML.</li>
+              </ul>
+            </article>
+          </div>
+          <p className="lede" style={{ marginTop: 10 }}>
+            Under the hood, the site favors performance, readability, and maintainability:
+            concise components, shared tokens for typography and colors, and progressive enhancement.
+          </p>
+        </div>
+      </section>
+
+      {/* EDUCATION + CERTS + FINAL PROJECT */}
       <section id="education" className="section" aria-labelledby="edu-title">
         <div className="container">
           <h2 id="edu-title" className="section-title">Education &amp; Certifications</h2>
@@ -315,7 +335,7 @@ export default function Home() {
             <div className="card">
               <h3>Education</h3>
               <ul className="bullets">
-                <li><b>Postgraduate, Applied AI &amp; ML</b> — ISEG Exec. Education (2024–2025), in partnership with AWS. 140h hands-on program (ML, DL, GenAI, deployment).</li>
+                <li><b>Postgraduate, Applied AI &amp; ML</b> — ISEG Exec. Education (2024–2025), in partnership with AWS. 140h hands-on (ML, DL, GenAI, deployment).</li>
                 <li><b>Integrated Master’s, Electrical &amp; Computer Eng.</b> — FCT NOVA (2017–2023). Thesis on analytics for AGV planning.</li>
                 <li><b>Erasmus</b> — AGH University, Kraków (2021–2022).</li>
               </ul>
@@ -325,7 +345,7 @@ export default function Home() {
               <ul className="bullets">
                 <li>Domain-specific chatbot for the Portuguese Gaming Authority.</li>
                 <li>Reverse-engineered Q&amp;A from legislation PDFs and official docs.</li>
-                <li>RAG grounding + LLaMA fine-tuning for legal accuracy &amp; traceability.</li>
+                <li>RAG grounding and LLM fine-tuning for legal accuracy & traceability.</li>
               </ul>
             </div>
           </div>
@@ -348,16 +368,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROJECTS (inclui Crypto) */}
+      {/* PROJECTS (incl. Crypto) */}
       <section id="projects" className="section" aria-labelledby="proj-title">
         <div className="container">
           <h2 id="proj-title" className="section-title">Personal Projects &amp; Activities</h2>
           <div className="grid two">
             <article className="card">
-              <h3>Crypto Market Analysis — ongoing</h3>
+              <h3>Crypto Market Analysis — Ongoing</h3>
               <ul className="bullets">
-                <li>Python + Binance API for high-frequency data ingestion and time-series modeling.</li>
-                <li>Correlation analysis across coin pairs; z-score &amp; hedge ratio for mean-reversion.</li>
+                <li>Python + Binance API for high-frequency ingestion and time-series modeling.</li>
+                <li>Correlation analysis across coin pairs; z-score & hedge ratios for mean-reversion.</li>
                 <li>Exploratory visualizations (Pandas, NumPy, Matplotlib) for strategy testing.</li>
               </ul>
             </article>
@@ -369,15 +389,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TIMELINE — Experience */}
+      {/* TIMELINE */}
       <section id="timeline" className="section" aria-labelledby="timeline-title">
         <div className="container">
           <h2 id="timeline-title" className="section-title">Timeline</h2>
           <ProTimeline items={career} height={520} />
         </div>
       </section>
-
-
 
       {/* CONTACT CTA */}
       <section className="section" aria-labelledby="contact">
