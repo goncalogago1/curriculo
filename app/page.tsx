@@ -41,10 +41,6 @@ const career: TLItem[] = [
     tags: ["Excel", "SQL"],
     color: "#f59e0b",
   },
-];
-
-/** EDUCAÇÃO **/
-const education: TLItem[] = [
   {
     id: "iseg",
     title: "Postgraduate · Applied AI & ML",
@@ -381,15 +377,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TIMELINE — Education */}
-      <section id="timeline-edu" className="section section--tight" aria-labelledby="edu-tl-title">
-        <div className="container">
-          <h3 id="edu-tl-title" className="section-title" style={{ fontSize: 20, marginTop: -8 }}>
-            Education Timeline
-          </h3>
-          <ProTimeline items={education} height={380} />
-        </div>
-      </section>
 
 
       {/* CONTACT CTA */}
