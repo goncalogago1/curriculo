@@ -361,3 +361,48 @@ input:focus{
   color: var(--text);
 }
 .mic-btn:focus{ outline: 2px solid color-mix(in srgb, var(--brand) 70%, white 30%); outline-offset: 2px; }
+
+/* === Horizontal card for the bottom row (Projects) === */
+.card--horizontal {
+  padding: 20px 22px;
+}
+.card--horizontal .hstack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.card--horizontal .subcard h3 {
+  margin-bottom: 8px;
+}
+.card--horizontal .divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+}
+
+/* Wider layout on >= 900px: side-by-side inside the horizontal rectangle */
+@media (min-width: 900px) {
+  .card--horizontal .hstack {
+    grid-template-columns: 1fr minmax(0, 1px) 1fr; /* left | divider | right */
+    align-items: start;
+  }
+  .card--horizontal .divider {
+    width: 1px;
+    height: 100%;
+    background: rgba(255,255,255,0.08);
+    margin: 0 8px;
+  }
+}
+
+/* Minor polish for lists in cards */
+.card .bullets {
+  padding-left: 18px;
+}
+.card .bullets li {
+  margin: 4px 0;
+}
+
+/* Optional: slightly smaller section titles for a tighter professional look */
+.section-title {
+  letter-spacing: 0.2px;
+}
