@@ -1,7 +1,43 @@
 // app/page.tsx
 import Image from "next/image";
 import ChatWidget from "@/components/ChatWidget";
-import Timeline from "@/components/Timeline"; // topo do ficheiro
+import GanttTimeline from "@/components/GanttTimeline"; // 👈 usar o Gantt
+
+const career = [
+  {
+    id: "deloitte",
+    name: "Tech Consultant (Data & AI)",
+    resource: "Deloitte Portugal",
+    start: "2023-06-01",
+    // sem end = presente
+    percent: 100,
+  },
+  {
+    id: "gdele",
+    name: "Data Lineage @ delote (Edge/Harvester)",
+    resource: "Client Project",
+    start: "2024-02-01",
+    end:   "2025-01-31",
+    percent: 100,
+    deps: ["deloitte"],
+  },
+  {
+    id: "mts",
+    name: "AI Course Builder",
+    resource: "Miles in the Sky",
+    start: "2023-04-01",
+    end:   "2023-05-31",
+    percent: 100,
+  },
+  {
+    id: "autoeuropa",
+    name: "Logistics Planning Intern",
+    resource: "Autoeuropa Volkswagen",
+    start: "2022-05-01",
+    end:   "2022-11-30",
+    percent: 100,
+  },
+];
 
 
 export default function Home() {
@@ -292,8 +328,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TIMELINE */}
-      <Timeline />
+      {/* TIMELINE (Google Gantt) */}
+      <section id="timeline" className="section" aria-labelledby="timeline-title">
+        <div className="container">
+          <h2 id="timeline-title" className="section-title">Timeline</h2>
+          <GanttTimeline items={career} height={520} />
+        </div>
+      </section>
+
 
       {/* CONTACT CTA */}
       <section className="section" aria-labelledby="contact">
