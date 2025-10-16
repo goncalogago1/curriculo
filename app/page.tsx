@@ -10,6 +10,7 @@ const career: TLItem[] = [
     title: "Tech Consultant (Data & AI)",
     company: "Deloitte Portugal",
     start: "2023-06-01", // Jun 2023 — Present
+    // ongoing → no end
     tags: ["Collibra", "Power BI", "MicroStrategy", "SQL Server", "Python"],
     color: "#8b5cf6",
   },
@@ -18,7 +19,7 @@ const career: TLItem[] = [
     title: "AI Course Developer",
     company: "Miles in the Sky",
     start: "2023-04-01", // Apr 2023 — May 2023
-    end: "2023-05-31",
+    end:   "2023-05-31",
     tags: ["OpenAI", "Python"],
     color: "#06b6d4",
   },
@@ -27,7 +28,7 @@ const career: TLItem[] = [
     title: "Logistics Planning Intern",
     company: "Autoeuropa Volkswagen",
     start: "2022-05-01", // May 2022 — Nov 2022
-    end: "2022-11-30",
+    end:   "2022-11-30",
     tags: ["Qlik Sense", "Analytics", "AGV"],
     color: "#22c55e",
   },
@@ -36,7 +37,7 @@ const career: TLItem[] = [
     title: "Engineering Intern",
     company: "Novo Banco",
     start: "2020-02-01", // Feb 2020 — Mar 2020
-    end: "2020-03-31",
+    end:   "2020-03-31",
     tags: ["Excel", "SQL"],
     color: "#f59e0b",
   },
@@ -45,7 +46,7 @@ const career: TLItem[] = [
     title: "Postgraduate · Applied AI & ML",
     company: "ISEG Executive Education — Univ. Lisbon",
     start: "2024-03-01", // Mar 2024 — Feb 2025
-    end: "2025-02-28",
+    end:   "2025-02-28",
     tags: ["Python", "ML/DL", "GenAI"],
     color: "#60a5fa",
   },
@@ -54,7 +55,7 @@ const career: TLItem[] = [
     title: "Integrated Master’s · EEE/CE",
     company: "FCT NOVA",
     start: "2017-10-01", // Oct 2017 — Mar 2023
-    end: "2023-03-31",
+    end:   "2023-03-31",
     tags: ["Thesis: AGV Analytics"],
     color: "#34d399",
   },
@@ -63,7 +64,7 @@ const career: TLItem[] = [
     title: "Erasmus Exchange",
     company: "AGH University of Science and Technology",
     start: "2021-09-01", // Sep 2021 — Feb 2022
-    end: "2022-02-28",
+    end:   "2022-02-28",
     tags: ["Intercultural", "MSc year"],
     color: "#a78bfa",
   },
@@ -72,7 +73,7 @@ const career: TLItem[] = [
     title: "High School Diploma",
     company: "Keyser High School (WV, USA)",
     start: "2016-08-01", // Aug 2016 — Jun 2017
-    end: "2017-06-30",
+    end:   "2017-06-30",
     tags: ["AFS Exchange"],
     color: "#f87171",
   },
@@ -149,24 +150,23 @@ export default function Home() {
                 </div>
                 <div className="stat">
                   <span className="stat__num">AI / RAG</span>
-                  <span className="stat__label">Applied AI & RAG assistants</span>
+                  <span className="stat__label">Applied AI assistants</span>
                 </div>
                 <div className="stat">
                   <span className="stat__num">Governance</span>
-                  <span className="stat__label">Automated lineage & metadata ingestion</span>
+                  <span className="stat__label">Automated lineage & metadata</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* LEDE LONG (full width) */}
+          {/* LEDE (full width) */}
           <p className="lede lede--full">
-            I’m a Data &amp; AI Consultant focused on turning complex data into clear, actionable insight.
-            I design and ship scalable solutions across <b>Analytics</b>, <b>Data Engineering</b>, and
-            <b> Data Governance</b> to unlock measurable business impact. Hands-on with
-            <b> MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>, <b>Python</b>, and <b>Collibra</b>,
-            I’ve built automated metadata pipelines, scalable reporting, and AI-powered assistants
-            that reduce manual effort and increase decision velocity.
+            I’m a Data &amp; AI Consultant focused on translating complex data into clear, defensible decisions.
+            I design and deliver scalable solutions across <b>Analytics</b>, <b>Data Engineering</b>, and <b>Data Governance</b>,
+            always anchored on measurable business outcomes. Hands-on with <b>MicroStrategy</b>, <b>Power BI</b>,
+            <b> SQL Server</b>, <b>Python</b>, and <b>Collibra</b>, I’ve built automated metadata pipelines, production-grade
+            reporting, and AI copilots that meaningfully reduce manual effort and accelerate decision velocity.
           </p>
         </div>
       </section>
@@ -182,11 +182,11 @@ export default function Home() {
             </div>
             <div className="card">
               <h3>Data Engineering</h3>
-              <p>ETL pipelines, performance tuning, and data products on SQL Server &amp; Python.</p>
+              <p>ETL pipelines, performance tuning, and productized datasets on SQL Server &amp; Python.</p>
             </div>
             <div className="card">
               <h3>Data Governance</h3>
-              <p>Collibra rollout, lineage automation, and workflows (Edge, REST APIs).</p>
+              <p>Collibra rollout, lineage automation, and workflow enablement (Edge, REST APIs).</p>
             </div>
           </div>
         </div>
@@ -196,12 +196,12 @@ export default function Home() {
       <section id="cases" className="section" aria-labelledby="cases-title">
         <div className="container">
           <h2 id="cases-title" className="section-title">Featured Case Studies</h2>
-        <div className="grid three">
+          <div className="grid three">
             <article className="card">
               <h3>Energy Client — Collibra at Scale</h3>
               <ul className="bullets">
-                <li>Implemented Collibra ingestion, workflows, and lineage automation.</li>
-                <li>Integrated SAP, Dremio, and Power BI via REST APIs and Python.</li>
+                <li>End-to-end Collibra ingestion, workflows, and lineage automation.</li>
+                <li>Integration with SAP, Dremio, and Power BI via REST & Python.</li>
                 <li>Improved discoverability and reduced manual curation time.</li>
               </ul>
             </article>
@@ -209,8 +209,8 @@ export default function Home() {
             <article className="card">
               <h3>DataHub &amp; Power BI — 1,300+ PDFs</h3>
               <ul className="bullets">
-                <li>PoC proving scalable reporting for high-volume data.</li>
-                <li>Optimized data model and report generation pipeline.</li>
+                <li>PoC proving scalable reporting for high-volume document output.</li>
+                <li>Optimized data model and report-generation pipeline.</li>
                 <li>Thousands of PDFs produced automatically in a fraction of the time.</li>
               </ul>
             </article>
@@ -218,9 +218,9 @@ export default function Home() {
             <article className="card">
               <h3>MicroStrategy &amp; ETL — Internal</h3>
               <ul className="bullets">
-                <li>Developed dashboards and optimized end-to-end pipelines.</li>
-                <li>Python-driven automations to reduce refresh time.</li>
-                <li>Faster, always-up-to-date executive views.</li>
+                <li>Executive dashboards with optimized ingest & refresh cycles.</li>
+                <li>Python-driven automations for faster, consistent updates.</li>
+                <li>Lower TCO via performance tuning and data model pruning.</li>
               </ul>
             </article>
           </div>
@@ -239,20 +239,20 @@ export default function Home() {
                 <span>Jun 2023 – Present · Lisbon</span>
               </header>
               <ul className="bullets">
-                <li>Governance, Engineering, and Analytics projects for large organizations.</li>
-                <li><b>Collibra</b> rollout: catalog, lineage, workflows (REST/Python).</li>
+                <li>Governance, Engineering &amp; Analytics projects for large organizations.</li>
+                <li><b>Collibra</b> rollout: catalog, lineage, and workflow automation (REST/Python).</li>
                 <li>ETL on <b>SQL Server</b> feeding <b>Power BI</b>/<b>MicroStrategy</b> KPIs.</li>
-                <li>Custom JS visualizations; Python performance improvements on data loads.</li>
+                <li>Custom JS visualizations and Python-based performance gains.</li>
               </ul>
             </article>
 
-            <article className="role">
+            <article className="role card--horizontal">
               <header>
                 <h4>Miles in the Sky — AI Course Builder</h4>
                 <span>Apr 2023 – May 2023 · Lisbon</span>
               </header>
               <ul className="bullets">
-                <li>OpenAI-powered content generation with robust prompt design in Python.</li>
+                <li>OpenAI-powered content generation with robust prompt engineering in Python.</li>
               </ul>
             </article>
 
@@ -295,14 +295,14 @@ export default function Home() {
               <p>OpenAI API, RAG (pgvector/Supabase), prompt engineering</p>
             </div>
             <div className="card">
-              <h3>Collaboration</h3>
+              <h3>Collab &amp; PM</h3>
               <p>Confluence, Jira, Excel</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* EDUCATION + CERTS + FINAL PROJECT */}
+      {/* EDUCATION + CERTS + FINAL PROJECT (SRIJ) */}
       <section id="education" className="section" aria-labelledby="edu-title">
         <div className="container">
           <h2 id="edu-title" className="section-title">Education &amp; Certifications</h2>
@@ -310,7 +310,7 @@ export default function Home() {
             <div className="card">
               <h3>Education</h3>
               <ul className="bullets">
-                <li><b>Postgraduate, Applied AI &amp; ML</b> — ISEG Exec. Education (2024–2025), in partnership with AWS. 140h hands-on (ML, DL, GenAI, deployment).</li>
+                <li><b>Postgraduate, Applied AI &amp; ML</b> — ISEG Exec. Education (2024–2025) with AWS. 140h hands-on (ML, DL, GenAI, deployment).</li>
                 <li><b>Integrated Master’s, Electrical &amp; Computer Eng.</b> — FCT NOVA (2017–2023). Thesis on analytics for AGV planning.</li>
                 <li><b>Erasmus</b> — AGH University, Kraków (2021–2022).</li>
               </ul>
@@ -320,7 +320,7 @@ export default function Home() {
               <ul className="bullets">
                 <li>Domain-specific chatbot for the Portuguese Gaming Authority.</li>
                 <li>Reverse-engineered Q&amp;A from legislation PDFs and official docs.</li>
-                <li>RAG grounding + LLaMA fine-tuning for accuracy &amp; traceability.</li>
+                <li>RAG grounding + LLaMA fine-tuning for legal accuracy and traceability.</li>
               </ul>
             </div>
           </div>
@@ -346,40 +346,36 @@ export default function Home() {
       {/* PROJECTS */}
       <section id="projects" className="section" aria-labelledby="proj-title">
         <div className="container">
-          <h2 id="proj-title" className="section-title">Projects &amp; Activities</h2>
+          <h2 id="proj-title" className="section-title">Personal Projects &amp; Activities</h2>
 
-          {/* Primary project card */}
-          <div className="grid two">
-            <article className="card">
+          {/* Horizontal featured project */}
+          <article className="card card--horizontal">
+            <div className="card__body">
               <h3>This Website — Portfolio &amp; AI Assistant</h3>
               <ul className="bullets">
-                <li>Next.js 15 (App Router) with a11y-first, performant UI.</li>
-                <li>Clean, responsive CSS; optimized image pipeline.</li>
-                <li>Chat with RAG (OpenAI + Supabase/pgvector) ingesting my CV.</li>
+                <li>Next.js 15 + React 19 (App Router), accessible and performance-minded.</li>
+                <li>Clean, responsive UI with optimized media and semantic HTML.</li>
+                <li>RAG chat (OpenAI + Supabase/pgvector) with CV/document ingestion.</li>
               </ul>
-            </article>
-          </div>
-
-          {/* Horizontal rectangle with the two items below */}
-          <article className="card card--horizontal" aria-label="Other activities">
-            <div className="hstack">
-              <div className="subcard">
-                <h3>Crypto Market Analysis — ongoing</h3>
-                <ul className="bullets">
-                  <li>Python + Binance API for high-frequency ingestion and time-series modeling.</li>
-                  <li>Pair correlations, z-score &amp; hedge ratio for mean-reversion testing.</li>
-                  <li>Exploratory visuals in Pandas, NumPy, Matplotlib.</li>
-                </ul>
-              </div>
-              <div className="divider" aria-hidden="true" />
-              <div className="subcard">
-                <h3>Volunteering &amp; Exchanges</h3>
-                <p className="muted">
-                  Missão País, Just a Change, Banco Alimentar, Projeto +; international camps in Norway, Iceland, and Luxembourg.
-                </p>
-              </div>
             </div>
           </article>
+
+          {/* Two items below */}
+          <div className="grid two" style={{ marginTop: 12 }}>
+            <article className="card">
+              <h3>Crypto Market Analysis — ongoing</h3>
+              <ul className="bullets">
+                <li>Python + Binance API for high-frequency ingestion and time-series modelling.</li>
+                <li>Correlation across coin pairs; z-score &amp; hedge ratio for mean-reversion.</li>
+                <li>Exploratory visualizations (Pandas, NumPy, Matplotlib) for strategy tests.</li>
+              </ul>
+            </article>
+
+            <article className="card">
+              <h3>Volunteering &amp; Exchanges</h3>
+              <p>Missão País, Just a Change, Banco Alimentar, Projeto +; international camps in Norway, Iceland, and Luxembourg.</p>
+            </article>
+          </div>
         </div>
       </section>
 
