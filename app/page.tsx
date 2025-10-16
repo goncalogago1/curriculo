@@ -1,6 +1,8 @@
 // app/page.tsx
 import Image from "next/image";
 import ChatWidget from "@/components/ChatWidget";
+import Timeline from "@/components/Timeline"; // topo do ficheiro
+
 
 export default function Home() {
   return (
@@ -10,6 +12,7 @@ export default function Home() {
         <div className="container topbar__inner">
           <div className="brand">Gonçalo Gago</div>
           <nav className="topnav" aria-label="Primary">
+            <a href="#timeline">Timeline</a>
             <a href="#work">Experience</a>
             <a href="#capabilities">Capabilities</a>
             <a href="#cases">Case Studies</a>
@@ -288,6 +291,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* TIMELINE */}
+      <Timeline />
 
       {/* CONTACT CTA */}
       <section className="section" aria-labelledby="contact">
