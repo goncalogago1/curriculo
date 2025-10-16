@@ -86,16 +86,25 @@ main { min-height: 100vh; }
 /* ========= PROFILE PANE (ESQUERDA) ========= */
 .profile-pane { display: grid; gap: 10px; align-content: start; }
 .profile-photo {
-  position: relative; width: 100%; aspect-ratio: 1 / 1;    /* mantém quadrado menor */
-  border-radius: 16px; overflow: hidden;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.profile-photo--round {
+  border-radius: 9999px;                /* círculo perfeito */
   background:
     radial-gradient(120% 80% at 10% 0%, rgba(41,151,255,.18), transparent 60%),
-    radial-gradient(120% 80% at 100% 20%, rgba(94,92,230,.18), transparent 60%);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+    radial-gradient(120% 80% at 100% 20%, rgba(94,92,230,.18), transparent 60%),
+    var(--bg-soft);
+  border: 2px solid rgba(255,255,255,0.12);  /* traço subtil */
+  box-shadow:
+    0 0 0 6px rgba(255,255,255,0.04) inset, /* glow interior muito suave */
+    var(--shadow);
 }
-.profile-photo img { object-fit: cover; }
 
+.profile-photo img { object-fit: cover; }
 .profile-topbar {
   grid-column: 1 / -1;
   background: linear-gradient(90deg, rgba(41,151,255,.18), rgba(94,92,230,.18));
