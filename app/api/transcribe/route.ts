@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const ct = req.headers.get("content-type") || "application/octet-stream";
     const audio = await req.arrayBuffer();
 
-    const url = `https://api-inference.huggingface.co/models/${encodeURIComponent(MODEL)}?provider=${encodeURIComponent(PROVIDER)}`;
+    const url = `https://api-inference.huggingface.co/models/${encodeURIComponent(MODEL)}`;
 
     const resp = await fetch(url, {
       method: "POST",
