@@ -107,7 +107,7 @@ main { min-height: 100vh; }
 .profile-photo img { object-fit: cover; }
 .profile-topbar {
   grid-column: 1 / -1;
-  background: linear-gradient(90deg, rgba(41,151,255,.18), rgba(94,92,230,.18));
+  background: linear-gradient(90deg, rgba(41,151,255,.55), rgba(94,92,230,.18));
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 10px 12px;

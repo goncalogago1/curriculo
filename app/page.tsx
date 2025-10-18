@@ -104,8 +104,8 @@ export default function Home() {
         <div className="container pro__grid">
           {/* Top strip with CTAs */}
           <div className="profile-topbar" aria-label="Intro actions">
-            <span className="loc">Lisbon, Portugal</span>
-            <span className="loc">Open to projects & interviews</span>
+            <span className="loc">Lisbon, Portugal 🇵🇹  </span>
+            <span className="loc">   Open to projects & interviews</span>
             <div className="actions">
               <a className="btn btn--primary" href="/chat">Talk to my assistant</a>
               <a className="btn btn--ghost" href="/cv.pdf" download>Download CV (PDF)</a>
@@ -133,8 +133,8 @@ export default function Home() {
               <span className="chip chip--blue">Analytics</span>
               <span className="chip chip--teal">Data Engineering</span>
               <span className="chip chip--violet">AI / RAG</span>
+              <span className="chip chip--green">Data Governance</span>
             </div>
-
             <div className="links" aria-label="Links" style={{ marginBottom: 16 }}>
               <a href="https://www.linkedin.com/in/goncalo-gago/" target="_blank" rel="noreferrer">LinkedIn</a>
               <span>•</span>
