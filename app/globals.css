@@ -118,8 +118,8 @@ main { min-height: 100vh; }
 .profile-topbar .actions { margin-left:auto; display:flex; gap:10px; }
 
 /* ========= HERO CONTENT (DIREITA) ========= */
-.hero__content h1{ font-size: 46px; line-height: 1.08; margin: 6px 0 8px; }
-@media (max-width:1024px){ .hero__content h1{ font-size: 38px; } }
+.hero__content h1{ font-size: 30px; line-height: 1.08; margin: 6px 0 8px; }
+@media (max-width:1024px){ .hero__content h1{ font-size: 30px; } }
 
 .chips { display:flex; gap:8px; flex-wrap:wrap; margin: 8px 0; }
 .chip {
@@ -381,6 +381,6 @@ input:focus{
 /* Optional: unify role items if you want horizontal look there too */
 .timeline .role.card--horizontal {
   border-radius: var(--radius-xl, 16px);
-  background: var(--bg-elev, rgba(255,255,255,0.03));
+  background: #1a1a1c;
   box-shadow: var(--shadow, 0 6px 20px rgba(0,0,0,0.12));
 }
