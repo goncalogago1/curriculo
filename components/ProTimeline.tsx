@@ -96,7 +96,7 @@ function TipContent({ active, payload }: any) {
   if (!p) return null;
   return (
     <div style={{
-      background: "#111", color: "white", padding: "10px 12px",
+      background: "#fffff", color: "white", padding: "10px 12px",
       borderRadius: 10, boxShadow: "0 8px 20px rgba(0,0,0,.25)", maxWidth: 340
     }}>
       <div style={{ fontWeight: 700, marginBottom: 4 }}>{p.title}</div>
