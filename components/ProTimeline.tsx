@@ -10,7 +10,7 @@ export type TLItem = {
   title: string;
   company: string;
   start: string;   // "YYYY-MM-DD"
-  end?: string;    // vazio = hoje
+  end?: string;    // se vazio = hoje
   color?: string;
   tags?: string[];
 };
@@ -34,13 +34,13 @@ function buildData(items: TLItem[]) {
     .map((i, idx) => {
       const s = toTs(i.start);
       const e = i.end ? toTs(i.end) : Date.now();
-      const duration = Math.max(e - s, 24 * 3600 * 1000); // >= 1 dia
+      const duration = Math.max(e - s, 24 * 3600 * 1000);
       return {
         id: i.id,
         row: `${i.title} · ${i.company}`,
         start: s,
         end: e,
-        offsetAbs: s,
+        offsetAbs: s, // guardo absoluto para calcular relativo depois
         duration,
         title: i.title,
         company: i.company,
@@ -60,7 +60,7 @@ function CustomBar(props: any) {
       y={y}
       width={Math.max(1, width)}
       height={height}
-      fill={fill || "#6366f1"}
+      fill={fill}
       radius={[r, r, r, r]}
     />
   );
@@ -114,20 +114,16 @@ export default function ProTimeline({ items, height = 420 }: Props) {
   const minTs = Math.min(...dataAbs.map(d => d.start));
   const maxTs = Math.max(...dataAbs.map(d => d.end));
 
+  // para barras empilhadas: offset relativo + duração
   const data = dataAbs.map(d => ({
     ...d,
-    offset: d.offsetAbs - minTs, // relativo ao min
+    offset: d.offsetAbs - minTs,
   }));
 
   return (
     <div style={{ width: "100%", height }}>
       <ResponsiveContainer>
-        <ComposedChart
-          data={data}
-          layout="vertical"                 // 👈 essencial para barras horizontais
-          margin={{ top: 16, right: 24, bottom: 24, left: 12 }}
-          barCategoryGap={12}              // espaço entre linhas
-        >
+        <ComposedChart data={data} margin={{ top: 16, right: 24, bottom: 24, left: 12 }}>
           <defs>
             {data.map(d => (
               <linearGradient key={d.id} id={`grad-${d.id}`} x1="0" y1="0" x2="1" y2="0">
@@ -140,20 +136,25 @@ export default function ProTimeline({ items, height = 420 }: Props) {
           <CartesianGrid strokeOpacity={0.15} />
           <XAxis
             type="number"
-            dataKey="offset"
+            dataKey="offset"               // qualquer chave numérica; domain manual abaixo
             tickFormatter={(v) => fmtMonth(v + minTs)}
-            domain={[0, Math.max(1, maxTs - minTs)]}
+            domain={[0, maxTs - minTs]}
             ticks={buildTicks(minTs, maxTs)}
           />
-          <YAxis dataKey="row" type="category" width={260} />
+          <YAxis dataKey="row" type="category" width={240} />
 
           <Tooltip content={<TipContent />} />
 
-          {/* empurra a barra até ao start */}
+          {/* Offset invisível para empurrar a barra */}
           <Bar dataKey="offset" stackId="t" fill="transparent" isAnimationActive={false} />
 
-          {/* barra visível */}
-          <Bar dataKey="duration" stackId="t" shape={<CustomBar />} isAnimationActive={false}>
+          {/* Barra visível */}
+          <Bar
+            dataKey="duration"
+            stackId="t"
+            shape={<CustomBar />}
+            isAnimationActive={false}
+          >
             <LabelList dataKey="company" content={<CenterLabel />} />
             {data.map(d => (
               <Cell key={d.id} fill={`url(#grad-${d.id})`} />
@@ -171,7 +172,7 @@ function buildTicks(min: number, max: number) {
   d.setDate(1);
   while (d.getTime() <= max) {
     out.push(d.getTime() - min);
-    d.setMonth(d.getMonth() + 3); // trimestral
+    d.setMonth(d.getMonth() + 3); // trimestral; mude para +1 se quiser mensal
   }
-  return out.length ? out : [0];
+  return out;
 }
