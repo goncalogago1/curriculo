@@ -137,26 +137,27 @@ export default function ProTimeline({ items, height = 420 }: Props) {
             ))}
           </defs>
 
-          <CartesianGrid stroke="var(--border)" strokeOpacity={0.25} />
           <XAxis
             type="number"
             dataKey="offset"
             tickFormatter={(v) => fmtMonth(v + minTs)}
             domain={[0, Math.max(1, maxTs - minTs)]}
             ticks={buildTicks(minTs, maxTs)}
-            tick={{ fill: "var(--muted)" }}
-            axisLine={{ stroke: "var(--border)" }}
-            tickLine={{ stroke: "var(--border)" }}
+            tick={{ fill: "#fff", fontSize: 12 }}           // datas em branco
+            axisLine={{ stroke: "rgba(255,255,255,0.3)" }}  // linha X subtil branca
+            tickLine={{ stroke: "rgba(255,255,255,0.3)" }}  // risquinhos brancos
           />
 
           <YAxis
             dataKey="row"
             type="category"
             width={260}
-            tick={false}                      // 👈 remove nomes/labels do eixo Y
-            axisLine={{ stroke: "var(--border)" }}
-            tickLine={{ stroke: "var(--border)" }}
+            tick={false}        // ❌ sem texto
+            axisLine={false}    // ❌ sem linha vertical
+            tickLine={false}    // ❌ sem risquinhos
           />
+          <CartesianGrid stroke="rgba(255,255,255,0.1)" />  // grelha clara branca
+
 
           <Tooltip content={<TipContent />} />
 
