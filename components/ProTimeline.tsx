@@ -149,6 +149,7 @@ export default function ProTimeline({ items, height = 420 }: Props) {
             tickFormatter={(v) => fmtMonth(v + minTs)}
             domain={[0, Math.max(1, maxTs - minTs)]}
             ticks={buildTicks(minTs, maxTs)}
+            tick={{ fill: "#fff", fontSize: 12 }} 
             axisLine={{ stroke: "rgba(255,255,255,0.3)" }}  // linha X subtil branca
             tickLine={{ stroke: "rgba(255,255,255,0.3)" }}  // risquinhos brancos
 
