@@ -179,7 +179,7 @@ export default function Home() {
                 </div>
                 <div className="stat">
                   <span className="stat__num">Governance</span>
-                  <span className="stat__label">Automated lineage & metadata</span>
+                  <span className="stat__label">Integrated lineage & metadata</span>
                 </div>
               </div>
             </div>
@@ -187,11 +187,13 @@ export default function Home() {
 
           {/* LEDE (full width) */}
           <p className="lede lede--full">
-            I’m a Data &amp; AI Consultant focused on translating complex data into clear, defensible decisions.
-            I design and deliver scalable solutions across <b>Analytics</b>, <b>Data Engineering</b>, and <b>Data Governance</b>,
-            always anchored on measurable business outcomes. Hands-on with <b>MicroStrategy</b>, <b>Power BI</b>,
-            <b> SQL Server</b>, <b>Python</b>, and <b>Collibra</b>, I’ve built automated metadata pipelines, production-grade
-            reporting, and AI copilots that meaningfully reduce manual effort and accelerate decision velocity.
+            I’m a <b>Data &amp; AI Consultant</b> dedicated to transforming complex information into actionable, data-driven strategy.
+            I design and implement <b>scalable data ecosystems</b> that bridge <b>Analytics</b>, <b>Data Engineering</b>, and 
+            <b> Data Governance</b> — ensuring every solution delivers measurable and sustainable business value.
+            Experienced across <b>MicroStrategy</b>, <b>Power BI</b>, <b>SQL Server</b>, <b>Python</b>, and <b>Collibra</b>, 
+            I’ve developed automated metadata pipelines, production-ready dashboards, and <b>AI-driven assistants</b> that streamline workflows, 
+            enhance decision accuracy, and accelerate time to insight.
+            My work blends technical depth with strategic thinking, enabling organizations to harness data as a true competitive advantage.
           </p>
         </div>
       </section>
