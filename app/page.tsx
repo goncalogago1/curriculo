@@ -284,28 +284,23 @@ export default function Home() {
           </div>
 
           <div className="card">
-            <h3>Data &amp; Infra</h3>
-            <p>SQL Server, Spark, Airflow, Databricks, AWS · Git, Postman</p>
+            <h3>Data Engineering</h3>
+            <p>SQL Server, Databricks, Spark, Airflow — scalable ETL pipelines, orchestration & optimization.</p>
           </div>
 
           <div className="card">
-            <h3>Governance</h3>
-            <p>Collibra (Edge, REST, workflows), lineage across SAP · Power BI · Dremio</p>
+            <h3>Data Governance</h3>
+            <p>Collibra (Edge, REST, workflows) — lineage automation & metadata management across SAP, Dremio, Power BI.</p>
           </div>
 
           <div className="card">
-            <h3>LLMs &amp; RAG</h3>
-            <p>OpenAI API, RAG (Supabase/pgvector), LLaMA fine-tuning, prompt engineering</p>
+            <h3>AI &amp; Machine Learning</h3>
+            <p> Generative AI, LLaMA fine-tuning, time-series forecasting, model deployment & monitoring, OpenAI API, RAG (Supabase/pgvector),</p>
           </div>
 
           <div className="card">
-            <h3>ML &amp; Ops</h3>
-            <p>Time series &amp; ML (training → deployment/monitoring), Pandas, NumPy, Matplotlib</p>
-          </div>
-
-          <div className="card">
-            <h3>Collab &amp; PM</h3>
-            <p>Confluence, Jira, Agile delivery · Advanced Excel</p>
+            <h3>Cloud &amp; Collaboration</h3>
+            <p>AWS, Git, Postman, Confluence, Jira — Agile delivery & version-controlled data products.</p>
           </div>
 
         </div>
@@ -313,25 +308,37 @@ export default function Home() {
     </section>
 
 
-      {/* EDUCATION + CERTS + FINAL PROJECT (SRIJ) */}
+      {/* EDUCATION + CERTIFICATIONS + FINAL PROJECT (SRIJ) */}
       <section id="education" className="section" aria-labelledby="edu-title">
         <div className="container">
           <h2 id="edu-title" className="section-title">Education &amp; Certifications</h2>
+
           <div className="grid two">
             <div className="card">
               <h3>Education</h3>
               <ul className="bullets">
-                <li><b>Postgraduate, Applied AI &amp; ML</b> — ISEG Exec. Education (2024–2025) with AWS. 140h hands-on (ML, DL, GenAI, deployment).</li>
-                <li><b>Integrated Master’s, Electrical &amp; Computer Eng.</b> — FCT NOVA (2017–2023). Thesis on analytics for AGV planning.</li>
-                <li><b>Erasmus</b> — AGH University, Kraków (2021–2022).</li>
+                <li>
+                  <b>Postgraduate in Applied Artificial Intelligence &amp; Machine Learning</b> — 
+                  ISEG Executive Education (2024–2025), in partnership with AWS. 
+                  140-hour program combining ML, DL, Generative AI, time-series forecasting, 
+                  and end-to-end model deployment &amp; monitoring.
+                </li>
+                <li>
+                  <b>Integrated Master’s in Electrical &amp; Computer Engineering</b> — 
+                  FCT NOVA (2017–2023). Thesis on data analytics for automated guided vehicle (AGV) planning.
+                </li>
+                <li>
+                  <b>Erasmus Exchange</b> — AGH University of Science &amp; Technology, Kraków (2021–2022).
+                </li>
               </ul>
             </div>
+
             <div className="card">
-              <h3>Final Project — SRIJ Regulatory Chatbot</h3>
+              <h3>Postgraduate Final Project — Regulatory Chatbot (SRIJ)</h3>
               <ul className="bullets">
-                <li>Domain-specific chatbot for the Portuguese Gaming Authority.</li>
-                <li>Reverse-engineered Q&amp;A from legislation PDFs and official docs.</li>
-                <li>RAG grounding + LLaMA fine-tuning for legal accuracy and traceability.</li>
+                <li>Developed a <b>domain-specific Generative AI chatbot</b> for the Portuguese Gaming Authority (SRIJ).</li>
+                <li>Extracted and structured legal knowledge from Portuguese gaming legislation and regulatory documents.</li>
+                <li>Built a <b>Retrieval-Augmented Generation (RAG)</b> pipeline with <b>LLaMA fine-tuning</b> to ensure accuracy, compliance, and traceability of responses.</li>
               </ul>
             </div>
           </div>
@@ -343,7 +350,7 @@ export default function Home() {
                 <li>MicroStrategy Developer &amp; Departmental Analyst (2025)</li>
                 <li>AWS Certified Cloud Practitioner (2023)</li>
                 <li>Collibra Solution Architect (2023)</li>
-                <li>Qlik Data Analytics (2023)</li>
+                <li>Qlik Data Analytics Certification (2023)</li>
               </ul>
             </div>
             <div className="card">
@@ -353,6 +360,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* PROJECTS */}
       <section id="projects" className="section" aria-labelledby="proj-title">
