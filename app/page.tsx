@@ -318,7 +318,7 @@ export default function Home() {
               <h3>Education</h3>
               <ul className="bullets">
                 <li>
-                  <b>Postgraduate in Applied Artificial Intelligence &amp; Machine Learning</b> — 
+                  <b>Postgraduate in Applied Artificial Intelligence &amp; Machine Learning</b> 
                   ISEG Executive Education (2024–2025), in partnership with AWS. 
                   140-hour program combining ML, DL, Generative AI, time-series forecasting, 
                   and end-to-end model deployment &amp; monitoring.
@@ -367,36 +367,41 @@ export default function Home() {
         <div className="container">
           <h2 id="proj-title" className="section-title">Personal Projects &amp; Activities</h2>
 
-          {/* Horizontal featured project */}
+          {/* Featured AI Project */}
           <article className="card card--horizontal">
             <div className="card__body">
-              <h3>This Website — Portfolio &amp; AI Assistant</h3>
+              <h3>AI Assistant &amp; Portfolio Website</h3>
               <ul className="bullets">
-                <li>Next.js 15 + React 19 (App Router), accessible and performance-minded.</li>
-                <li>Clean, responsive UI with optimized media and semantic HTML.</li>
-                <li>RAG chat (OpenAI + Supabase/pgvector) with CV/document ingestion.</li>
+                <li>End-to-end project combining <b>Generative AI</b>, <b>RAG architecture</b>, and <b>Next.js 15 + React 19</b>.</li>
+                <li>Developed an <b>interactive AI assistant</b> capable of answering questions about my CV and experience, using <b>OpenAI embeddings</b> stored in <b>Supabase (pgvector)</b>.</li>
+                <li>Implemented document ingestion, chunking, and semantic search pipelines for accurate retrieval and contextual responses.</li>
+                <li>Deployed a responsive and performant portfolio site with semantic HTML, reusable components, and SEO optimization.</li>
               </ul>
             </div>
           </article>
 
-          {/* Two items below */}
+          {/* Two projects below */}
           <div className="grid two" style={{ marginTop: 12 }}>
             <article className="card">
-              <h3>Crypto Market Analysis — ongoing</h3>
+              <h3>Crypto Market Analysis — Ongoing</h3>
               <ul className="bullets">
-                <li>Python + Binance API for high-frequency ingestion and time-series modelling.</li>
-                <li>Correlation across coin pairs; z-score &amp; hedge ratio for mean-reversion.</li>
-                <li>Exploratory visualizations (Pandas, NumPy, Matplotlib) for strategy tests.</li>
+                <li>Python-based quantitative analytics using <b>Binance API</b> for real-time and historical market data ingestion.</li>
+                <li>Applied <b>statistical modeling</b>, correlation matrices, z-score, and hedge ratio to detect mean-reversion patterns.</li>
+                <li>Visualized results through <b>time-series dashboards</b> built with Pandas, NumPy, and Matplotlib.</li>
               </ul>
             </article>
 
             <article className="card">
-              <h3>Volunteering &amp; Exchanges</h3>
-              <p>Missão País, Just a Change, Banco Alimentar, Projeto +; international camps in Norway, Iceland, and Luxembourg.</p>
+              <h3>Volunteering &amp; International Exchanges</h3>
+              <ul className="bullets">
+                <li>Contributed to social impact initiatives: <b>Missão País</b>, <b>Just a Change</b>, <b>Banco Alimentar</b>, and <b>Projeto +</b>.</li>
+                <li>Participated in intercultural exchange programs across <b>Norway</b>, <b>Iceland</b>, and <b>Luxembourg</b>, developing leadership and collaboration skills.</li>
+              </ul>
             </article>
           </div>
         </div>
       </section>
+
 
       {/* TIMELINE */}
       <section id="timeline" className="section" aria-labelledby="timeline-title">
