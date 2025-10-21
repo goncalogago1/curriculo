@@ -179,8 +179,8 @@ export default function Home() {
             <div className="card">
               <h3>Analytics & Business Intelligence</h3>
               <p>
-                Design and delivery of semantic data models, KPIs, and dashboards 
-                using <b>MicroStrategy</b> and <b>Power BI</b>. Skilled in data modeling, DAX optimization, and 
+                Design and delivery of semantic models, KPIs, and dashboards 
+                using <b>MicroStrategy</b> and <b>Power BI</b>. Skilled in data modeling, DAX, and 
                 data storytelling to support strategic decision-making at scale. Proven ability to turn complex 
                 datasets into actionable insights through performance-driven visual analytics.
               </p>
@@ -267,38 +267,51 @@ export default function Home() {
       </section>
 
 
-      {/* TECH STACK */}
-      <section id="stack" className="section" aria-labelledby="stack-title">
-        <div className="container">
-          <h2 id="stack-title" className="section-title">Technical Toolbox</h2>
-          <div className="grid three">
-            <div className="card">
-              <h3>Languages</h3>
-              <p>Python, SQL, JavaScript/TypeScript, Java, C/C++, VBA</p>
-            </div>
-            <div className="card">
-              <h3>Analytics &amp; BI</h3>
-              <p>MicroStrategy, Power BI, Qlik Sense</p>
-            </div>
-            <div className="card">
-              <h3>Data &amp; Infra</h3>
-              <p>SQL Server, Airflow, Spark, AWS, Git, Postman</p>
-            </div>
-            <div className="card">
-              <h3>Governance</h3>
-              <p>Collibra (Edge, REST, workflows), lineage automation</p>
-            </div>
-            <div className="card">
-              <h3>AI</h3>
-              <p>OpenAI API, RAG (pgvector/Supabase), prompt engineering</p>
-            </div>
-            <div className="card">
-              <h3>Collab &amp; PM</h3>
-              <p>Confluence, Jira, Excel</p>
-            </div>
+    {/* TECH STACK */}
+    <section id="stack" className="section" aria-labelledby="stack-title">
+      <div className="container">
+        <h2 id="stack-title" className="section-title">Technical Toolbox</h2>
+        <div className="grid three">
+
+          <div className="card">
+            <h3>Languages</h3>
+            <p>Python, SQL, JavaScript/TypeScript, Java, VBA, Groovy, HTML/CSS</p>
           </div>
+
+          <div className="card">
+            <h3>Analytics &amp; BI</h3>
+            <p>MicroStrategy, Power BI, Qlik Sense · KPI models, DAX, data storytelling</p>
+          </div>
+
+          <div className="card">
+            <h3>Data &amp; Infra</h3>
+            <p>SQL Server, Spark, Airflow, Databricks, AWS · Git, Postman</p>
+          </div>
+
+          <div className="card">
+            <h3>Governance</h3>
+            <p>Collibra (Edge, REST, workflows), lineage across SAP · Power BI · Dremio</p>
+          </div>
+
+          <div className="card">
+            <h3>LLMs &amp; RAG</h3>
+            <p>OpenAI API, RAG (Supabase/pgvector), LLaMA fine-tuning, prompt engineering</p>
+          </div>
+
+          <div className="card">
+            <h3>ML &amp; Ops</h3>
+            <p>Time series &amp; ML (training → deployment/monitoring), Pandas, NumPy, Matplotlib</p>
+          </div>
+
+          <div className="card">
+            <h3>Collab &amp; PM</h3>
+            <p>Confluence, Jira, Agile delivery · Advanced Excel</p>
+          </div>
+
         </div>
-      </section>
+      </div>
+    </section>
+
 
       {/* EDUCATION + CERTS + FINAL PROJECT (SRIJ) */}
       <section id="education" className="section" aria-labelledby="edu-title">
