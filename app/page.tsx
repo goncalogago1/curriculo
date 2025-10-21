@@ -10,8 +10,11 @@ const career: TLItem[] = [
     title: "Tech Consultant (Data & AI)",
     company: "Deloitte Portugal",
     start: "2023-06-01", // Jun 2023 — Present
-    // ongoing → no end
-    tags: ["Collibra", "Power BI", "MicroStrategy", "SQL Server", "Python"],
+    tags: [
+      "Collibra", "Data Governance", "Metadata Management", "Lineage Automation",
+      "REST APIs", "Python", "SQL Server", "ETL Pipelines", "Power BI", "MicroStrategy",
+      "Data Modeling", "Analytics Engineering", "Agile Delivery", "Jira", "Git"
+    ],
     color: "#8b5cf6",
   },
   {
@@ -19,8 +22,11 @@ const career: TLItem[] = [
     title: "AI Course Developer",
     company: "Miles in the Sky",
     start: "2023-04-01", // Apr 2023 — May 2023
-    end:   "2023-05-31",
-    tags: ["OpenAI", "Python"],
+    end: "2023-05-31",
+    tags: [
+      "Generative AI", "OpenAI API", "Prompt Engineering", "NLP", "Python",
+      "Automation", "Content Generation", "Course Design", "API Integration"
+    ],
     color: "#06b6d4",
   },
   {
@@ -28,8 +34,11 @@ const career: TLItem[] = [
     title: "Logistics Planning Intern",
     company: "Autoeuropa Volkswagen",
     start: "2022-05-01", // May 2022 — Nov 2022
-    end:   "2022-11-30",
-    tags: ["Qlik Sense", "Analytics", "AGV"],
+    end: "2022-11-30",
+    tags: [
+      "Qlik Sense", "Data Visualization", "AGV Analytics", "Process Optimization",
+      "Operational Efficiency", "KPI Dashboards", "Logistics Data", "Automation"
+    ],
     color: "#22c55e",
   },
   {
@@ -37,47 +46,64 @@ const career: TLItem[] = [
     title: "Engineering Intern",
     company: "Novo Banco",
     start: "2020-02-01", // Feb 2020 — Mar 2020
-    end:   "2020-03-31",
-    tags: ["Excel", "SQL"],
+    end: "2020-03-31",
+    tags: [
+      "SQL", "Excel", "Data Management", "Reporting", "Banking IT",
+      "Data Cleaning", "Performance Tracking"
+    ],
     color: "#f59e0b",
   },
   {
     id: "iseg",
     title: "Postgraduate · Applied AI & ML",
-    company: "ISEG Executive Education — Univ. Lisbon",
+    company: "ISEG Executive Education — Univ. Lisbon (AWS Partnership)",
     start: "2024-03-01", // Mar 2024 — Feb 2025
-    end:   "2025-02-28",
-    tags: ["Python", "ML/DL", "GenAI"],
+    end: "2025-02-28",
+    tags: [
+      "Machine Learning", "Deep Learning", "Generative AI", "RAG", "LLaMA Fine-tuning",
+      "Python", "Time-Series Forecasting", "Model Deployment", "Monitoring", "AWS",
+      "LLMs", "Data Preprocessing", "NLP"
+    ],
     color: "#60a5fa",
   },
   {
     id: "fct",
-    title: "Integrated Master’s · EEE/CE",
-    company: "FCT NOVA",
+    title: "Integrated Master’s · Electrical & Computer Eng.",
+    company: "FCT NOVA — Nova School of Science and Technology",
     start: "2017-10-01", // Oct 2017 — Mar 2023
-    end:   "2023-03-31",
-    tags: ["Thesis: AGV Analytics"],
+    end: "2023-03-31",
+    tags: [
+      "Thesis: AGV Analytics", "Automation", "Data Processing", "Engineering Systems",
+      "Data Analytics", "Control Systems", "Software Engineering", "Research"
+    ],
     color: "#34d399",
   },
   {
     id: "agh",
     title: "Erasmus Exchange",
-    company: "AGH University of Science and Technology",
+    company: "AGH University of Science and Technology (Poland)",
     start: "2021-09-01", // Sep 2021 — Feb 2022
-    end:   "2022-02-28",
-    tags: ["Intercultural", "MSc year"],
+    end: "2022-02-28",
+    tags: [
+      "Intercultural Experience", "International Collaboration", "MSc Coursework",
+      "Academic Exchange", "STEM Mobility", "Cultural Adaptability"
+    ],
     color: "#a78bfa",
   },
   {
     id: "keyser",
     title: "High School Diploma",
-    company: "Keyser High School (WV, USA)",
+    company: "Keyser High School (West Virginia, USA)",
     start: "2016-08-01", // Aug 2016 — Jun 2017
-    end:   "2017-06-30",
-    tags: ["AFS Exchange"],
+    end: "2017-06-30",
+    tags: [
+      "AFS Exchange", "Cultural Immersion", "Leadership", "Teamwork",
+      "English Proficiency", "Adaptability"
+    ],
     color: "#f87171",
   },
 ];
+
 
 export default function Home() {
   return (
