@@ -200,8 +200,8 @@ export default function Home() {
               <p>
                 Specialized in <b>Collibra</b> implementation and enablement, from metadata catalog rollout and 
                 workflow automation to <b>lineage orchestration</b> across complex data ecosystems (SAP, Power BI, Dremio). 
-                Proficient in REST API integration and Python-based ingestion frameworks that improve discoverability 
-                and compliance through automated governance at scale.
+                Proficient in REST API integration and Python-based ingestion frameworks.
+
               </p>
             </div>
           </div>
@@ -214,16 +214,18 @@ export default function Home() {
           <h2 id="exp-title" className="section-title">Professional Experience</h2>
 
           <div className="timeline">
+
             <article className="role">
               <header>
                 <h4>Deloitte — Tech Consultant · Data &amp; AI</h4>
                 <span>Jun 2023 – Present · Lisbon</span>
               </header>
               <ul className="bullets">
-                <li>Governance, Engineering &amp; Analytics projects for large organizations.</li>
-                <li><b>Collibra</b> rollout: catalog, lineage, and workflow automation (REST/Python).</li>
-                <li>ETL on <b>SQL Server</b> feeding <b>Power BI</b>/<b>MicroStrategy</b> KPIs.</li>
-                <li>Custom JS visualizations and Python-based performance gains.</li>
+                <li>Delivered end-to-end projects across <b>Data Governance</b>, <b>Engineering</b>, and <b>Analytics</b> for large-scale organizations.</li>
+                <li>Implemented and optimized <b>Collibra</b> for metadata cataloging, workflow automation, and <b>lineage orchestration</b> across SAP, Dremio, and Power BI ecosystems.</li>
+                <li>Developed <b>ETL pipelines</b> on <b>SQL Server</b> and <b>Python</b>, automating ingestion and transformation for KPI monitoring in Power BI and MicroStrategy.</li>
+                <li>Created custom <b>JavaScript visualizations</b> to extend MicroStrategy capabilities and improve data storytelling.</li>
+                <li>Enhanced data loading performance with Python scripts and optimized models for large-scale reporting.</li>
               </ul>
             </article>
 
@@ -233,7 +235,8 @@ export default function Home() {
                 <span>Apr 2023 – May 2023 · Lisbon</span>
               </header>
               <ul className="bullets">
-                <li>OpenAI-powered content generation with robust prompt engineering in Python.</li>
+                <li>Developed an <b>AI-powered course generation tool</b> integrating <b>OpenAI APIs</b> with Python for automated content creation.</li>
+                <li>Applied prompt engineering to generate personalized and optimized learning experiences at scale.</li>
               </ul>
             </article>
 
@@ -243,12 +246,26 @@ export default function Home() {
                 <span>May 2022 – Nov 2022 · Palmela</span>
               </header>
               <ul className="bullets">
-                <li>Qlik Sense analysis on 120 AGVs; identified underutilization and proposed reallocation.</li>
+                <li>Analyzed operational data from 120 <b>Automated Guided Vehicles (AGVs)</b> using Qlik Sense dashboards to support logistics optimization.</li>
+                <li>Identified underutilized robots and proposed reallocation, improving resource utilization and production efficiency.</li>
               </ul>
             </article>
+
+            <article className="role">
+              <header>
+                <h4>Novo Banco — Engineering Intern</h4>
+                <span>Feb 2020 – Mar 2020 · Lisbon</span>
+              </header>
+              <ul className="bullets">
+                <li>Gained practical experience in <b>corporate IT</b> and <b>data management</b> within a banking environment.</li>
+                <li>Supported internal teams with <b>Excel</b> and <b>SQL</b> process improvements, enhancing reporting accuracy and efficiency.</li>
+              </ul>
+            </article>
+
           </div>
         </div>
       </section>
+
 
       {/* TECH STACK */}
       <section id="stack" className="section" aria-labelledby="stack-title">
