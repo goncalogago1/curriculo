@@ -37,7 +37,7 @@ const career: TLItem[] = [
     end: "2022-11-30",
     tags: [
       "Qlik Sense", "Data Visualization", "AGV Analytics",
-      "Operational Efficiency", "KPI Dashboards", "Logistics Data", "Automation"
+      "Operational Efficiency", "KPI Dashboards", "Logistics Data"
     ],
     color: "#22c55e",
   },
