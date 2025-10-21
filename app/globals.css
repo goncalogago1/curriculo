@@ -129,6 +129,8 @@ main { min-height: 100vh; }
 .chip--blue { box-shadow: 0 0 0 1px rgba(41,151,255,.18) inset; color:#b9d6ff; }
 .chip--teal { box-shadow: 0 0 0 1px rgba(14,165,164,.18) inset; color:#bff4f2; }
 .chip--violet { box-shadow: 0 0 0 1px rgba(94,92,230,.18) inset; color:#d6d1ff; }
+.chip--green { box-shadow: 0 0 0 1px rgba(92, 230, 113, 0.18) inset; color:#d1ffd1; }
+
 
 /* ========= STATS ========= */
 .stats{ margin-top: 18px; }           /* MAIS ESPAÇO após LinkedIn */

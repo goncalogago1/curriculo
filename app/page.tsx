@@ -174,23 +174,41 @@ export default function Home() {
       {/* CAPABILITIES */}
       <section id="capabilities" className="section section--tight" aria-labelledby="cap-title">
         <div className="container">
-          <h2 id="cap-title" className="section-title">Capabilities</h2>
+          <h2 id="cap-title" className="section-title">Core Capabilities</h2>
           <div className="grid three">
             <div className="card">
-              <h3>Analytics</h3>
-              <p>Semantic models, certified metrics, and executive dashboards (MicroStrategy, Power BI).</p>
+              <h3>Analytics & Business Intelligence</h3>
+              <p>
+                Design and delivery of semantic data models, certified KPIs, and executive dashboards 
+                using <b>MicroStrategy</b> and <b>Power BI</b>. Skilled in data modeling, DAX optimization, and 
+                data storytelling to support strategic decision-making at scale. Proven ability to turn complex 
+                datasets into actionable insights through performance-driven visual analytics.
+              </p>
             </div>
+
             <div className="card">
-              <h3>Data Engineering</h3>
-              <p>ETL pipelines, performance tuning, and productized datasets on SQL Server &amp; Python.</p>
+              <h3>Data Engineering & Automation</h3>
+              <p>
+                End-to-end development of <b>ETL pipelines</b> on <b>SQL Server</b> and <b>Python</b>, ensuring high data quality,
+                consistency, and scalability. Experience in integrating APIs, automating data ingestion and transformation,
+                and optimizing query performance for enterprise-grade analytics. Hands-on with CI/CD, Git, and data 
+                orchestration tools to streamline delivery.
+              </p>
             </div>
+
             <div className="card">
-              <h3>Data Governance</h3>
-              <p>Collibra rollout, lineage automation, and workflow enablement (Edge, REST APIs).</p>
+              <h3>Data Governance & Metadata Management</h3>
+              <p>
+                Specialized in <b>Collibra</b> implementation and enablement — from metadata catalog rollout and 
+                workflow automation to <b>lineage orchestration</b> across complex data ecosystems (SAP, Power BI, Dremio). 
+                Proficient in REST API integration and Python-based ingestion frameworks that improve discoverability 
+                and compliance through automated governance at scale.
+              </p>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* FEATURED CASE STUDIES */}
       <section id="cases" className="section" aria-labelledby="cases-title">
