@@ -171,7 +171,7 @@ export default function Home() {
               <div className="stats__inner">
                 <div className="stat">
                   <span className="stat__num">ETL</span>
-                  <span className="stat__label">Scalable SQL Server pipelines</span>
+                  <span className="stat__label">Automated ETL pipelines</span>
                 </div>
                 <div className="stat">
                   <span className="stat__num">AI / RAG</span>
