@@ -11,9 +11,9 @@ const career: TLItem[] = [
     company: "Deloitte Portugal",
     start: "2023-06-01", // Jun 2023 — Present
     tags: [
-      "Collibra", "Data Governance", "Metadata Management", "Lineage Automation",
+      "Analytics Engineering", "Data Governance", "Metadata Management", "Lineage Automation",
       "REST APIs", "Python", "SQL Server", "ETL Pipelines", "Power BI", "MicroStrategy",
-      "Data Modeling", "Analytics Engineering", "Agile Delivery", "Jira", "Git"
+      "Data Modeling",  "Agile Delivery"
     ],
     color: "#8b5cf6",
   },
@@ -25,7 +25,7 @@ const career: TLItem[] = [
     end: "2023-05-31",
     tags: [
       "Generative AI", "OpenAI API", "Prompt Engineering", "NLP", "Python",
-      "Automation", "Content Generation", "Course Design", "API Integration"
+      "Content Generation", "Course Design", "API Integration"
     ],
     color: "#06b6d4",
   },
@@ -36,7 +36,7 @@ const career: TLItem[] = [
     start: "2022-05-01", // May 2022 — Nov 2022
     end: "2022-11-30",
     tags: [
-      "Qlik Sense", "Data Visualization", "AGV Analytics", "Process Optimization",
+      "Qlik Sense", "Data Visualization", "AGV Analytics",
       "Operational Efficiency", "KPI Dashboards", "Logistics Data", "Automation"
     ],
     color: "#22c55e",
@@ -48,8 +48,7 @@ const career: TLItem[] = [
     start: "2020-02-01", // Feb 2020 — Mar 2020
     end: "2020-03-31",
     tags: [
-      "SQL", "Excel", "Data Management", "Reporting", "Banking IT",
-      "Data Cleaning", "Performance Tracking"
+      "SQL", "Excel", "Reporting", "Banking IT"
     ],
     color: "#f59e0b",
   },
@@ -61,7 +60,7 @@ const career: TLItem[] = [
     end: "2025-02-28",
     tags: [
       "Machine Learning", "Deep Learning", "Generative AI", "RAG", "LLaMA Fine-tuning",
-      "Python", "Time-Series Forecasting", "Model Deployment", "Monitoring", "AWS",
+      "Python", "Time-Series Forecasting", "Model Deployment", "AWS",
       "LLMs", "Data Preprocessing", "NLP"
     ],
     color: "#60a5fa",
@@ -85,7 +84,7 @@ const career: TLItem[] = [
     start: "2021-09-01", // Sep 2021 — Feb 2022
     end: "2022-02-28",
     tags: [
-      "Intercultural Experience", "International Collaboration", "MSc Coursework",
+      "Intercultural Experience", "MSc Coursework",
       "Academic Exchange", "STEM Mobility", "Cultural Adaptability"
     ],
     color: "#a78bfa",
