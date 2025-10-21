@@ -179,7 +179,7 @@ export default function Home() {
             <div className="card">
               <h3>Analytics & Business Intelligence</h3>
               <p>
-                Design and delivery of semantic data models, certified KPIs, and executive dashboards 
+                Design and delivery of semantic data models, KPIs, and dashboards 
                 using <b>MicroStrategy</b> and <b>Power BI</b>. Skilled in data modeling, DAX optimization, and 
                 data storytelling to support strategic decision-making at scale. Proven ability to turn complex 
                 datasets into actionable insights through performance-driven visual analytics.
@@ -191,56 +191,19 @@ export default function Home() {
               <p>
                 End-to-end development of <b>ETL pipelines</b> on <b>SQL Server</b> and <b>Python</b>, ensuring high data quality,
                 consistency, and scalability. Experience in integrating APIs, automating data ingestion and transformation,
-                and optimizing query performance for enterprise-grade analytics. Hands-on with CI/CD, Git, and data 
-                orchestration tools to streamline delivery.
+                and optimizing query performance for enterprise-grade analytics. 
               </p>
             </div>
 
             <div className="card">
               <h3>Data Governance & Metadata Management</h3>
               <p>
-                Specialized in <b>Collibra</b> implementation and enablement — from metadata catalog rollout and 
+                Specialized in <b>Collibra</b> implementation and enablement, from metadata catalog rollout and 
                 workflow automation to <b>lineage orchestration</b> across complex data ecosystems (SAP, Power BI, Dremio). 
                 Proficient in REST API integration and Python-based ingestion frameworks that improve discoverability 
                 and compliance through automated governance at scale.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* FEATURED CASE STUDIES */}
-      <section id="cases" className="section" aria-labelledby="cases-title">
-        <div className="container">
-          <h2 id="cases-title" className="section-title">Featured Case Studies</h2>
-          <div className="grid three">
-            <article className="card">
-              <h3>Energy Client — Collibra at Scale</h3>
-              <ul className="bullets">
-                <li>End-to-end Collibra ingestion, workflows, and lineage automation.</li>
-                <li>Integration with SAP, Dremio, and Power BI via REST & Python.</li>
-                <li>Improved discoverability and reduced manual curation time.</li>
-              </ul>
-            </article>
-
-            <article className="card">
-              <h3>DataHub &amp; Power BI — 1,300+ PDFs</h3>
-              <ul className="bullets">
-                <li>PoC proving scalable reporting for high-volume document output.</li>
-                <li>Optimized data model and report-generation pipeline.</li>
-                <li>Thousands of PDFs produced automatically in a fraction of the time.</li>
-              </ul>
-            </article>
-
-            <article className="card">
-              <h3>MicroStrategy &amp; ETL — Internal</h3>
-              <ul className="bullets">
-                <li>Executive dashboards with optimized ingest & refresh cycles.</li>
-                <li>Python-driven automations for faster, consistent updates.</li>
-                <li>Lower TCO via performance tuning and data model pruning.</li>
-              </ul>
-            </article>
           </div>
         </div>
       </section>
