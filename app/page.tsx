@@ -25,7 +25,7 @@ const career: TLItem[] = [
     end: "2023-05-31",
     tags: [
       "Generative AI", "OpenAI API", "Prompt Engineering", "NLP", "Python",
-      "Content Generation", "Course Design", "API Integration"
+      "Course Design", "API Integration"
     ],
     color: "#06b6d4",
   },
@@ -61,7 +61,7 @@ const career: TLItem[] = [
     tags: [
       "Machine Learning", "Deep Learning", "Generative AI", "RAG", "LLaMA Fine-tuning",
       "Python", "Time-Series Forecasting", "Model Deployment", "AWS",
-      "LLMs", "Data Preprocessing", "NLP"
+      "LLMs", "Data Preprocessing"
     ],
     color: "#60a5fa",
   },
