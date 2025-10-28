@@ -312,7 +312,7 @@ export default function Home() {
 
           <div className="card">
             <h3>Data Engineering</h3>
-            <p>SQL Server, Databricks, Spark, Airflow — scalable ETL pipelines, orchestration & optimization.</p>
+            <p>SQL Server, Databricks, Spark, Airflow, Huggingface scalable ETL pipelines, orchestration & optimization.</p>
           </div>
 
           <div className="card">
@@ -327,7 +327,7 @@ export default function Home() {
 
           <div className="card">
             <h3>Cloud &amp; Collaboration</h3>
-            <p>AWS, Git, Postman, Confluence, Jira — Agile delivery & version-controlled data products.</p>
+            <p>AWS, Git, Postman, Confluence, Jira: Agile delivery & version-controlled data products.</p>
           </div>
 
         </div>
@@ -403,6 +403,7 @@ export default function Home() {
                 <li>Developed an <b>interactive AI assistant</b> capable of answering questions about my CV and experience, using <b>OpenAI embeddings</b> stored in <b>Supabase (pgvector)</b>.</li>
                 <li>Implemented document ingestion, chunking, and semantic search pipelines for accurate retrieval and contextual responses.</li>
                 <li>Deployed a responsive and performant portfolio site with semantic HTML, reusable components, and SEO optimization.</li>
+                <li>Integrated <b>speech-to-text transcription</b> via <b>Hugging Face Inference API</b> using <b>Whisper Large V3</b>, enabling real-time voice input processing.</li>
               </ul>
             </div>
           </article>
