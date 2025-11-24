@@ -19,17 +19,3 @@ I developed an AI-powered course creation tool integrating OpenAI APIs. This inv
 Autoeuropa Volkswagen — Logistics Planning Intern (May 2022 – Nov 2022)
 
 At Autoeuropa, I analyzed operational data from a fleet of 120 Automated Guided Vehicles (AGVs) responsible for transporting parts to assembly lines. Using Qlik Sense dashboards, I visualized insights related to AGV performance, routes, and battery status. Through data analysis, I identified underutilized AGVs and proposed reallocating them to another production line. This led to tangible operational optimization and better resource utilization.
-
-Python Libraries & Tools
-
-Python Libraries & Tools:
-Pandas, NumPy, Scikit-learn, Statsmodels, TensorFlow, PyTorch, Transformers (HuggingFace), Sentence-Transformers, OpenAI API, LangChain, LlamaIndex, XGBoost, Whisper, Supabase-Py, PyODBC, Requests,  Matplotlib, Seaborn
-
-Data Governance & BI Integrations:
-Collibra API (lineage, workflows, ingestion automation), mstrio (MicroStrategy Python library), Dremio connectivity & metadata extraction, JDBC/ODBC automation, REST APIs.
-
-Audio, NLP & LLMs:
-Whisper (V3), Transformers, OpenAI Assistants, Embeddings (text-embedding-3-large, bge-models), RAG Pipelines, Prompt Engineering, Text generation & document automation.
-
-Forecasting & Statistical Modeling:
-Statsmodels (AR, MA, ARIMA, SARIMA), Prophet, SciPy.
