@@ -85,9 +85,11 @@ main { min-height: 100vh; }
 
 /* ========= PROFILE PANE (ESQUERDA) ========= */
 .profile-pane { display: grid; gap: 10px; align-content: start; }
-.profile-photo img {
-  object-fit: cover;
-  object-position: center 20%;
+.profile-photo {
+  position: relative;
+  width: 90%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
 }
 
 
@@ -103,7 +105,11 @@ main { min-height: 100vh; }
     var(--shadow);
 }
 
-.profile-photo img { object-fit: cover; }
+.profile-photo img {
+  object-fit: cover;
+  object-position: center 20%;
+}
+
 .profile-topbar {
   grid-column: 1 / -1;
   background: linear-gradient(90deg, rgba(41,151,255,.55), rgba(94,92,230,.18));
