@@ -90,7 +90,9 @@ main { min-height: 100vh; }
   width: 90%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  top: -12px; /* ajusta: -8px, -10px, -16px */
 }
+
 
 .profile-photo--round {
   border-radius: 9999px;                /* círculo perfeito */
