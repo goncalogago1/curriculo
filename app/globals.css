@@ -85,12 +85,9 @@ main { min-height: 100vh; }
 
 /* ========= PROFILE PANE (ESQUERDA) ========= */
 .profile-pane { display: grid; gap: 10px; align-content: start; }
-.profile-photo {
-  position: relative;
-  width: 90%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  top: -20px; /* ajusta: -8px, -10px, -16px */
+.profile-photo img {
+  object-fit: cover;
+  object-position: center 20%;
 }
 
 
